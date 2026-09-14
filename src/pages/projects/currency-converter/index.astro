@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PortPending from '../../../components/PortPending.astro';
+import CurrencyConverterWidget from '../../../components/projects/currency-converter/CurrencyConverterWidget';
 ---
 
 <BaseLayout title="Peter Jones | Currency Converter">
-  <PortPending
-    title="Currency Converter"
-    sourceComponent="Components/projects/currency-converter/CurrencyConverter.js"
-    sourcePage="pages/projects/currency-converter/index.js"
-  />
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Currency Converter</h1>
+    <CurrencyConverterWidget client:load />
+  </div>
 </BaseLayout>

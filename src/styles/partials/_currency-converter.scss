@@ -252,10 +252,13 @@
       background-color: #009973;
     }
 
-    i {
+    i,
+    svg.arrow-left-icon {
       position: absolute;
       top: 0.75rem;
       left: 30%;
+      width: 1.5rem;
+      height: 1.5rem;
       font-size: 2rem;
       opacity: 0;
       transition: all .25s ease-in-out;
@@ -268,7 +271,8 @@
         background-color: #c9302c;
       }
 
-      i {
+      i,
+      svg.arrow-left-icon {
         opacity: 1;
         left: 1.25rem;
       }
@@ -329,7 +333,8 @@
       height: calc(100vh - 80px - 51px);
     }
 
-    .currency-add-btn i {
+    .currency-add-btn i,
+    .currency-add-btn svg.arrow-left-icon {
       left: 25%;
       top: 0.65rem;
     }
