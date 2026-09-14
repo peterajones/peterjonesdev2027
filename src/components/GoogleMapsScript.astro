@@ -1,0 +1,31 @@
+---
+// Loads the Google Maps JS API, conditional on PUBLIC_GOOGLE_MAPS_API_KEY
+// being set, and bridges its load callback to a 'google-maps-loaded'
+// window event — since React components that need window.google may
+// mount before or after this script finishes loading, they should listen
+// for this event rather than assuming google.maps is ready at mount.
+interface Props {
+  libraries?: string;
+}
+
+const { libraries } = Astro.props;
+const apiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+const librariesParam = libraries ? `&libraries=${libraries}` : '';
+---
+
+{
+  apiKey && (
+    <>
+      <script is:inline>
+        {`window.__onGoogleMapsLoaded = function () {
+          window.dispatchEvent(new Event('google-maps-loaded'));
+        };`}
+      </script>
+      <script
+        is:inline
+        src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}${librariesParam}&callback=__onGoogleMapsLoaded`}
+        async
+      />
+    </>
+  )
+}
