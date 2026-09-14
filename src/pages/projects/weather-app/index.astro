@@ -1,12 +1,31 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PortPending from '../../../components/PortPending.astro';
+import WeatherAppWidget from '../../../components/projects/weather-app/WeatherAppWidget';
+
+const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 ---
 
 <BaseLayout title="Peter Jones | Weather App">
-  <PortPending
-    title="Weather App"
-    sourceComponent="Components/projects/weather-app/WeatherApp.js"
-    sourcePage="pages/projects/weather-app/index.js"
-  />
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Weather App</h1>
+    <WeatherAppWidget client:load />
+  </div>
+  {
+    googleMapsApiKey && (
+      <>
+        <script is:inline>
+          {`window.__onGoogleMapsLoaded = function () {
+            window.dispatchEvent(new Event('google-maps-loaded'));
+          };`}
+        </script>
+        <script
+          is:inline
+          src={`https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=__onGoogleMapsLoaded`}
+          async
+        />
+      </>
+    )
+  }
 </BaseLayout>
