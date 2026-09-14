@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PortPending from '../../../components/PortPending.astro';
+import RollupCounterWidget from '../../../components/projects/rollup-counter/RollupCounterWidget';
 ---
 
 <BaseLayout title="Peter Jones | Javascript Rollup Counter">
-  <PortPending
-    title="Javascript Rollup Counter"
-    sourceComponent="Components/projects/rollup-counter/RollupCounter.js"
-    sourcePage="pages/projects/rollup-counter/index.js"
-  />
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Javascript Rollup Counter</h1>
+    <RollupCounterWidget client:load />
+  </div>
 </BaseLayout>
