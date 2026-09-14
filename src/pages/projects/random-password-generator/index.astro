@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PortPending from '../../../components/PortPending.astro';
+import PasswordGeneratorWidget from '../../../components/projects/random-password-generator/PasswordGeneratorWidget';
 ---
 
 <BaseLayout title="Peter Jones | Random Password Generator">
-  <PortPending
-    title="Random Password Generator"
-    sourceComponent="Components/projects/password-generator/PasswordGenerator.js"
-    sourcePage="pages/projects/random-password-generator/index.js"
-  />
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Random Password Generator</h1>
+    <PasswordGeneratorWidget client:load />
+  </div>
 </BaseLayout>
