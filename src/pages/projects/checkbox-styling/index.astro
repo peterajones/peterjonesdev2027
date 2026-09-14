@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PortPending from '../../../components/PortPending.astro';
+import CheckboxStylingWidget from '../../../components/projects/checkbox-styling/CheckboxStylingWidget';
 ---
 
 <BaseLayout title="Peter Jones | CSS - Checkbox Styling">
-  <PortPending
-    title="CSS - Checkbox Styling"
-    sourceComponent="Components/projects/checkbox-styling/checkboxes.js"
-    sourcePage="pages/projects/checkbox-styling/index.js"
-  />
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Checkbox Styling</h1>
+    <CheckboxStylingWidget client:load />
+  </div>
 </BaseLayout>
