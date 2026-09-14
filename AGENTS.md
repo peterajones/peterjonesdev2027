@@ -8,6 +8,23 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+### Known quirk: stale Vite dependency cache after repeated restarts
+
+Editing `astro.config.mjs` (or otherwise forcing several `astro dev stop` /
+`astro dev --background` cycles in one session) can leave Vite's dependency
+pre-bundle in a state where a React island's hydration fails in the browser
+console with `Failed to fetch dynamically imported module` — reproducible on
+every page, not specific to whatever you were actually testing. A plain
+`fetch()` of the same URL succeeds; only the module-graph `import()` used by
+hydration fails, and it doesn't self-heal on reload.
+
+This is a dev-server-only artifact, unrelated to application code. Don't
+chase it in the app — either:
+- `astro dev stop && rm -rf node_modules/.vite .astro && astro dev --background --force`, or
+- test against the real production build instead (what actually matters for
+  a deploy question anyway): `npm run build && node --env-file=.env ./dist/server/entry.mjs`,
+  which has no Vite dev-time module graph at all.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
