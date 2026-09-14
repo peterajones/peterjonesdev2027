@@ -1,0 +1,112 @@
+.nav {
+	border-bottom: 1px solid rebeccapurple;
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	background-color: rgba(255, 255, 255, 0.95);
+	-webkit-box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.85);
+	box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.85);
+	top: 0;
+	z-index: 10;
+	-webkit-transition: background-color 0.25s ease-in;
+	transition: background-color 0.25s ease-in;
+}
+
+.navContent {
+	position: relative;
+	width: 80vw;
+	margin: auto;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+.toplinks {
+	width: max-content;
+}
+.topNavLinks a {
+	margin-left: 20px;
+}
+.avatar-link {
+	position: relative;
+  top: 7px;
+  display: inline-block;
+	border-radius: 50%;
+}
+/* Toggle Theme */
+svg.svg-inline--fa.fa-sun,
+svg.svg-inline--fa.fa-moon,
+svg.svg-inline--fa.fa-lock,
+svg.svg-inline--fa.fa-unlock,
+svg.svg-inline--fa.fa-bell {
+	color: rebeccapurple;
+	-webkit-transition: color 0.35s ease-in;
+	transition: color 0.35s ease-in;
+	width: 18px;
+	height: 18px;
+}
+svg.svg-inline--fa.fa-sun:hover,
+svg.svg-inline--fa.fa-sun:focus,
+svg.svg-inline--fa.fa-moon:hover,
+svg.svg-inline--fa.fa-moon:focus,
+svg.svg-inline--fa.fa-lock:hover,
+svg.svg-inline--fa.fa-lock:focus,
+svg.svg-inline--fa.fa-unlock:hover,
+svg.svg-inline--fa.fa-unlock:focus,
+svg.svg-inline--fa.fa-bell:hover,
+svg.svg-inline--fa.fa-bell:focus {
+	color: var(--red);
+	-webkit-transition: color 0.25s ease-in;
+	transition: color 0.25s ease-in;
+}
+.dark svg.svg-inline--fa.fa-sun,
+.dark svg.svg-inline--fa.fa-moon,
+.dark .svg-inline--fa.fa-lock,
+.dark .svg-inline--fa.fa-unlock,
+.dark svg.svg-inline--fa.fa-bell {
+	color: #ffa804;
+  transition: color 0.25s ease-in;
+	width: 18px;
+	height: 18px;
+}
+.dark svg.svg-inline--fa.fa-sun:hover,
+.dark svg.svg-inline--fa.fa-sun:focus,
+.dark svg.svg-inline--fa.fa-moon:hover,
+.dark svg.svg-inline--fa.fa-moon:focus,
+.dark .svg-inline--fa.fa-lock:hover,
+.dark .svg-inline--fa.fa-lock:focus,
+.dark .svg-inline--fa.fa-unlock:hover,
+.dark .svg-inline--fa.fa-unlock:focus,
+.dark svg.svg-inline--fa.fa-bell:hover,
+.dark svg.svg-inline--fa.fa-bell:focus {
+	color: #ff7272;
+}
+
+button.faIcon {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	margin-left: 20px;
+	width: 30px;
+	height: 30px;
+	position: relative;
+	top: 4px;
+}
+
+button[name="toggle updates modal"] {
+  margin-left: 8px;
+}
+
+.avatar {
+	position: relative;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+/*# sourceMappingURL=Navbar.module.css.map */

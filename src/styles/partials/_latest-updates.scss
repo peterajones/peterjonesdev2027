@@ -1,0 +1,199 @@
+/* footer button */
+button[name='toggle updates'] {
+	background-color: transparent;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	margin-left: 4px;
+	transition: color 0.25s ease-in-out;
+}
+
+button[name='toggle updates']:hover {
+	color: #ffa804;
+}
+
+.dark button[name='toggle updates'] {
+	color: #ffa804;
+}
+
+.dark button[name='toggle updates']:hover {
+	color: #ff7272;
+}
+
+/* Latest Updates modal */
+
+/* stop page scrolling on body - doesn't work in Safari*/
+body.modal-open {
+	height: 100vh;
+	overflow-y: hidden;
+	/* position: fixed; */
+}
+
+.updates-bg {
+	position: absolute;
+	color: #fff;
+	/* height: calc(100vh - 110px); */
+	margin: 0;
+	padding: 0;
+	opacity: 0.9;
+	z-index: 9999999;
+	transition: all 0.35s ease-in-out;
+}
+.updates-bg.open {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.85);
+	top: 0;
+	bottom: 0;
+}
+.updates-container {
+	position: fixed;
+	margin: 0 auto;
+	width: 80vw;
+	top: 20vh;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	max-height: 80vh;
+	transform: scale(0);
+	transition: transform 0.35s 0.15s cubic-bezier(0.4, 0, 0.05, 1.64);
+}
+.updates-container.open {
+	top: 10vh;
+	width: 82vw;
+	transform: scale(1);
+	background-color: transparent;
+	color: #000000;
+	padding: 10px 10px;
+}
+.updates-container.closed {
+	top: 0;
+	transform: scale(0);
+}
+.modal-title {
+	position: relative;
+	margin: 0 auto;
+	text-align: center;
+	top: 0px;
+	background-color: rgb(144, 75, 213);
+	padding: 4px;
+	width: 160px;
+	font-weight: 700;
+	color: #fff;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+.dark .modal-title {
+	background-color: rgba(201, 44, 44, 1);
+}
+.updates-container-inner {
+	position: relative;
+	width: auto;
+	height: 100%;
+	background-color: #fff;
+	border: 4px double #000;
+	padding: 10px;
+	overflow-y: scroll;
+	transition: background-color 0.25s ease-in;
+}
+.dark .updates-container-inner {
+	background-color: #333333;
+	color: #f4f4f4;
+	border: 1px solid #f4f4f4;
+}
+.update-content {
+	position: relative;
+	padding: 10px;
+	font-size: 18px;
+	border-bottom: 1px solid rgba(63, 63, 63, 0.4);
+	line-height: 1.5;
+	font-weight: 500;
+}
+.update-content:last-child {
+	border-bottom: none;
+}
+.dark .update-content {
+	border-bottom: 1px solid rgba(244, 244, 244, 0.4);
+}
+.dark .update-content:last-child {
+	border-bottom: none;
+}
+.update-date {
+	font-size: 15px;
+	font-style: italic;
+	margin-bottom: 2px;
+}
+.update-details {
+	margin-bottom: 4px;
+}
+/* .open {
+	top: calc(-100vh + 110px);
+	background-color: rgba(44, 44, 44, 0.85);
+	opacity: 1;
+}
+.closed {
+	top: calc(-100vh + 110px);
+	background-color: transparent;
+	opacity: 0;
+	transition: all 0.35s ease-in-out;
+} */
+span.update-date {
+	display: none;
+}
+@media only screen and (max-width: 1200px) {
+	.updates-container.open {
+		top: 10vh;
+	}
+	.footer-container li {
+		padding: 0 40px;
+	}
+}
+@media only screen and (max-width: 400px) {
+	.updates-container.open {
+		top: 12vh;
+	}
+	.updates-container-inner {
+		height: 70vh;
+	}
+}
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+	.updates-container.open {
+		top: 0 !important;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.65);
+	}
+	.modal-title {
+		top: 10px;
+	}
+	.updates-container-inner {
+		height: 90vh;
+		top: 10px;
+	}
+}
+/* iPhone X/11 */
+@media only screen and (min-device-width: 375px) and (max-device-width: 896px) and (orientation: landscape) {
+	.updates-container.open {
+		top: 7px;
+	}
+	.updates-container-inner {
+		height: 82vh;
+	}
+}
+/* iPhone 6/7/8 */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+	.updates-container.open {
+		top: 2vh;
+		width: 94vw;
+		max-height: 80vh;
+	}
+	.updates-container-inner {
+		height: 88vh;
+	}
+	.modal-title {
+		font-size: 14px;
+		padding: 0px;
+	}
+}

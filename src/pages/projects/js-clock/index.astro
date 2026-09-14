@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ClockWidget from '../../../components/projects/js-clock/ClockWidget';
+---
+
+<BaseLayout title="Peter Jones | Twelve Hour Clock">
+  <div class="content">
+    <a href="/projects" class="backBtn">Back to Projects</a>
+    <div class="btnSpacer"></div>
+    <h1>Twelve Hour Clock in React</h1>
+    <ClockWidget client:load />
+  </div>
+</BaseLayout>

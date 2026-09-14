@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+h4.checkbox-group {
+	font-size: 18px;
+	margin: 0;
+}
+
+.dark h4.checkbox-group {
+	color: #f4f4f4;
+}
+
+.dark .checkbox-input {
+	color: #f4f4f4;
+}
+
+#container {
+	position: relative;
+	width: 920px;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #747474;
+	border: 1px solid rgba(0, 200, 0, 0.6);
+}
+
+.dark #checkboxes {
+	color: #f4f4f4;
+}
+
+.dark #switches {
+	color: #f4f4f4;
+}
+
+.dark #switches label span {
+	border: 2px solid #f4f4f4;
+}
+
+.dark #switches label input:checked + span {
+	border: 2px solid #f4f4f4;
+}
+
+#forms-wrapper {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+form#form1 {
+	width: 400px;
+	padding: 10px 0;
+}
+
+form#form2 {
+	width: 400px;
+	padding: 10px 0;
+}
+
+#checkboxes {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: calc(50% - 70px);
+	text-align: left;
+}
+
+#checkboxes .checkbox-label {
+	display: block;
+	margin-top: 0;
+	cursor: pointer;
+	line-height: 3;
+}
+
+#checkboxes input.checkbox-input {
+	width: 24px;
+	transform: scale(1.5);
+	display: inline-block;
+	cursor: pointer;
+}
+
+#checkboxes input.checkbox-input:focus {
+	outline: none;
+}
+
+#switches {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: calc(50% - 70px);
+	text-align: left;
+}
+
+#switches label {
+	display: inline-block;
+	margin-top: 1rem;
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	touch-action: manipulation;
+	cursor: pointer;
+}
+
+#switches label span {
+	display: inline-block;
+	width: 50px;
+	height: 27px;
+	position: relative;
+	top: 8px;
+	right: 8px;
+	border-radius: 16px;
+	border: 2px solid rgba(97, 96, 96, 0.6);
+	background-color: rgba(255, 0, 0, 0.8);
+	transition: background-color 0.3s;
+}
+
+#switches label span::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 1);
+	transition: left 0.3s;
+}
+
+#switches label input:checked + span {
+	border-color: rgba(97, 96, 96, 0.6);
+	background-color: rgb(0, 200, 0);
+}
+
+#switches label input:checked + span::after {
+	left: calc(100% - 21px);
+	background-color: #fff;
+}
+
+#form2 label input {
+	display: none;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+	#checkboxes input.checkbox-input {
+		margin-right: 30px;
+	}
+}
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+	#checkboxes input.checkbox-input {
+		margin-right: 30px;
+	}
+}

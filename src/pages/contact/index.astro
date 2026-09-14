@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Banner from '../../components/Banner.astro';
+import ContactForm from '../../components/ContactForm';
+---
+
+<BaseLayout title="Peter Jones | Contact Me">
+  <Banner src="/images/banners/People.jpg" />
+  <div class="content" style="min-height: 2000px">
+    <div class="fade-in visible">
+      <div class="container">
+        <div class="content">
+          <ContactForm client:load />
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+}
+const { src, alt = 'banner' } = Astro.props;
+---
+
+<div class="banner">
+  <img class="banner-img" src={src} alt={alt} width="1200" height="400" />
+</div>
+
+<script>
+  // Lightweight parallax on scroll — same effect as the old React Banner,
+  // no framework needed for a single transform update per scroll event.
+  const img = document.querySelector<HTMLImageElement>('.banner-img');
+  if (img) {
+    const onScroll = () => {
+      const scale = (100 + window.scrollY / 5) / 100;
+      img.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

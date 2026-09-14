@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsFeed from '../../components/NewsFeed';
+import { feeds, getFeed } from '../../config/news';
+
+export function getStaticPaths() {
+  return feeds.map((feed) => ({ params: { feed: feed.slug } }));
+}
+
+const { feed: slug } = Astro.params;
+const feed = getFeed(slug!);
+
+if (!feed) {
+  return Astro.redirect('/news');
+}
+---
+
+<BaseLayout title={`Peter Jones | ${feed.title}`}>
+  <NewsFeed client:load slug={feed.slug} pageTitle={feed.pageTitle} image={feed.image} />
+</BaseLayout>

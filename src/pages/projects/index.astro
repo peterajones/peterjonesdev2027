@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Banner from '../../components/Banner.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../config/projects';
+---
+
+<BaseLayout title="Peter Jones | Projects">
+  <Banner src="/images/banners/Keyboard.jpg" />
+  <div class="content" style="min-height: 2000px">
+    <div class="fade-in visible">
+      <h1 class="projects page">Projects</h1>
+      <ul class="items-container">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import '../styles/globals.scss';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Peter Jones — web developer portfolio, project demos, and news feeds.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Web Development, HTML5, CSS3, CSS, JavaScript, RSS News Feeds, ReactJS, Astro"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar />
+    <div class="wrapper">
+      <slot />
+    </div>
+    <Footer />
+  </body>
+</html>

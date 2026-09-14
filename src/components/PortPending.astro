@@ -1,0 +1,27 @@
+---
+// Placeholder for a project page not yet ported from the 2026 (Next.js) site.
+// See the js-clock project for the pattern: a static Astro page shell
+// (this file) plus a React island for the interactive part.
+interface Props {
+  title: string;
+  sourceComponent: string;
+  sourcePage: string;
+}
+const { title, sourceComponent, sourcePage } = Astro.props;
+---
+
+<div class="content">
+  <a href="/projects" class="backBtn">Back to Projects</a>
+  <div class="btnSpacer"></div>
+  <h1>{title}</h1>
+  <p class="red-msg">
+    Not yet ported to Astro. The original React logic lives in the 2026
+    (Next.js) repo at <code class="inline">{sourceComponent}</code>,
+    wired up by <code class="inline">{sourcePage}</code>. Port it here as a
+    React island the same way <code class="inline">js-clock</code> was
+    done: keep the component's state/logic as-is, drop the
+    <code class="inline">next/*</code> imports, and mount it with
+    <code class="inline">client:load</code> (or <code class="inline">client:visible</code>
+    if it's heavier, like the Google Maps pagination demo).
+  </p>
+</div>

@@ -1,0 +1,69 @@
+body {
+	background-color: var(--white);
+	scroll-behavior: smooth;
+	transition: background-color 0.25s ease-in;
+}
+body.dark {
+	background-color: var(--dark-grey);
+}
+.wrapper {
+	position: relative;
+}
+.content {
+	position: relative;
+	background-color: var(--white);
+	padding: 10px 20px;
+	top: 80px;
+	min-height: 90vh;
+	max-width: 80vw;
+	margin: 0 auto;
+	z-index: 0;
+	margin-bottom: 50px;
+	transition: background-color 0.25s ease-in;
+	@media (max-width: 1024px) {
+		max-width: 100vw;
+	}
+}
+.dark .content {
+	background-color: var(--dark-grey);
+}
+svg.svg-inline--fa.fa-sun.fa-w-16,
+svg.svg-inline--fa.fa-lock.fa-w-14,
+svg.svg-inline--fa.fa-unlock.fa-w-14,
+svg.svg-inline--fa.fa-bell.fa-w-14 {
+	font-size: 22px;
+	color: var(--purple);
+	transition: color 0.25s ease-in;
+	width: 18px;
+	height: 18px;
+}
+.dark svg.svg-inline--fa.fa-moon.fa-w-16,
+.dark svg.svg-inline--fa.fa-lock.fa-w-14,
+.dark svg.svg-inline--fa.fa-unlock.fa-w-14,
+.dark svg.svg-inline--fa.fa-bell.fa-w-14 {
+	font-size: 22px;
+	color: var(--dark-link);
+	transition: color 0.25s ease-in;
+	width: 18px;
+	height: 18px;
+}
+.dark nav {
+	background-color: rgba(51, 51, 51, 0.95);
+	box-shadow: 0 -12px 26px 0px rgb(255 255 255 / 85%);
+	border-bottom: 1px solid rgba(255, 235, 59, 0.35);
+}
+footer {
+	z-index: -10;
+}
+div.footer {
+	color: var(--dark-text);
+	position: relative;
+	text-align: center;
+	padding: 40px 0 20px;
+	bottom: 0;
+	z-index: -10;
+	transition: color 0.25s ease-in;
+}
+.dark div.footer {
+	color: var(--light-text);
+}

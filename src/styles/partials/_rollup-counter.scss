@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+/* .github-link {
+	padding-top: 20px;
+	width: 50vw;
+	margin: 0 auto;
+}
+.github-link span {
+	vertical-align: middle;
+}
+.github-logo {
+	background-image: url(../../../images/github-logo.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 26px;
+	height: 26px;
+	margin: 0 10px;
+} */
+span {
+	display: inline-block;
+}
+span.count {
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+	overflow: hidden;
+}
+.count {
+	font-size: 60px;
+}
+.dark .count {
+	color: #f4f4f4;
+}
+.count-enter {
+	transform: translateY(100%);
+	transition: 0.25s ease-in-out;
+}
+.count-enter.count-enter-active {
+	transform: translateY(0);
+}
+.count-exit {
+	transition: 0.25s ease-in-out;
+	transform: translateY(0);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.count-exit.count-exit-active {
+	transform: translateY(-100%);
+}
+.buttons {
+	padding-bottom: 18px;
+}
+#increment,
+#reset {
+	cursor: pointer;
+	font-weight: 500;
+	padding: 10px;
+	margin: 5px;
+	font-size: 1rem;
+	border-radius: 4px;
+	background-color: #333333;
+	color: #f4f4f4;
+}
+.dark #increment,
+.dark #reset {
+	background-color: #f4f4f4;
+	color: #333333;
+	border-radius: 4px;
+}
+.comment {
+	position: relative;
+	max-width: 800px;
+	margin: 0 auto;
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+}

@@ -1,0 +1,39 @@
+.page {
+	text-align: center;
+	padding-bottom: 20px;
+}
+ul.items-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-evenly;
+	grid-gap: 20px;
+	gap: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+li.item {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	min-width: 325px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	transition: all 0.25s ease-in;
+}
+li.item:hover {
+	transform: scale(1.05);
+}
+.card-title {
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	font-size: 1.2rem;
+	font-weight: 700;
+	padding: 10px;
+	transition: color 0.25s ease-in;
+}
+.dark .card-title {
+	color: var(--light-text);
+}

@@ -1,0 +1,128 @@
+.fade-in {
+	opacity: 0;
+}
+.fade-in.visible {
+	transition: opacity 850ms ease-in;
+	opacity: 1;
+}
+.logged-in-message {
+	background-color: antiquewhite;
+}
+section {
+	line-height: 1.5;
+}
+.section-one {
+	background-color: transparent;
+	margin-bottom: 40px;
+}
+.left {
+	width: 50%;
+}
+.right {
+	width: 50%;
+}
+.section-two {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.section-two .left {
+	padding: 60px;
+	min-height: 400px;
+}
+.section-two .right {
+	background-image: url('/images/banners/WebDev.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	min-height: 200px;
+	height: auto;
+}
+.section-three {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.section-three .left {
+	background-image: url('/images/banners/Keyboard.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	min-height: 200px;
+}
+.section-three .right {
+	padding: 60px;
+	min-height: 400px;
+}
+.section-four {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.section-four .left {
+	padding: 60px;
+	min-height: 400px;
+}
+.section-four .right {
+	background-image: url('/images/banners/News.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	min-height: 200px;
+	height: auto;
+}
+.section-five {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-bottom: 40px;
+}
+.section-five .left {
+	background-image: url('/images/banners/People.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	min-height: 200px;
+	height: auto;
+}
+.section-five .right {
+	padding: 60px;
+	min-height: 400px;
+}
+.section-divider {
+	background-color: rgb(155, 149, 149);
+}
+
+@media only screen and (max-width: 1024px) {
+	.left {
+		width: 100%;
+	}
+	.right {
+		width: 100%;
+	}
+	.section-one {
+		padding: 10px;
+	}
+	.section-two {
+		flex-direction: column-reverse;
+	}
+	.section-two .left {
+		padding: 10px;
+		min-height: 200px;
+	}
+	.section-three .right {
+		padding: 10px;
+		min-height: 200px;
+	}
+	.section-four {
+		flex-direction: column-reverse;
+	}
+	.section-four .left {
+		padding: 10px;
+		min-height: 200px;
+	}
+	.section-five .right {
+		padding: 10px;
+		min-height: 200px;
+	}
+}

@@ -1,0 +1,137 @@
+---
+import { updates } from '../config/updates';
+---
+
+<nav class="nav">
+  <div class="navContent">
+    <div class="logo">
+      <a href="/">
+        <img
+          class="logo-light"
+          src="/images/my-logo.png"
+          alt="logo"
+          width="224"
+          height="60"
+        />
+        <img
+          class="logo-dark"
+          src="/images/my-logo-dark.png"
+          alt="logo"
+          width="224"
+          height="60"
+        />
+      </a>
+    </div>
+    <div class="topNavLinks">
+      <a href="/projects">Projects</a>
+      <a href="/news">News</a>
+      <a href="/contact">Contact</a>
+      <button
+        id="theme-toggle"
+        name="toggle theme"
+        title="Toggle Theme"
+        aria-label="Toggle Theme"
+        class="faIcon"
+      >
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.14 6.14 1.42 1.42M4.44 4.44l1.42 1.42m0 12.28-1.42 1.42M19.56 4.44l-1.42 1.42M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.354 15.354A9 9 0 0 1 8.646 3.646 9.003 9.003 0 1 0 20.354 15.354Z"/>
+        </svg>
+      </button>
+      <button
+        id="updates-toggle"
+        name="toggle updates modal"
+        title="Latest Updates"
+        aria-label="Toggle Updates Modal"
+        class="faIcon"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 22a2.5 2.5 0 0 0 2.45-2H9.55A2.5 2.5 0 0 0 12 22Zm8-6-1.6-1.6V10a6.4 6.4 0 0 0-5.2-6.29V3a1.2 1.2 0 1 0-2.4 0v.71A6.4 6.4 0 0 0 5.6 10v4.4L4 16v1h16v-1Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div id="updates-bg" class="updates-bg closed">
+  <div id="updates-container" class="updates-container closed">
+    <div class="modal-title">Latest Updates</div>
+    <div class="updates-container-inner">
+      {
+        updates.map((update) => (
+          <div class="update-content">
+            <div class="update-date">{update.date}</div>
+            <div class="update-details">{update.details}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const THEME_KEY = 'theme';
+  const body = document.body;
+
+  function applyTheme(theme: string) {
+    body.classList.toggle('dark', theme === 'dark');
+  }
+
+  function initTheme() {
+    const stored = localStorage.getItem(THEME_KEY);
+    const theme = stored === 'dark' ? 'dark' : 'light';
+    if (!stored) localStorage.setItem(THEME_KEY, theme);
+    applyTheme(theme);
+  }
+
+  function toggleTheme() {
+    const isDark = body.classList.contains('dark');
+    const next = isDark ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  }
+
+  function toggleUpdatesModal() {
+    const bg = document.getElementById('updates-bg');
+    const container = document.getElementById('updates-container');
+    const isOpen = bg?.classList.contains('open');
+    bg?.classList.toggle('open', !isOpen);
+    bg?.classList.toggle('closed', isOpen);
+    container?.classList.toggle('open', !isOpen);
+    container?.classList.toggle('closed', isOpen);
+    document.body.style.overflow = isOpen ? 'unset' : 'hidden';
+  }
+
+  initTheme();
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('updates-toggle')?.addEventListener('click', toggleUpdatesModal);
+  document.getElementById('updates-bg')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) toggleUpdatesModal();
+  });
+
+  // Re-run on Astro view-transition navigation, if enabled later.
+  document.addEventListener('astro:page-load', initTheme);
+</script>
+
+<style>
+  .logo-dark {
+    display: none;
+  }
+  :global(body.dark) .logo-light {
+    display: none;
+  }
+  :global(body.dark) .logo-dark {
+    display: inline;
+  }
+  .icon-moon {
+    display: none;
+  }
+  :global(body.dark) .icon-sun {
+    display: none;
+  }
+  :global(body.dark) .icon-moon {
+    display: inline;
+  }
+</style>

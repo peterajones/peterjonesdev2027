@@ -1,0 +1,49 @@
+label {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  touch-action: manipulation;
+}
+input {
+  min-width: 300px;
+  height: 50px;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+input.contact-email {
+  box-shadow: none;
+  width: auto;
+  border: 1px solid #ccc;
+}
+.dark input.contact-email {
+  background-color: var(--white);
+  color: var(--dark-gray);
+}
+textarea {
+  display: block;
+  min-width: 300px;
+  height: 60px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: sans-serif;
+  font-size: 1.1rem;
+}
+.btn-submit {
+  width: auto;
+  text-transform: uppercase;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.btn-submit:hover,
+.btn-submit:focus {
+  background-color: rebeccapurple;
+  color: #fff;
+}

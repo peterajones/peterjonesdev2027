@@ -1,0 +1,256 @@
+.PaginationContainer {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.page-info {
+	position: relative;
+	width: 100%;
+}
+.page-info p {
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+}
+ul.p-list {
+	position: relative;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: space-evenly;
+}
+li.p-card {
+	display: flex;
+	justify-content: center;
+	text-align: left;
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid #ccc;
+}
+.info {
+	position: relative;
+	min-width: 300px;
+	margin-bottom: 10px;
+}
+.p-card p {
+	line-height: 0.2;
+	padding: 10px 0;
+	margin: 0;
+}
+.p-card p.name {
+	font-weight: 600;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.email {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 4px 0;
+}
+.email-icon {
+	color: darkgreen;
+	width: 18px;
+}
+.dark .email-icon {
+	color: #ffa804;
+}
+.email-address {
+	padding-left: 10px;
+}
+.email-address a {
+	color: #000;
+}
+.dark .email-address a {
+	color: #f4f4f4;
+}
+.email-address a:hover {
+	color: darkgreen;
+}
+.address {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 4px 0;
+}
+.address-icon {
+	position: relative;
+	top: 2px;
+	color: darkgreen;
+	width: 18px;
+}
+.dark .address-icon {
+	color: #ffa804;
+}
+.address-details {
+	padding-left: 9px;
+}
+.address-details p {
+	font-size: 16px;
+	line-height: 0;
+}
+.phone {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 4px 0;
+}
+.phone-icon {
+	color: darkgreen;
+	width: 18px;
+}
+.dark .phone-icon {
+	color: #faa804;
+}
+.phone-number {
+	padding-left: 12px;
+}
+.dark .phone-number {
+	color: #f4f4f4;
+}
+.website {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 4px 0;
+}
+.website-icon {
+	color: darkgreen;
+	width: 18px;
+}
+.dark .website-icon {
+	color: #faa804;
+}
+.website-url {
+	padding-left: 10px;
+}
+.website-url a {
+	color: #000000;
+}
+.dark .website-url a {
+	color: #f4f4f4;
+}
+.website-url a:hover {
+	color: darkgreen;
+}
+.dark .website-url a:hover {
+	color: #faa804;
+}
+.dark .info span {
+	color: #fff;
+}
+.map {
+	position: relative;
+	width: 260px;
+	height: 220px;
+	background-color: gray;
+}
+.page-numbers {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	height: 60px;
+	list-style: none;
+}
+ul.page-nums {
+	display: flex;
+	padding-left: 0;
+}
+li.page-num {
+	border: none;
+	padding: 10px;
+	margin-bottom: 6px;
+	margin-right: 4px;
+	font-size: 16px;
+	border: 1px solid darkgreen;
+	color: #fff;
+	border-radius: 4px;
+	background-color: #f4f4f4;
+	text-transform: capitalize;
+	cursor: pointer;
+	list-style: none;
+	height: 30px;
+	transition: background-color 0.25s ease-in-out;
+}
+li.page-num:hover {
+	background-color: #faa804;
+}
+.dark li.page-num {
+	background-color: #ffa804;
+	transition: background-color 0.25s ease-in-out;
+}
+.dark li.page-num:hover {
+	background-color: #f4f4f4;
+	color: #333333;
+}
+li.page-num span {
+	position: relative;
+	top: -5px;
+	color: darkgreen;
+	font-weight: 500;
+}
+.dark li.page-num span {
+	color: #333333;
+}
+li.page-num.active {
+	background-color: darkgreen;
+}
+li.page-num.active:hover {
+	background-color: #ffa804;
+}
+.dark li.page-num.active:hover {
+	background-color: #f4f4f4;
+}
+li.page-num.active span {
+	color: #f4f4f4;
+}
+.dark li.page-num.active span {
+	color: #f4f4f4;
+}
+li.page-num.active:hover span {
+	color: #333333;
+}
+.dark li.page-num.active:hover span {
+	color: #333333;
+}
+.page-link {
+	color: #000000;
+	text-decoration: none;
+}
+
+@media only screen and (max-width: 640px) {
+	li.p-card {
+		flex-direction: column;
+	}
+	.info {
+		width: 100%;
+		padding-bottom: 12px;
+		min-width: 278px;
+	}
+	.map {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 320px) {
+	.page-info p {
+		font-size: 15px;
+	}
+	li.p-card {
+		max-width: 260px;
+	}
+	.info {
+		min-width: 240px;
+	}
+	.p-card p {
+		font-size: 1rem;
+	}
+}

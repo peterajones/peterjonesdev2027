@@ -1,0 +1,31 @@
+---
+import { badgeImage, type ProjectEntry } from '../config/projects';
+
+interface Props {
+  project: ProjectEntry;
+}
+const { project } = Astro.props;
+---
+
+<li class="item">
+  <a href={`/projects/${project.slug}`}>
+    <div class="card">
+      <div class="card-badges" style="display: flex">
+        {
+          project.badges.map((badge) => (
+            <img src={badgeImage(badge)} alt={badge} class="tech-badge" width="48" height="16" />
+          ))
+        }
+      </div>
+      <div class="card-title">
+        <span>{project.title}</span>
+      </div>
+      <div class="card-intro truncate">
+        {project.intro.map((line) => <span>{line}</span>)}
+      </div>
+      <div class="card-image" style="position: relative; height: 200px">
+        <img src={project.image} alt={project.imageAlt} style="object-fit: cover; width: 100%; height: 100%" />
+      </div>
+    </div>
+  </a>
+</li>

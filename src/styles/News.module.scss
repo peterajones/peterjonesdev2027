@@ -1,0 +1,23 @@
+.title {
+	color: #047fa5;
+	text-decoration: none;
+	line-height: inherit;
+	font-size: 1.5rem;
+	transition: all 0.25s ease-in;
+}
+.pubData {
+	display: block;
+	font-size: 0.9rem;
+	font-style: italic;
+}
+.newsfeedHeader {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+.newsfeedHeader > img {
+	max-width: 100%;
+}
+.newsfeedHeader h2 {
+	margin-left: 30px;
+}

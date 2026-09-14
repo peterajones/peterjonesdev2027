@@ -1,0 +1,14 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer" id="footer-year">Copyright &copy;{year} Peter A. Jones</div>
+</footer>
+
+<script>
+  // Build-time year is correct at deploy time; this keeps it accurate
+  // between rebuilds too, at effectively zero cost.
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = `Copyright © ${new Date().getFullYear()} Peter A. Jones`;
+</script>

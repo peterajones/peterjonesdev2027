@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+:root {
+	font-family: 'Roboto', sans-serif;
+}
+h1 {
+	font-size: 3.1573345183rem;
+	color: var(--black);
+	transition: color 0.25s ease-in;
+}
+.dark h1 {
+	color: var(--light-text);
+}
+h2 {
+	font-size: 2.368593037rem;
+	color: var(--dark-text);
+	transition: color 0.25s ease-in;
+}
+.dark h2 {
+	color: var(--light-text);
+}
+h3 {
+	font-size: 1.776889rem;
+	color: var(--dark-text);
+	transition: color 0.25s ease-in;
+}
+.dark h3 {
+	color: var(--light-text);
+}
+h4 {
+	font-size: 1.333rem;
+	color: var(--dark-text);
+	transition: color 0.25s ease-in;
+}
+.dark h4 {
+	color: var(--light-text);
+}
+p {
+	font-size: 1.15rem;
+	font-weight: 300;
+	line-height: 1.6;
+	padding: 10px 0;
+	color: var(--light-grey);
+	transition: color 0.25s ease-in;
+}
+.dark p {
+	color: var(--light-text);
+}
+/* links */
+a {
+	color: rebeccapurple;
+	text-decoration: none;
+	transition: all 0.15s ease-in;
+}
+a:hover {
+	color: #ff0000;
+	text-decoration: underline;
+}
+.dark a {
+	color: #ffa804;
+	text-decoration: none;
+	transition: all 0.15s ease-in;
+}
+.dark a:hover {
+	color: #ff7272;
+	text-decoration: underline;
+}
+::selection {
+	color: #ffffff;
+	background-color: rebeccapurple;
+}
+/* homepage */
+li.users {
+	color: red;
+}
+li.users {
+	font-size: 1.15rem;
+	font-weight: 300;
+	line-height: 1.6;
+	padding: 10px 0;
+	color: var(--light-grey);
+	transition: color 0.25s ease-in;
+}
+.dark li.users {
+	color: var(--white);
+}

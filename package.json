@@ -12,14 +12,27 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.5",
     "@astrojs/react": "^6.0.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.3.2",
+    "dompurify": "^3.4.15",
+    "nodemailer": "^10.0.10",
+    "prismjs": "^1.30.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "react-syntax-highlighter": "^16.1.1",
+    "sass": "^1.104.1"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^26.5.1",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "typescript": "^6.0.3"
   }
 }
