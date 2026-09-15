@@ -1,11 +1,20 @@
-label {
+// Scoped to .form-container (ContactForm.tsx's wrapper) — these were
+// previously bare `label`/`input`/`textarea` selectors, which applied
+// site-wide to every input/textarea/label on every page (checkboxes,
+// the weather-app search box, currency-converter/password-generator
+// inputs, etc.), not just this form. See the same bug in
+// _rollup-counter.scss (a bare `span` rule that broke every code block's
+// syntax highlighting) for how this class of leak happens: every partial
+// here compiles into one global stylesheet, so an unscoped tag selector
+// in any one of them applies everywhere, not just to its own widget.
+.form-container label {
   display: inline-block;
   margin-top: 1rem;
   font-size: 0.85rem;
   text-transform: uppercase;
   touch-action: manipulation;
 }
-input {
+.form-container input {
   min-width: 300px;
   height: 50px;
   display: block;
@@ -13,16 +22,16 @@ input {
   border-radius: 6px;
   font-size: 1.1rem;
 }
-input.contact-email {
+.form-container input.contact-email {
   box-shadow: none;
   width: auto;
   border: 1px solid #ccc;
 }
-.dark input.contact-email {
+.dark .form-container input.contact-email {
   background-color: var(--white);
   color: var(--dark-gray);
 }
-textarea {
+.form-container textarea {
   display: block;
   min-width: 300px;
   height: 60px;
