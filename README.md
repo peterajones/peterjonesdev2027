@@ -36,6 +36,41 @@ nvm use 22
     `src/lib/rateLimit.ts`.
   - `GET /api/rss/[feed]` — CORS proxy for the RSS feeds (config in
     `src/config/news.ts`), replacing 6 duplicated Next.js API routes.
+- **Content Collections** (`src/content.config.ts`) for content that's
+  genuinely a list of documents rather than app config — currently `blog`
+  (`/blog`, `/blog/[...slug]`, one seed post so far — dormant until real
+  posts are written) and `updates` (the navbar's "Latest Updates" modal,
+  27 entries migrated off a flat `src/config/updates.ts` array). Each entry
+  is a Markdown file under `src/content/<collection>/`; `updates` entries
+  use their filename as the unique id (not the date — several entries
+  intentionally share a date) with only `date` in frontmatter and the
+  changelog text as the file body. Uses Astro 7.3's current loader API
+  (`glob()` from `astro/loaders`, `z` from `astro/zod` — not `astro:content`,
+  deprecated there and removed in Astro 8).
+
+## Styling gotcha: `src/styles/partials/*.scss` is all global
+
+`globals.scss` `@use`-concatenates every partial into one shared
+stylesheet — there's no per-component scoping between them (unlike Astro's
+own `<style>` blocks in `.astro` files, which *do* auto-scope). A bare
+tag selector in any partial (e.g. `span { ... }`, `input { ... }`) applies
+to that element **everywhere on the site**, not just the widget the partial
+is named for. This has already caused two real bugs, both from leftover
+selectors that made sense in whatever more-isolated context they were
+originally written for, but not once concatenated globally:
+- an unscoped `span { display: inline-block; }` in `_rollup-counter.scss`
+  broke every project's syntax-highlighted code block (a `\n` inside an
+  `inline-block` box doesn't propagate a line break to the surrounding
+  flow, even under `white-space: pre`) — fixed by removing it, since
+  `span.count` already covers what that widget actually needs.
+- unscoped `label`/`input`/`textarea` in `_contactForm.scss` forced
+  `min-width: 300px; height: 50px` onto every input/textarea/label
+  site-wide — fixed by scoping to `.form-container`.
+
+When adding to an existing partial or writing a new one, scope selectors
+to that widget's actual class/container rather than bare tag names, unless
+the rule is genuinely meant to be global (as in `_typography.scss`,
+`_reset.scss`, `_footer.scss`, `_layout.scss` — site-wide by design).
 
 ## Environment variables
 
@@ -83,6 +118,13 @@ deployment notes.
 To attach a real domain: Coolify → app → **Domains**, add it, point an
 A/AAAA record at the server's IP, and Coolify's built-in proxy
 auto-provisions a Let's Encrypt cert once DNS resolves.
+
+**Push-to-deploy is configured**: a manual GitHub webhook (Coolify app →
+**Git** → **Webhooks**, the "Manual Git webhooks" → GitHub section — not
+the GitHub App source) is registered on this repo, so pushes to `main`
+auto-trigger a deploy. This works independent of which Source (public URL
+vs. GitHub App) the app uses, since the webhook lives on the app resource
+itself.
 
 Build-pack settings Coolify needs (already set on the test app): Dockerfile
 build strategy, base directory `/`, Dockerfile location `/Dockerfile`, port
@@ -141,5 +183,8 @@ use (no FontAwesome, no axios, no `@react-google-maps/api` —
 message for specifics before assuming its code matches the old site 1:1.
 
 Coolify deployment: done as a test deploy, Dockerfile and Google Places API
-issues both found and fixed (see Deployment section above). Not yet done:
-custom domain + TLS.
+issues both found and fixed (see Deployment section above), push-to-deploy
+configured. Not yet done: custom domain + TLS.
+
+Blog: scaffolded on Content Collections (see Architecture above), one seed
+post, not linked to a real domain yet — dormant until then.

@@ -18,6 +18,13 @@ every page, not specific to whatever you were actually testing. A plain
 `fetch()` of the same URL succeeds; only the module-graph `import()` used by
 hydration fails, and it doesn't self-heal on reload.
 
+Also seen with **Content Collections** (`src/content.config.ts`): creating
+that file for the first time, or adding new entries to an already-loaded
+collection's directory, can leave `getCollection()` silently returning
+fewer entries (or none) in an already-running dev server — no error, the
+page just renders with missing content. Same fix, same non-self-healing
+behavior.
+
 This is a dev-server-only artifact, unrelated to application code. Don't
 chase it in the app — either:
 - `astro dev stop && rm -rf node_modules/.vite .astro && astro dev --background --force`, or
