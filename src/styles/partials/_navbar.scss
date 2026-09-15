@@ -39,51 +39,48 @@
 	border-radius: 50%;
 }
 /* Toggle Theme */
-svg.svg-inline--fa.fa-sun,
-svg.svg-inline--fa.fa-moon,
-svg.svg-inline--fa.fa-lock,
-svg.svg-inline--fa.fa-unlock,
-svg.svg-inline--fa.fa-bell {
+// These previously targeted FontAwesome's rendered classes
+// (svg.svg-inline--fa.fa-sun etc.), leftover from before the icons were
+// swapped for plain inline SVGs (this project doesn't use FontAwesome —
+// see AGENTS.md). Never matched the actual markup (icon-sun/icon-moon/
+// icon-bell), in light mode or dark, so these icons rendered with
+// whatever ambient text color they inherited instead — in dark mode
+// that's black-on-dark-background, effectively invisible. fa-lock/
+// fa-unlock is dropped entirely: no lock/unlock icon exists anywhere in
+// the current navbar.
+.icon-sun,
+.icon-moon,
+.icon-bell {
 	color: rebeccapurple;
 	-webkit-transition: color 0.35s ease-in;
 	transition: color 0.35s ease-in;
 	width: 18px;
 	height: 18px;
 }
-svg.svg-inline--fa.fa-sun:hover,
-svg.svg-inline--fa.fa-sun:focus,
-svg.svg-inline--fa.fa-moon:hover,
-svg.svg-inline--fa.fa-moon:focus,
-svg.svg-inline--fa.fa-lock:hover,
-svg.svg-inline--fa.fa-lock:focus,
-svg.svg-inline--fa.fa-unlock:hover,
-svg.svg-inline--fa.fa-unlock:focus,
-svg.svg-inline--fa.fa-bell:hover,
-svg.svg-inline--fa.fa-bell:focus {
+.icon-sun:hover,
+.icon-sun:focus,
+.icon-moon:hover,
+.icon-moon:focus,
+.icon-bell:hover,
+.icon-bell:focus {
 	color: var(--red);
 	-webkit-transition: color 0.25s ease-in;
 	transition: color 0.25s ease-in;
 }
-.dark svg.svg-inline--fa.fa-sun,
-.dark svg.svg-inline--fa.fa-moon,
-.dark .svg-inline--fa.fa-lock,
-.dark .svg-inline--fa.fa-unlock,
-.dark svg.svg-inline--fa.fa-bell {
+.dark .icon-sun,
+.dark .icon-moon,
+.dark .icon-bell {
 	color: #ffa804;
   transition: color 0.25s ease-in;
 	width: 18px;
 	height: 18px;
 }
-.dark svg.svg-inline--fa.fa-sun:hover,
-.dark svg.svg-inline--fa.fa-sun:focus,
-.dark svg.svg-inline--fa.fa-moon:hover,
-.dark svg.svg-inline--fa.fa-moon:focus,
-.dark .svg-inline--fa.fa-lock:hover,
-.dark .svg-inline--fa.fa-lock:focus,
-.dark .svg-inline--fa.fa-unlock:hover,
-.dark .svg-inline--fa.fa-unlock:focus,
-.dark svg.svg-inline--fa.fa-bell:hover,
-.dark svg.svg-inline--fa.fa-bell:focus {
+.dark .icon-sun:hover,
+.dark .icon-sun:focus,
+.dark .icon-moon:hover,
+.dark .icon-moon:focus,
+.dark .icon-bell:hover,
+.dark .icon-bell:focus {
 	color: #ff7272;
 }
 
