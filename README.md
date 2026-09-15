@@ -71,6 +71,42 @@ The `Dockerfile` builds and runs the Node-adapter standalone server on port
 the env vars above, and it's a normal container deploy — no
 framework-specific hosting integration needed.
 
+**Live test deployment:** deployed to a self-hosted Coolify instance (public
+GitHub repo, no deploy key needed). Currently reachable only at its
+Coolify-assigned `*.sslip.io` test URL — no custom domain attached yet.
+(Coolify gives every app a working HTTPS-less URL this way before a real
+domain is attached, by resolving `<anything>.<server-ip>.sslip.io` straight
+to that server.) Infra specifics (instance URL, server IP, test URL) are
+intentionally not listed here since this repo is public — see local
+deployment notes.
+
+To attach a real domain: Coolify → app → **Domains**, add it, point an
+A/AAAA record at the server's IP, and Coolify's built-in proxy
+auto-provisions a Let's Encrypt cert once DNS resolves.
+
+Build-pack settings Coolify needs (already set on the test app): Dockerfile
+build strategy, base directory `/`, Dockerfile location `/Dockerfile`, port
+`4321`. The `PUBLIC_*` env vars must be marked "available at buildtime" —
+they get baked into the client bundle during `npm run build`, which runs in
+the Docker build stage, not at container start.
+
+**Known issue found in this test deploy:** the run-stage of `Dockerfile`
+originally copied only `dist/`, but the Node adapter's standalone build
+doesn't bundle every dependency into `entry.mjs` (e.g. `devalue`, used for
+session/actions serialization, stays an external `import`) — the container
+crash-looped with `ERR_MODULE_NOT_FOUND: Cannot find package 'devalue'`,
+which surfaced to the browser as a generic Traefik 404 (not an app error
+page) since nothing was listening on 4321. Fixed by pruning dev deps out of
+the build stage (`npm prune --omit=dev`) and copying that `node_modules`
+into the run stage alongside `dist` (see git log for the fix commit).
+
+**Outstanding:** Google Places/Maps API calls are erroring in this test
+deploy — not yet diagnosed. Likely candidates: the API key's HTTP-referrer
+restrictions (in Google Cloud Console) don't yet include the sslip.io test
+URL or the eventual production domain, or the Places/Maps APIs aren't
+enabled on that key's project. Needs investigation before this is
+considered production-ready.
+
 ## Status
 
 Everything is ported: layout/nav/footer, home page, projects index, all
@@ -88,4 +124,7 @@ use (no FontAwesome, no axios, no `@react-google-maps/api` —
 19, see the git log for `rollup-counter`). Check each project's port commit
 message for specifics before assuming its code matches the old site 1:1.
 
-Not yet done: the actual Coolify deployment.
+Coolify deployment: done as a test deploy (see Deployment section above for
+the URL, the Dockerfile fix that was needed, and the outstanding Google API
+issue). Not yet done: custom domain + TLS, and diagnosing the Google
+Places/Maps errors.
