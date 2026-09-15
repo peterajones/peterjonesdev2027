@@ -100,12 +100,28 @@ page) since nothing was listening on 4321. Fixed by pruning dev deps out of
 the build stage (`npm prune --omit=dev`) and copying that `node_modules`
 into the run stage alongside `dist` (see git log for the fix commit).
 
-**Outstanding:** Google Places/Maps API calls are erroring in this test
-deploy — not yet diagnosed. Likely candidates: the API key's HTTP-referrer
-restrictions (in Google Cloud Console) don't yet include the sslip.io test
-URL or the eventual production domain, or the Places/Maps APIs aren't
-enabled on that key's project. Needs investigation before this is
-considered production-ready.
+**Known issue, fixed:** Google Places autocomplete (weather-app's city
+search) errored in this test deploy. Two separate causes, both on the
+Google Cloud side rather than app code:
+1. The API key's HTTP-referrer allowlist didn't include the test/dev URLs
+   being used — add each origin you test from (`localhost:<port>`, the
+   Coolify test URL, the eventual production domain) under the key's
+   **Website restrictions** in Cloud Console.
+2. `google.maps.places.AutocompleteService`/`PlacesService` (what the code
+   originally used) were discontinued for any API key/project created after
+   **March 1, 2025** — Google's console error names the replacement
+   (`AutocompleteSuggestion`), which `WeatherApp.tsx` now uses. That class
+   calls a different endpoint (`places.googleapis.com`, "Places API (New)")
+   than the legacy client library, so the key's **API restrictions** also
+   need "Places API (New)" checked, separately from the legacy "Places API"
+   that was already allowed.
+
+A harmless, cosmetic `InvalidValueError: <callback> is not a function`
+console error can also show up from Google's own Maps JS loader when using
+the classic `callback=` URL-param loading style — confirmed to originate
+inside Google's script (reproducible with extensions disabled) and to have
+no effect on functionality. Left as-is rather than risk a larger loader
+rewrite to silence a console-only message.
 
 ## Status
 
@@ -124,7 +140,6 @@ use (no FontAwesome, no axios, no `@react-google-maps/api` —
 19, see the git log for `rollup-counter`). Check each project's port commit
 message for specifics before assuming its code matches the old site 1:1.
 
-Coolify deployment: done as a test deploy (see Deployment section above for
-the URL, the Dockerfile fix that was needed, and the outstanding Google API
-issue). Not yet done: custom domain + TLS, and diagnosing the Google
-Places/Maps errors.
+Coolify deployment: done as a test deploy, Dockerfile and Google Places API
+issues both found and fixed (see Deployment section above). Not yet done:
+custom domain + TLS.
