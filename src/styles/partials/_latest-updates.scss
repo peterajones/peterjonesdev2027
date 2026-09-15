@@ -128,6 +128,14 @@ body.modal-open {
 .update-details {
 	margin-bottom: 4px;
 }
+// <Content /> renders a real <p> for each entry's Markdown body — global
+// _typography.scss's `p { padding: 10px 0; }` would otherwise stack with
+// .update-content/.update-date's own spacing, adding extra vertical gap
+// per entry versus the plain-text rendering this replaced.
+.update-details p {
+	margin: 0;
+	padding: 0;
+}
 /* .open {
 	top: calc(-100vh + 110px);
 	background-color: rgba(44, 44, 44, 0.85);

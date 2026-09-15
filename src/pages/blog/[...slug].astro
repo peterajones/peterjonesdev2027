@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// z.coerce.date() on a bare pubDate parses as UTC midnight — format with
+// timeZone: 'UTC' or the day can shift by one in negative-UTC-offset zones.
+const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<BaseLayout title={`Peter Jones | ${post.data.title}`} description={post.data.description}>
+  <div class="content">
+    <article class="blog-post">
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">{formattedDate}</div>
+      <Content />
+    </article>
+  </div>
+</BaseLayout>

@@ -1,5 +1,28 @@
 ---
-import { updates } from '../config/updates';
+import { getCollection, render } from 'astro:content';
+
+const updateEntries = (await getCollection('updates')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Pre-resolve render() for every entry with Promise.all — an await inside a
+// template-level .map() would return unresolved Promises into JSX instead
+// of rendered content.
+const updates = await Promise.all(
+  updateEntries.map(async (entry) => {
+    const { Content } = await render(entry);
+    // z.coerce.date() on a bare "2019-06-24" parses as UTC midnight;
+    // formatting without timeZone: 'UTC' would show the wrong day in
+    // negative-UTC-offset zones.
+    const date = entry.data.date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+    return { id: entry.id, date, Content };
+  })
+);
 ---
 
 <nav class="nav">
@@ -24,6 +47,7 @@ import { updates } from '../config/updates';
     </div>
     <div class="topNavLinks">
       <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
       <a href="/news">News</a>
       <a href="/contact">Contact</a>
       <button
@@ -60,10 +84,12 @@ import { updates } from '../config/updates';
     <div class="modal-title">Latest Updates</div>
     <div class="updates-container-inner">
       {
-        updates.map((update) => (
-          <div class="update-content">
-            <div class="update-date">{update.date}</div>
-            <div class="update-details" set:html={update.details} />
+        updates.map(({ id, date, Content }) => (
+          <div class="update-content" data-id={id}>
+            <div class="update-date">{date}</div>
+            <div class="update-details">
+              <Content />
+            </div>
           </div>
         ))
       }

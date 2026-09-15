@@ -1,0 +1,21 @@
+/* Blog post detail page. Global _typography.scss already themes p/h1-h4/a
+   for light+dark mode — this just constrains prose to a readable line
+   length and styles the post date. */
+.blog-post {
+	max-width: 700px;
+	margin: 0 auto;
+	padding: 20px 0 60px;
+}
+.blog-post h1 {
+	margin-bottom: 4px;
+}
+.post-meta {
+	font-size: 0.95rem;
+	font-style: italic;
+	color: var(--light-grey);
+	margin-bottom: 20px;
+	transition: color 0.25s ease-in;
+}
+.dark .post-meta {
+	color: var(--light-text);
+}
