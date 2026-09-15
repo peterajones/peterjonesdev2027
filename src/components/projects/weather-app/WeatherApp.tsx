@@ -13,9 +13,17 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 const shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+// google.maps.places.AutocompleteSuggestion / Place — the classes
+// google.maps.places.AutocompleteService / PlacesService (used here
+// previously) were replaced by, as of March 2025 they're no longer
+// available to new API keys/projects at all. See
+// https://developers.google.com/maps/documentation/javascript/places-migration-overview
 interface Suggestion {
-  place_id: string;
-  description: string;
+  placePrediction: {
+    placeId: string;
+    text: { text: string };
+    toPlace: () => any;
+  };
 }
 
 export default function WeatherApp() {
@@ -27,25 +35,29 @@ export default function WeatherApp() {
   });
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const autocompleteService = useRef<any>(null);
-  const placesService = useRef<any>(null);
+  // Holds the `places` library namespace (window.google.maps.places) once
+  // it's ready, rather than a service instance — the new API is a set of
+  // static/class methods, not an object you construct once and reuse.
+  const placesLibrary = useRef<any>(null);
+  // Tracks the most recently typed value so a slow, out-of-order response
+  // to an earlier keystroke can't clobber newer suggestions.
+  const latestQuery = useRef('');
 
   useEffect(() => {
     setMounted(true);
     setAddress('Toronto, ON, Canada');
 
-    const initPlacesServices = () => {
-      if (window.google?.maps?.places) {
-        autocompleteService.current = new window.google.maps.places.AutocompleteService();
-        placesService.current = new window.google.maps.places.PlacesService(document.createElement('div'));
+    const initPlacesLibrary = () => {
+      if (window.google?.maps?.places?.AutocompleteSuggestion) {
+        placesLibrary.current = window.google.maps.places;
       }
     };
 
     // The Maps script (loaded from the page) may already be ready, or may
     // still be loading — either way, pick it up as soon as it's available.
-    initPlacesServices();
-    window.addEventListener('google-maps-loaded', initPlacesServices);
-    return () => window.removeEventListener('google-maps-loaded', initPlacesServices);
+    initPlacesLibrary();
+    window.addEventListener('google-maps-loaded', initPlacesLibrary);
+    return () => window.removeEventListener('google-maps-loaded', initPlacesLibrary);
   }, []);
 
   if (!mounted) {
@@ -66,57 +78,57 @@ export default function WeatherApp() {
     setShowSuggestions(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAddress(value);
+    latestQuery.current = value;
 
-    if (value.length > 2 && autocompleteService.current) {
-      const request = { input: value, types: ['(cities)'] };
+    if (value.length > 2 && placesLibrary.current) {
+      try {
+        const { suggestions: results } = await placesLibrary.current.AutocompleteSuggestion.fetchAutocompleteSuggestions(
+          {
+            input: value,
+            // Closest equivalent of the old `types: ['(cities)']` filter
+            // in the new type taxonomy — see the migration guide linked
+            // above if this needs tightening/loosening.
+            includedPrimaryTypes: ['locality'],
+          }
+        );
 
-      const timeoutId = setTimeout(() => {
-        console.error('Autocomplete request timed out - callback never called');
+        // A later keystroke may have already fired its own request —
+        // ignore a stale response instead of overwriting fresher results.
+        if (value !== latestQuery.current) return;
+
+        setSuggestions(results ?? []);
+        setShowSuggestions((results ?? []).length > 0);
+      } catch (err) {
+        console.error('Autocomplete request failed:', err);
         console.error('This usually indicates:');
-        console.error('1. Billing not enabled for Google Cloud project');
+        console.error('1. Billing not enabled for the Google Cloud project');
         console.error('2. Places API quota exceeded');
         console.error('3. API key lacks Places API permissions');
         console.error('4. Network or CORS issues');
-      }, 5000);
-
-      autocompleteService.current.getPlacePredictions(
-        request,
-        (predictions: Suggestion[] | null, status: string) => {
-          clearTimeout(timeoutId);
-
-          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-            setSuggestions(predictions);
-            setShowSuggestions(true);
-          } else {
-            console.log('Autocomplete failed. Status:', status, 'Predictions:', predictions);
-            setSuggestions([]);
-            setShowSuggestions(false);
-          }
-        }
-      );
+        setSuggestions([]);
+        setShowSuggestions(false);
+      }
     } else {
       setSuggestions([]);
       setShowSuggestions(false);
     }
   };
 
-  const handleSelect = (placeId: string, description: string) => {
-    setAddress(description);
+  const handleSelect = async (suggestion: Suggestion) => {
+    setAddress(suggestion.placePrediction.text.text);
     setShowSuggestions(false);
 
-    if (placesService.current) {
-      const request = { placeId };
-      placesService.current.getDetails(request, (place: any, status: string) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK && place.geometry) {
-          setCoordinates({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          });
-        }
-      });
+    try {
+      const place = suggestion.placePrediction.toPlace();
+      await place.fetchFields({ fields: ['location'] });
+      if (place.location) {
+        setCoordinates({ lat: place.location.lat(), lng: place.location.lng() });
+      }
+    } catch (err) {
+      console.error('Failed to fetch place details:', err);
     }
   };
 
@@ -259,7 +271,7 @@ export default function WeatherApp() {
           <div className="autocompleteDropdownContainer">
             {suggestions.map((suggestion) => (
               <div
-                key={suggestion.place_id}
+                key={suggestion.placePrediction.placeId}
                 className="suggestionItem"
                 style={{ backgroundColor: '#ffffff', cursor: 'pointer' }}
                 onMouseEnter={(e) => {
@@ -270,9 +282,9 @@ export default function WeatherApp() {
                   e.currentTarget.style.backgroundColor = '#ffffff';
                   e.currentTarget.style.color = 'initial';
                 }}
-                onClick={() => handleSelect(suggestion.place_id, suggestion.description)}
+                onClick={() => handleSelect(suggestion)}
               >
-                <span>{suggestion.description}</span>
+                <span>{suggestion.placePrediction.text.text}</span>
               </div>
             ))}
           </div>

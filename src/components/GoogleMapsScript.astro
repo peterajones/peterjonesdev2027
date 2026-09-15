@@ -23,7 +23,7 @@ const librariesParam = libraries ? `&libraries=${libraries}` : '';
       </script>
       <script
         is:inline
-        src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}${librariesParam}&callback=__onGoogleMapsLoaded`}
+        src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}${librariesParam}&loading=async&callback=__onGoogleMapsLoaded`}
         async
       />
     </>
