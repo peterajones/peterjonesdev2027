@@ -63,7 +63,7 @@ import { updates } from '../config/updates';
         updates.map((update) => (
           <div class="update-content">
             <div class="update-date">{update.date}</div>
-            <div class="update-details">{update.details}</div>
+            <div class="update-details" set:html={update.details} />
           </div>
         ))
       }
