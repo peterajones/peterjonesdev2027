@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Banner from '../components/Banner.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Banner from "../components/Banner.astro";
 ---
 
 <BaseLayout title="Peter Jones | Homepage">
@@ -13,48 +13,45 @@ import Banner from '../components/Banner.astro';
       <p>Thank you for visiting my website.</p>
       <p>
         I am a Front End Web Developer in Toronto and I have been building
-        websites for more than 10 years. My background is making websites
-        with HTML, CSS and JavaScript from Photoshop mockups. I have
-        worked with PHP, mySql, Wordpress, jQuery and many other
-        technologies. When mobile devices arrived, I learned responsive
-        web design with fluid grids as well as the importance of web
-        standards, cross browser compatibility and accessibility.
+        websites for more than 10 years. My background is making websites with
+        HTML, CSS and JavaScript from Photoshop mockups. I have worked with PHP,
+        mySql, Wordpress, jQuery and many other technologies. When mobile
+        devices arrived, I learned responsive web design with fluid grids as
+        well as the importance of web standards, cross browser compatibility and
+        accessibility.
       </p>
       <p>
-        With the arrival of task managers such as Gulp and Grunt,
-        minifying CSS and Javascript as well as optimizing images was no
-        longer a chore and the benefits of faster load times became
-        obvious using these techniques. Flexbox and CSS Grid gave us the
-        ability to design web pages in ways that we could never have
-        imagined. At any rate, the industry has moved on and new
-        technologies have appeared, and so has the way sites like this one
-        get built.
+        With the arrival of task managers such as Gulp and Grunt, minifying CSS
+        and Javascript as well as optimizing images was no longer a chore and
+        the benefits of faster load times became obvious using these techniques.
+        Flexbox and CSS Grid gave us the ability to design web pages in ways
+        that we could never have imagined. At any rate, the industry has moved
+        on and new technologies have appeared, and so has the way sites like
+        this one get built.
       </p>
       <p>
-        Staying on top of the latest technologies and techniques is
-        challenging but I want to keep building websites using the latest
-        and greatest. This site is built with Astro — content ships as
-        plain static HTML, and React is used only for the handful of pages
-        that are genuinely interactive.
+        Staying on top of the latest technologies and techniques is challenging
+        but I want to keep building websites using the latest and greatest. This
+        site is built with Astro — content ships as plain static HTML, and React
+        is used only for the handful of pages that are genuinely interactive.
       </p>
     </section>
     <section class="section section-two">
       <div class="left">
         <h3>So what&apos;s here?</h3>
         <p>
-          Most of this site is static — the content doesn't change per
-          visitor, so it's rendered once at build time instead of shipping
-          a JavaScript framework to reconstruct it in your browser.
+          Most of this site is static — the content doesn't change per visitor,
+          so it's rendered once at build time instead of shipping a JavaScript
+          framework to reconstruct it in your browser.
         </p>
         <p>
           The interactive project demos under <a href="/projects">Projects</a>
-          are still built with React, but each one loads independently, only
-          on the page that needs it — the homepage you're reading right now
-          ships no framework JavaScript at all.
+          are still built with React, but each one loads independently, only on the
+          page that needs it — the homepage you're reading right now ships no framework
+          JavaScript at all.
         </p>
         <p>
-          I have tried to explain more on this in the Code Snippets
-          Section.
+          I have tried to explain more on this in the Code Snippets Section.
         </p>
       </div>
       <div class="right"></div>
@@ -64,27 +61,25 @@ import Banner from '../components/Banner.astro';
       <div class="right">
         <h3>Code Snippets Section</h3>
         <p>
-          In this section I have converted some past side projects written
-          in HTML, CSS and Javascript.
+          In this section I have converted some past side projects written in
+          HTML, CSS and Javascript.
         </p>
         <p>
           The original code is shown in the syntax highlighting sections -
-          usually one section for each. For the syntax highlighting I used
-          Prism which is a lightweight, extensible syntax highlighter.
-          Check out the
-          <a href="https://prismjs.com/" target="_new">Prism website</a> to
-          learn more.
+          usually one section for each. For the syntax highlighting I used Prism
+          which is a lightweight, extensible syntax highlighter. Check out the <a
+            href="https://prismjs.com/"
+            target="_new">Prism website</a
+          > to learn more.
         </p>
         <p>
           If you want to see how the original snippets worked, you can
-          copy/paste from the snippets into separate files (i.e.
-          index.html, styles.css and scripts.js) and run them in a
-          browser.
+          copy/paste from the snippets into separate files (i.e. index.html,
+          styles.css and scripts.js) and run them in a browser.
         </p>
         <p>
-          There is a short explanation as to what was required to convert
-          the snippet for use with React at the top of each snippet&apos;s
-          page.
+          There is a short explanation as to what was required to convert the
+          snippet for use with React at the top of each snippet&apos;s page.
         </p>
       </div>
     </section>
@@ -93,15 +88,16 @@ import Banner from '../components/Banner.astro';
         <h3>News Feeds Section</h3>
         <p>I have always added a news feeds section to my site.</p>
         <p>
-          In React we can use the <code>Fetch API</code> to pull data and
-          display it on our site.
+          In React we can use the <code>Fetch API</code> to pull data and display
+          it on our site.
         </p>
         <p>
-          For the news feed on this site I'm pulling RSS feeds from
-          <a href="https://www.cbc.ca/rss/" target="_new">CBC</a>. Thanks
-          <a href="https://www.cbc.ca/" target="_new">CBC!</a> Since RSS
-          feeds don't allow cross-origin requests from the browser, a
-          small server endpoint on this site proxies each feed.
+          For the news feed on this site I'm pulling RSS feeds from <a
+            href="https://www.cbc.ca/rss/"
+            target="_new">CBC</a
+          >. Thanks <a href="https://www.cbc.ca/" target="_new">CBC!</a> Since RSS
+          feeds don't allow cross-origin requests from the browser, a small server
+          endpoint on this site proxies each feed.
         </p>
       </div>
       <div class="right"></div>
@@ -112,13 +108,13 @@ import Banner from '../components/Banner.astro';
         <h3>Contact Form Section</h3>
         <p>Every website should have a contact form, even a simple one.</p>
         <p>
-          This site is self-hosted, so the contact form posts to a small
-          API endpoint on this same server rather than relying on a
-          third-party forms service.
+          This site is self-hosted, so the contact form posts to a small API
+          endpoint on this same server rather than relying on a third-party
+          forms service.
         </p>
         <p>
-          Go ahead - <a href="/contact">send me a message</a>. I promise to
-          get back to you.
+          Go ahead - <a href="/contact">send me a message</a>. I promise to get
+          back to you.
         </p>
       </div>
     </section>

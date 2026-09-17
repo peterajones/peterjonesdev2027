@@ -8,7 +8,7 @@ export default function PasswordGeneratorWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         This is a random password generator written in JavaScript.{' '}
         <span className="btn-widget-description">
           <button onClick={() => setDescriptionOpen((v) => !v)}>
@@ -16,7 +16,6 @@ export default function PasswordGeneratorWidget() {
           </button>
         </span>
       </p>
-      <br />
       <PasswordGenerator />
       <div className="code-content">
         <div className={descriptionOpen ? 'code-description-open' : 'code-description-closed'}>

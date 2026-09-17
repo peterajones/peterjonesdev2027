@@ -87,7 +87,7 @@ export const projects: ProjectEntry[] = [
     slug: 'rollup-counter',
     title: 'Javascript Rollup Counter',
     intro: [
-      "This is a vanilla Javascript version of a react-transition-group animation that I saw on one of Wes Bos' tutorials.",
+      "This is a vanilla Javascript version of a react-transition-group animation that I saw on some tutorial somewhere.",
       'As the counter increments, the numbers roll up to reveal the increment.',
     ],
     badges: ['CSS', 'JS'],

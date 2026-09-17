@@ -8,17 +8,15 @@ export default function ClockWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         Here is a simple clock that generates the current time using the
         JavaScript <code className="inline">Date</code> object.{' '}
         <span className="btn-widget-description">
-          <br />
           <button onClick={() => setDescriptionOpen((v) => !v)}>
             {descriptionOpen ? 'Hide description' : 'Read more...'}
           </button>
         </span>
       </p>
-      <br />
       <div className="stage clock">
         <Clock />
       </div>

@@ -8,17 +8,15 @@ export default function RollupCounterWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         This is a React version of a rolling digit counter, along with the
-        original vanilla JavaScript it's based on.{' '}
-        <br />
+        original vanilla JavaScript it's based on.
         <span className="btn-widget-description">
           <button onClick={() => setDescriptionOpen((v) => !v)}>
             {descriptionOpen ? 'Hide description' : 'Read more...'}
           </button>
         </span>
       </p>
-      <br />
       <div className="stage">
         <Counter />
       </div>

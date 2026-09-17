@@ -27,7 +27,7 @@ a:hover.btnLink {
 	text-decoration: none;
 }
 .truncate{
-	display: -webkit-box;
+	display: flow;
 	max-width: var(--maxWidth);
 	max-height: calc(var(--fontSize) * var(--lineHeight) * var(--numLines));
 	margin: 0 auto;
@@ -37,10 +37,11 @@ a:hover.btnLink {
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding: 0;
+	margin: 0 0 10px 0;
 }
 .truncate span {
-	padding-bottom: 10px;
+	padding-bottom: 20px;
+	color: #000000;
 }
 .dark .truncate span {
 	color: #f4f4f4;
@@ -48,11 +49,7 @@ a:hover.btnLink {
 .github-link {
 	display: flex;
 	align-items: center;
-	padding-top: 20px;
-	width: 50vw;
-	margin: 0 auto;
-	color: initial;
-	transition: color 0.25s ease-in;
+	padding: 10px 0 10px 0;
 }
 .dark .github-link span {
 	color: #f4f4f4;
@@ -78,8 +75,10 @@ a:hover.btnLink {
 	padding: 0;
 }
 .card-badges > img {
-	height: 16px;
+	width: 55px;
+	height: 22px;
 	margin-right: 6px;
+	border: 1px solid #d2d2d2;
 }
 code.inline {
 	font-size: 16px;
@@ -151,7 +150,7 @@ a:hover.backBtn {
 	border: 1px solid #464646;
 }
 section.code {
-	width: 50vw;
+	/* width: 50vw; */
 	margin: 0 auto;
 	overflow-x: scroll;
 	-webkit-overflow-scrolling: touch;
@@ -209,7 +208,7 @@ section.code pre {
   flex-direction: column;
 	width: 290px;
 	margin: 10px;
-	min-height: 400px;
+	min-height: 430px;
 	transition: border 0.25s ease-in;
 }
 .dark .card {
@@ -221,23 +220,18 @@ a .card-title {
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 700;
-	padding: 10px;
+	padding: 20px 0 10px 0;
 	transition: color 0.25s ease-in;
 }
 .dark a .card-title {
 	color: #fafafa;
 }
 a .card-intro {
-	padding: 20px 10px;
-	text-align: left;
+	text-align: center;
+  padding-bottom: 10px;;
 }
 a .card-image img {
-	position: absolute;
-	width: 300px;
-	margin: 0 auto;
-	text-align: center;
-	bottom: 0px;
-	right: -5px;
+	position: relative;
 }
 .stage h1 {
 	color: #000000;
@@ -254,8 +248,8 @@ a .card-image img {
 	margin-bottom: 30px;
 }
 .btn-widget-description > button {
-	display: block;
 	border: 1px solid #464646;
+	margin-left: 10px;;
 	border-radius: 6px;
 	font-size: 1rem;
 	background-color: #464646;
@@ -356,6 +350,7 @@ span.btn-widget-code {
 	max-height: 12000px;
 	transition: all 0.35s ease-in-out;
 	overflow-y: hidden;
+	width: 50vw;
 }
 
 @media only screen and (max-width: 1460px) {

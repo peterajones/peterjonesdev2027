@@ -8,7 +8,7 @@ export default function CurrencyConverterWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         A handy currency converter. Build your own lists of currencies to compare several
         currencies at the same time!{' '}
         <span className="btn-widget-description">
@@ -17,7 +17,6 @@ export default function CurrencyConverterWidget() {
           </button>
         </span>
       </p>
-      <br />
       <div className="stage">
         <CurrencyConverter />
       </div>

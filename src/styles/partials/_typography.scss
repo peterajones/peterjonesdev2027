@@ -52,8 +52,8 @@ a {
 	transition: all 0.15s ease-in;
 }
 a:hover {
-	color: #ff0000;
-	text-decoration: underline;
+	color: #000000;
+	text-decoration: none;
 }
 .dark a {
 	color: #ffa804;
@@ -61,8 +61,8 @@ a:hover {
 	transition: all 0.15s ease-in;
 }
 .dark a:hover {
-	color: #ff7272;
-	text-decoration: underline;
+	color: #000000;
+	text-decoration: none;
 }
 ::selection {
 	color: #ffffff;

@@ -8,16 +8,14 @@ export default function CheckboxStylingWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         An example of how checkboxes can be styled with CSS.{' '}
         <span className="btn-widget-description">
-          <br />
           <button onClick={() => setDescriptionOpen((v) => !v)}>
             {descriptionOpen ? 'Hide description' : 'Read more...'}
           </button>
         </span>
       </p>
-      <br />
       <div className="stage checkboxes">
         <Checkboxes />
       </div>

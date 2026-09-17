@@ -8,7 +8,7 @@ export default function WeatherAppWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         Get the current weather for a city of your choice. Includes a 5 day forecast.{' '}
         <span className="btn-widget-description">
           <button onClick={() => setDescriptionOpen((v) => !v)}>
@@ -16,7 +16,6 @@ export default function WeatherAppWidget() {
           </button>
         </span>
       </p>
-      <br />
       <div className="stage">
         <WeatherApp />
       </div>

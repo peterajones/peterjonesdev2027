@@ -8,16 +8,14 @@ export default function PizzaPieWidget() {
 
   return (
     <>
-      <p>
+      <p style={{ paddingBottom: '30px' }}>
         This was a prototype of an idea for a client.{' '}
         <span className="btn-widget-description">
-          <br />
           <button onClick={() => setDescriptionOpen((v) => !v)}>
             {descriptionOpen ? 'Hide description' : 'Read more...'}
           </button>
         </span>
       </p>
-      <br />
       <div className="stage pizza-pie">
         <PizzaSlices />
       </div>
