@@ -12,3 +12,23 @@ const year = new Date().getFullYear();
   const el = document.getElementById('footer-year');
   if (el) el.textContent = `Copyright © ${new Date().getFullYear()} Peter A. Jones`;
 </script>
+
+<style>
+  footer {
+    z-index: -10;
+  }
+
+  div.footer {
+    color: var(--color-text);
+    position: relative;
+    text-align: center;
+    padding: 40px 0 20px;
+    bottom: 0;
+    z-index: -10;
+    transition: color 0.25s ease-in;
+  }
+
+  footer {
+    width: 100%;
+  }
+</style>

@@ -10,7 +10,6 @@
 @import './partials/nprogress.css';
 @import './partials/signin.css';
 @import './partials/banner.css';
-@import './partials/nav-footer.css';
 @import './partials/homepage.css';
 @import './partials/card.css';
 @import './partials/atom-dark.css';
@@ -25,4 +24,3 @@
 @import './partials/news.css';
 @import './partials/blog.css';
 @import './partials/contactForm.css';
-@import './partials/footer.css';
