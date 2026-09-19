@@ -6,6 +6,12 @@
 .github-link span {
 	color: var(--color-text-inherit);
 }
+/* In dark mode the span's colour is pinned (--color-text-inherit is a fixed
+   value there, not currentColor), so it would not follow the link's hover
+   colour the way it does in light mode. Restore hover parity. See E5. */
+[data-theme="dark"] .github-link:hover span {
+	color: var(--color-link-hover);
+}
 .github-logo {
 	background-image: url(/images/code/github-logo.png);
 	background-size: contain;

@@ -1,6 +1,6 @@
 # CSS Refactor — Exceptions Log
 
-**4 exceptions, all approved by Peter on 2026-09-19.**
+**5 exceptions: E1–E4 approved by Peter on 2026-09-19; E5 pending his check.**
 
 Every intentional or unavoidable visual change from the pixel-identical baseline.
 
@@ -67,3 +67,11 @@ Each entry is `E<n>` and records:
 - **What to look for:** With the code panel open in light mode, find the first paragraph of the code panel — "The code displayed below is from my original iteration in HTML, CSS and JS." It darkens from grey to black. (It carries a legacy `red-msg` class, but nothing in the CSS actually colours it red — the audit confirms `.red-msg` has no colour rule.) Computed `color` on that paragraph: **before** `rgb(88, 88, 88)` (`#585858`), **after** `rgb(0, 0, 0)` (`#000000`). Dark theme is unaffected: computed `color` stays `rgb(244, 244, 244)` (`#f4f4f4`) before and after. Verified with a scratch Playwright script comparing commit `bec3cb8` (module move, before this fix) vs commit `5fb02c7` (working tree, after), light and dark theme, desktop viewport — confirmed via `getComputedStyle` directly, not a screenshot.
 - **Commit:** 5fb02c7
 - **Approval:** approved (Peter, 2026-09-19 — browser review)
+
+### E5: "Get it on GitHub" link — hover colour now works in dark mode
+
+- **Where:** any project page's code panel, e.g. `/projects/js-clock`, dark theme, any width. Open the code panel and hover the "Get it on GitHub" link. Hover is invisible to the screenshots, so the gate shows zero diff.
+- **What changed and why:** Peter noticed the link's hover colour did nothing in dark mode. It behaved that way before the refactor too, so this is a fix, not a regression: `main` had `.dark .github-link span { color: #f4f4f4 }`, which pinned the text white and stopped the link's `a:hover` colour reaching the `<span>` inside it. The refactor carried that behaviour over faithfully via `--color-text-inherit` (`currentColor` in light, so hover works; `#f4f4f4` in dark, so it does not). This adds one rule in `src/styles/code.css` restoring parity.
+- **What to look for:** in dark mode, hovering the link turns its text the link-hover colour (`var(--color-link-hover)`, which is `#e43af4` in dark) instead of staying white. Light mode is unchanged (it already worked). The link's resting colour is unchanged in both themes.
+- **Commit:** see `git log --oneline -- src/styles/code.css`
+- **Approval:** pending
