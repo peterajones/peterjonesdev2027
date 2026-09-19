@@ -31,7 +31,6 @@
 	--color-widget-btn-bg: #464646;
 	--color-widget-btn-border: #464646;
 	--color-widget-btn-hover-bg: transparent;
-	--image-github-logo: url(/images/code/github-logo.png);
 
 	/* Latest updates modal */
 	--color-modal-title-bg: rgb(144, 75, 213);
@@ -40,7 +39,6 @@
 	/* Pagination project */
 	--color-contact-icon: darkgreen;
 	--color-contact-icon-alt: darkgreen;
-	--color-user-info-text: currentColor;
 	--color-page-num-bg: #f4f4f4;
 	--color-page-num-hover-bg: #faa804;
 	--color-page-num-hover-text: #fff;
@@ -90,7 +88,6 @@
 	--color-widget-btn-bg: transparent;
 	--color-widget-btn-border: #f4f4f4;
 	--color-widget-btn-hover-bg: #464646;
-	--image-github-logo: url(/images/code/github-logo-dark.png);
 
 	/* Latest updates modal */
 	--color-modal-title-bg: rgba(201, 44, 44, 1);
@@ -99,7 +96,6 @@
 	/* Pagination project */
 	--color-contact-icon: #ffa804;
 	--color-contact-icon-alt: #faa804;
-	--color-user-info-text: #fff;
 	--color-page-num-bg: #ffa804;
 	--color-page-num-hover-bg: #f4f4f4;
 	--color-page-num-hover-text: #333333;

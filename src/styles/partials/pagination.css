@@ -118,8 +118,8 @@ li.p-card {
 .website-url a:hover {
 	color: var(--color-contact-icon-alt);
 }
-.info span {
-	color: var(--color-user-info-text);
+[data-theme="dark"] .info span {
+	color: #fff;
 }
 .map {
 	position: relative;

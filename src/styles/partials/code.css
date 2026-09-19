@@ -51,13 +51,16 @@ a:hover.btnLink {
 	color: var(--color-text-inherit);
 }
 .github-logo {
-	background-image: var(--image-github-logo);
+	background-image: url(/images/code/github-logo.png);
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 26px;
 	height: 26px;
 	margin: 0 10px;
 	transition: background-image 0.25s ease-in;
+}
+[data-theme="dark"] .github-logo {
+	background-image: url(/images/code/github-logo-dark.png);
 }
 .snippets-intro {
 	padding: 0;

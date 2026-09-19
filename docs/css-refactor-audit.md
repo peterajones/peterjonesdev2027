@@ -141,7 +141,7 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _items | `.dark .card-title` | color | `#000` (`.card-title`) | `var(--light-text)` | token `--color-text` (always out-specified by `a .card-title`, kept for fidelity) |
 | _code | `.dark .truncate span` | color | `#000000` | `#f4f4f4` | token `--color-text` |
 | _code | `.dark .github-link span` | color | inherited from `a` (`rebeccapurple`, `#ffa804` on hover) | `#f4f4f4` | token `--color-text-inherit` on a new light rule `.github-link span` (Task 5: light `currentColor` keeps the hover inheritance) |
-| _code | `.dark .github-logo` | background-image | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | token `--image-github-logo` (Task 5: escape converted; not a colour, so not `--color-*`) |
+| _code | `.dark .github-logo` | background-image | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | escape (not a colour; tokens.css holds only `--color-*` tokens — Task 5 fix round 1) |
 | _code | `.dark .github-logo` | background-size, background-repeat, width, height, margin | same | same | redundant |
 | _code | `.dark .code-container` | background-color | `#f6f6f6` | `#333333` | dead (no `.code-container` in markup) |
 | _code | `.dark .code-content p` | color | `#000000` | `#f4f4f4` | token `--color-text` |
@@ -170,7 +170,7 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _pagination | `.dark .phone-icon`, `.dark .website-icon`, `.dark .website-url a:hover` | color | `darkgreen` | `#faa804` (sic, not `#ffa804`) | token `--color-contact-icon-alt` |
 | _pagination | `.dark .email-address a`, `.dark .website-url a` | color | `#000` / `#000000` | `#f4f4f4` | token `--color-text` |
 | _pagination | `.dark .phone-number` | color | inherited | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
-| _pagination | `.dark .info span` | color | inherited | `#fff` | token `--color-user-info-text` on a new light rule `.info span` (Task 5: escape converted, light `currentColor`) |
+| _pagination | `.dark .info span` | color | inherited | `#fff` | escape (light inherits; a light-mode `.info span` rule would also reach the spans Google Maps injects into `.map`, which the gate can't see — Task 5 fix round 1) |
 | _pagination | `.dark li.page-num` | background-color | `#f4f4f4` | `#ffa804` | token `--color-page-num-bg` |
 | _pagination | `.dark li.page-num` | transition | same | same | redundant |
 | _pagination | `.dark li.page-num:hover` | background-color | `#faa804` | `#f4f4f4` | token `--color-page-num-hover-bg` |
@@ -217,15 +217,17 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 
 Counts: 106 rows. **57 token, 23 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal (Task 2).
 
-**Task 5 update.** Under the binding audit ruling (an escape becomes a token wherever its light value can be written exactly: `transparent` for backgrounds, `currentColor` for inherited colours), 13 of the 23 escapes became tokens: 10 inherited-colour rows (`--color-text-inherit`, `--color-user-info-text`), 2 transparent backgrounds (`--color-card-bg`, `--color-stage-bg`) and the GitHub logo image (`--image-github-logo`). Final tally: **70 token, 10 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal.
+**Task 5 update.** Under the binding audit ruling (an escape becomes a token wherever its light value can be written exactly: `transparent` for backgrounds, `currentColor` for inherited colours), 11 of the 23 escapes became tokens: 9 inherited-colour rows (`--color-text-inherit`) and 2 transparent backgrounds (`--color-card-bg`, `--color-stage-bg`). Final tally: **68 token, 12 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal.
 
-The 10 remaining escapes are the end-state `[data-theme="dark"]` list. `grep -rn 'data-theme' src/styles src/components` shows only these plus `tokens.css`:
+The 12 remaining escapes are the end-state `[data-theme="dark"]` list. `grep -rn 'data-theme' src/styles src/components` shows only these plus `tokens.css`:
 
 | File | Selector | Property | Why it can't be a token |
 |---|---|---|---|
 | `layout.css` | `[data-theme="dark"] nav` | box-shadow | The offsets and blur differ between themes as well as the colour, so it isn't a colour swap |
 | `navbar.css` | `[data-theme="dark"] .icon-sun`, `.icon-moon`, `.icon-bell` | transition | Timing differs by theme (`0.35s` light, `0.25s` dark). Not a colour |
 | `Navbar.astro` | `:global([data-theme="dark"]) .logo-light`, `.logo-dark`, `.icon-sun`, `.icon-moon` | display | Display toggles, not colours |
+| `code.css` | `[data-theme="dark"] .github-logo` | background-image | Not a colour, and `tokens.css` holds only `--color-*` tokens |
+| `pagination.css` | `[data-theme="dark"] .info span` | color | A light rule `.info span { color: currentColor }` would also style the spans Google Maps injects inside the outer `.info` (which wraps `.map`). Maps is aborted in the tests, so the gate couldn't catch a change there |
 | `latest-updates.css` | `[data-theme="dark"] .updates-container-inner` | border | Width and style change too (`4px double` becomes `1px solid`) |
 | `contactForm.css` | `[data-theme="dark"] .form-container input.contact-email` | background-color, color | The light values are UA defaults (`Field`/`FieldText`), which neither `transparent` nor `currentColor` reproduces. The values are now the literals `#ffffff` and `#333333` |
 | `signin.css` | `[data-theme="dark"] ::placeholder` | color | The light value is the UA placeholder colour. Literal `#ffffff`. Task 17 moves it to `WeatherApp.module.css` |
@@ -235,7 +237,7 @@ The 10 remaining escapes are the end-state `[data-theme="dark"]` list. `grep -rn
 
 ## D. Token inventory
 
-Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Each token merges only colour pairs that are already identical: `#000` = `#000000`, `#fff` = `#ffffff` and `rgb(244, 244, 244)` = `#f4f4f4` render the same, and the source spellings are listed under "Replaces". All 36 tokens differ between themes. Task 5 added 5 more when it converted escapes. They are listed after the original 36.
+Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Each token merges only colour pairs that are already identical: `#000` = `#000000`, `#fff` = `#ffffff` and `rgb(244, 244, 244)` = `#f4f4f4` render the same, and the source spellings are listed under "Replaces". All 36 tokens differ between themes. Task 5 added 3 more when it converted escapes. They are listed after the original 36.
 
 | Token | Light | Dark | Replaces |
 |---|---|---|---|
@@ -276,10 +278,8 @@ Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Eac
 | `--color-weather-credit` | `#484848` | `#282828` | `.widgetLeftMenu__links span`, `.widgetLeftMenu__link` |
 | `--color-weather-credit-hover` | `#ffa804` | `#4c0295` | new light rule `.widgetLeftMenu__links a:hover` (today the light value comes from `a:hover`; H2) |
 | `--color-text-inherit` *(Task 5)* | `currentColor` | `#f4f4f4` | escapes whose light colour is inherited: `.updates-container-inner`, `.github-link span` (new light rule), `.code-header`, `.phone-number`, `ol.pwg`, `#eaten`, `.count`, `#checkboxes`, `#switches`, `.currentWeatherWrapper` |
-| `--color-user-info-text` *(Task 5)* | `currentColor` | `#fff` | `.info span` (new light rule; the dark value differs from `--color-text-inherit`) |
 | `--color-card-bg` *(Task 5)* | `transparent` | `#4a4a4a` | `.card` background |
 | `--color-stage-bg` *(Task 5)* | `transparent` | `#464646` | `.stage` background |
-| `--image-github-logo` *(Task 5)* | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | `.github-logo` background-image |
 
 ### Existing `_colors.scss` custom properties
 
