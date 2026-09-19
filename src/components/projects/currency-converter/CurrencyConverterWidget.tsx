@@ -89,8 +89,8 @@ export default function CurrencyConverterWidget() {
             </button>
           </span>
         </div>
+        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-      <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
     </div>
   );
 }
