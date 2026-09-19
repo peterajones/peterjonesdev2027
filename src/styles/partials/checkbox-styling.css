@@ -4,11 +4,11 @@ h4.checkbox-group {
 	margin: 0;
 }
 
-.dark h4.checkbox-group {
+[data-theme="dark"] h4.checkbox-group {
 	color: #f4f4f4;
 }
 
-.dark .checkbox-input {
+[data-theme="dark"] .checkbox-input {
 	color: #f4f4f4;
 }
 
@@ -22,19 +22,19 @@ h4.checkbox-group {
 	border: 1px solid rgba(0, 200, 0, 0.6);
 }
 
-.dark #checkboxes {
+[data-theme="dark"] #checkboxes {
 	color: #f4f4f4;
 }
 
-.dark #switches {
+[data-theme="dark"] #switches {
 	color: #f4f4f4;
 }
 
-.dark #switches label span {
+[data-theme="dark"] #switches label span {
 	border: 2px solid #f4f4f4;
 }
 
-.dark #switches label input:checked + span {
+[data-theme="dark"] #switches label input:checked + span {
 	border: 2px solid #f4f4f4;
 }
 

@@ -27,7 +27,7 @@
   width: auto;
   border: 1px solid #ccc;
 }
-.dark .form-container input.contact-email {
+[data-theme="dark"] .form-container input.contact-email {
   background-color: var(--white);
   color: var(--dark-gray);
 }

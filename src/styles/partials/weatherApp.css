@@ -1,7 +1,7 @@
 .weatherOl {
 	color: #000000;
 }
-.dark .weatherOl {
+[data-theme="dark"] .weatherOl {
 	color: rgb(244, 244, 244);
 }
 .weatherContainer {
@@ -16,7 +16,7 @@
 	text-align: left;
 	min-height: 150px;
 }
-.dark .weatherContainer {
+[data-theme="dark"] .weatherContainer {
 	background-color: rgba(0, 201, 255, 0.75);
 	color: #f4f4f4;
 }
@@ -25,7 +25,7 @@
 	color: rgba(56, 56, 57, 0.85) !important;
 	transition: color 0.25s ease-in-out;
 }
-.dark .weatherContainer h1 {
+[data-theme="dark"] .weatherContainer h1 {
 	color: #f4f4f4 !important;
 }
 span.tagline {
@@ -38,7 +38,7 @@ span.tagline {
 	font-size: 1.5em;
 	line-height: 2.5;
 }
-.dark .weatherOutput h2 {
+[data-theme="dark"] .weatherOutput h2 {
 	color: #f4f4f4;
 }
 .dateTime {
@@ -47,7 +47,7 @@ span.tagline {
 	font-size: 1rem;
 	color: rgba(56, 56, 57, 0.85);
 }
-.dark .dateTime {
+[data-theme="dark"] .dateTime {
 	color: #f4f4f4;
 }
 span.weatherConditions {
@@ -56,7 +56,7 @@ span.weatherConditions {
 	color: #484848;
 	font-weight: 600;
 }
-.dark span.weatherConditions {
+[data-theme="dark"] span.weatherConditions {
 	color: #f4f4f4;
 }
 div#weatherOutput {
@@ -67,7 +67,7 @@ div#weatherOutput {
 	position: relative;
 	bottom: 26px;
 }
-.dark .currentWeatherWrapper {
+[data-theme="dark"] .currentWeatherWrapper {
 	color: #f4f4f4;
 }
 .row1,
@@ -148,7 +148,7 @@ div.loading {
 	font-size: 1.2rem;
 	padding-bottom: 12px;
 }
-.dark #forecastOutput h4 {
+[data-theme="dark"] #forecastOutput h4 {
 	color: #f4f4f4;
 }
 .forecast {
@@ -190,16 +190,16 @@ div.loading {
 	opacity: 0.75;
 	font-size: 0.85rem;
 }
-.dark .widgetLeftMenu__links span {
+[data-theme="dark"] .widgetLeftMenu__links span {
 	font-weight: 600;
 	color: #282828;
 	opacity: 0.75;
 	font-size: 0.85rem;
 }
-.dark .widgetLeftMenu__links a {
+[data-theme="dark"] .widgetLeftMenu__links a {
 	color: #282828;
 }
-.dark .widgetLeftMenu__links a:hover {
+[data-theme="dark"] .widgetLeftMenu__links a:hover {
 	color: #4c0295;
 }
 .widgetLefMenu__links a:hover {
@@ -227,7 +227,7 @@ p.errorMsg {
 	color: #ff0000;
 	font-weight: 600;
 }
-.dark p.error-msg {
+[data-theme="dark"] p.error-msg {
 	color: #860202;
 }
 footer.weatherFooter {

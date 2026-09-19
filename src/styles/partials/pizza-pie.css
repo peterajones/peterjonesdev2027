@@ -16,7 +16,7 @@
 	min-height: 430px;
 	padding-top: 20px;
 }
-.dark .code-top h1 {
+[data-theme="dark"] .code-top h1 {
 	color: #f4f4f4;
 }
 #ddl {
@@ -34,7 +34,7 @@
 	-moz-appearance: none;
 	appearance: none;
 }
-.dark #ddl {
+[data-theme="dark"] #ddl {
 	border: 1px solid #aaaaaa;
 	color: #f4f4f4;
 	background: #333333;
@@ -78,7 +78,7 @@
 	background-color: silver;
 	transform: rotate(226deg);
 }
-.dark .slice_1_w {
+[data-theme="dark"] .slice_1_w {
 	background-color: dimgrey;
 }
 .slice_2_c {
@@ -88,7 +88,7 @@
 	background-color: silver;
 	transform: rotate(224deg);
 }
-.dark .slice_2_w {
+[data-theme="dark"] .slice_2_w {
 	background-color: dimgrey;
 }
 .slice_3_c {
@@ -98,7 +98,7 @@
 	background-color: silver;
 	transform: rotate(224deg);
 }
-.dark .slice_3_w {
+[data-theme="dark"] .slice_3_w {
 	background-color: dimgrey;
 }
 .slice_4_c {
@@ -108,7 +108,7 @@
 	background-color: silver;
 	transform: rotate(226deg);
 }
-.dark .slice_4_w {
+[data-theme="dark"] .slice_4_w {
 	background-color: dimgrey;
 }
 .slice_5_c {
@@ -118,7 +118,7 @@
 	background-color: silver;
 	transform: rotate(226deg);
 }
-.dark .slice_5_w {
+[data-theme="dark"] .slice_5_w {
 	background-color: dimgrey;
 }
 .slice_6_c {
@@ -128,7 +128,7 @@
 	background-color: silver;
 	transform: rotate(224deg);
 }
-.dark .slice_6_w {
+[data-theme="dark"] .slice_6_w {
 	background-color: dimgrey;
 }
 .slice_7_c {
@@ -138,7 +138,7 @@
 	background-color: silver;
 	transform: rotate(224deg);
 }
-.dark .slice_7_w {
+[data-theme="dark"] .slice_7_w {
 	background-color: dimgrey;
 }
 .slice_8_c {
@@ -148,7 +148,7 @@
 	background-color: silver;
 	transform: rotate(226deg);
 }
-.dark .slice_8_w {
+[data-theme="dark"] .slice_8_w {
 	background-color: dimgrey;
 }
 #eaten {
@@ -158,7 +158,7 @@
 	font-size: 1.15rem;
 	padding-bottom: 40px;
 }
-.dark #eaten {
+[data-theme="dark"] #eaten {
 	color: #f4f4f4;
 }
 button.btn-start-over {
@@ -177,13 +177,13 @@ button.btn-start-over:hover {
 	background-color: #333333;
 	color: #f4f4f4;
 }
-.dark button.btn-start-over {
+[data-theme="dark"] button.btn-start-over {
 	border: 1px solid #aaaaaa;
 	color: #f4f4f4;
 	background: #333333;
 	transition: all 0.25s ease-in-out;
 }
-.dark button.btn-start-over:hover {
+[data-theme="dark"] button.btn-start-over:hover {
 	border: 1px solid #333333;
 	color: #333333;
 	background: #f4f4f4;

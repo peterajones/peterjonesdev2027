@@ -99,24 +99,16 @@ const updates = await Promise.all(
 
 <script>
   const THEME_KEY = 'theme';
-  const body = document.body;
-
-  function applyTheme(theme: string) {
-    body.classList.toggle('dark', theme === 'dark');
-  }
-
-  function initTheme() {
-    const stored = localStorage.getItem(THEME_KEY);
-    const theme = stored === 'dark' ? 'dark' : 'light';
-    if (!stored) localStorage.setItem(THEME_KEY, theme);
-    applyTheme(theme);
-  }
+  const root = document.documentElement;
 
   function toggleTheme() {
-    const isDark = body.classList.contains('dark');
-    const next = isDark ? 'light' : 'dark';
-    localStorage.setItem(THEME_KEY, next);
-    applyTheme(next);
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      /* storage blocked — theme lasts for this page only */
+    }
   }
 
   function toggleUpdatesModal() {
@@ -130,34 +122,30 @@ const updates = await Promise.all(
     document.body.style.overflow = isOpen ? 'unset' : 'hidden';
   }
 
-  initTheme();
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
   document.getElementById('updates-toggle')?.addEventListener('click', toggleUpdatesModal);
   document.getElementById('updates-bg')?.addEventListener('click', (e) => {
     if (e.target === e.currentTarget) toggleUpdatesModal();
   });
-
-  // Re-run on Astro view-transition navigation, if enabled later.
-  document.addEventListener('astro:page-load', initTheme);
 </script>
 
 <style>
   .logo-dark {
     display: none;
   }
-  :global(body.dark) .logo-light {
+  :global([data-theme="dark"]) .logo-light {
     display: none;
   }
-  :global(body.dark) .logo-dark {
+  :global([data-theme="dark"]) .logo-dark {
     display: inline;
   }
   .icon-moon {
     display: none;
   }
-  :global(body.dark) .icon-sun {
+  :global([data-theme="dark"]) .icon-sun {
     display: none;
   }
-  :global(body.dark) .icon-moon {
+  :global([data-theme="dark"]) .icon-moon {
     display: inline;
   }
 </style>

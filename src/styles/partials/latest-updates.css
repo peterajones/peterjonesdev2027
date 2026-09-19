@@ -12,11 +12,11 @@ button[name='toggle updates']:hover {
 	color: #ffa804;
 }
 
-.dark button[name='toggle updates'] {
+[data-theme="dark"] button[name='toggle updates'] {
 	color: #ffa804;
 }
 
-.dark button[name='toggle updates']:hover {
+[data-theme="dark"] button[name='toggle updates']:hover {
 	color: #ff7272;
 }
 
@@ -85,7 +85,7 @@ body.modal-open {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
-.dark .modal-title {
+[data-theme="dark"] .modal-title {
 	background-color: rgba(201, 44, 44, 1);
 }
 .updates-container-inner {
@@ -98,7 +98,7 @@ body.modal-open {
 	overflow-y: scroll;
 	transition: background-color 0.25s ease-in;
 }
-.dark .updates-container-inner {
+[data-theme="dark"] .updates-container-inner {
 	background-color: #333333;
 	color: #f4f4f4;
 	border: 1px solid #f4f4f4;
@@ -114,10 +114,10 @@ body.modal-open {
 .update-content:last-child {
 	border-bottom: none;
 }
-.dark .update-content {
+[data-theme="dark"] .update-content {
 	border-bottom: 1px solid rgba(244, 244, 244, 0.4);
 }
-.dark .update-content:last-child {
+[data-theme="dark"] .update-content:last-child {
 	border-bottom: none;
 }
 .update-date {

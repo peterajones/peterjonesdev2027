@@ -67,20 +67,20 @@
 	-webkit-transition: color 0.25s ease-in;
 	transition: color 0.25s ease-in;
 }
-.dark .icon-sun,
-.dark .icon-moon,
-.dark .icon-bell {
+[data-theme="dark"] .icon-sun,
+[data-theme="dark"] .icon-moon,
+[data-theme="dark"] .icon-bell {
 	color: #ffa804;
   transition: color 0.25s ease-in;
 	width: 18px;
 	height: 18px;
 }
-.dark .icon-sun:hover,
-.dark .icon-sun:focus,
-.dark .icon-moon:hover,
-.dark .icon-moon:focus,
-.dark .icon-bell:hover,
-.dark .icon-bell:focus {
+[data-theme="dark"] .icon-sun:hover,
+[data-theme="dark"] .icon-sun:focus,
+[data-theme="dark"] .icon-moon:hover,
+[data-theme="dark"] .icon-moon:focus,
+[data-theme="dark"] .icon-bell:hover,
+[data-theme="dark"] .icon-bell:focus {
 	color: #ff7272;
 }
 

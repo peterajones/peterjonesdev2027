@@ -57,7 +57,7 @@ li.p-card {
 	color: darkgreen;
 	width: 18px;
 }
-.dark .email-icon {
+[data-theme="dark"] .email-icon {
 	color: #ffa804;
 }
 .email-address {
@@ -66,7 +66,7 @@ li.p-card {
 .email-address a {
 	color: #000;
 }
-.dark .email-address a {
+[data-theme="dark"] .email-address a {
 	color: #f4f4f4;
 }
 .email-address a:hover {
@@ -84,7 +84,7 @@ li.p-card {
 	color: darkgreen;
 	width: 18px;
 }
-.dark .address-icon {
+[data-theme="dark"] .address-icon {
 	color: #ffa804;
 }
 .address-details {
@@ -104,13 +104,13 @@ li.p-card {
 	color: darkgreen;
 	width: 18px;
 }
-.dark .phone-icon {
+[data-theme="dark"] .phone-icon {
 	color: #faa804;
 }
 .phone-number {
 	padding-left: 12px;
 }
-.dark .phone-number {
+[data-theme="dark"] .phone-number {
 	color: #f4f4f4;
 }
 .website {
@@ -123,7 +123,7 @@ li.p-card {
 	color: darkgreen;
 	width: 18px;
 }
-.dark .website-icon {
+[data-theme="dark"] .website-icon {
 	color: #faa804;
 }
 .website-url {
@@ -132,16 +132,16 @@ li.p-card {
 .website-url a {
 	color: #000000;
 }
-.dark .website-url a {
+[data-theme="dark"] .website-url a {
 	color: #f4f4f4;
 }
 .website-url a:hover {
 	color: darkgreen;
 }
-.dark .website-url a:hover {
+[data-theme="dark"] .website-url a:hover {
 	color: #faa804;
 }
-.dark .info span {
+[data-theme="dark"] .info span {
 	color: #fff;
 }
 .map {
@@ -184,11 +184,11 @@ li.page-num {
 li.page-num:hover {
 	background-color: #faa804;
 }
-.dark li.page-num {
+[data-theme="dark"] li.page-num {
 	background-color: #ffa804;
 	transition: background-color 0.25s ease-in-out;
 }
-.dark li.page-num:hover {
+[data-theme="dark"] li.page-num:hover {
 	background-color: #f4f4f4;
 	color: #333333;
 }
@@ -198,7 +198,7 @@ li.page-num span {
 	color: darkgreen;
 	font-weight: 500;
 }
-.dark li.page-num span {
+[data-theme="dark"] li.page-num span {
 	color: #333333;
 }
 li.page-num.active {
@@ -207,19 +207,19 @@ li.page-num.active {
 li.page-num.active:hover {
 	background-color: #ffa804;
 }
-.dark li.page-num.active:hover {
+[data-theme="dark"] li.page-num.active:hover {
 	background-color: #f4f4f4;
 }
 li.page-num.active span {
 	color: #f4f4f4;
 }
-.dark li.page-num.active span {
+[data-theme="dark"] li.page-num.active span {
 	color: #f4f4f4;
 }
 li.page-num.active:hover span {
 	color: #333333;
 }
-.dark li.page-num.active:hover span {
+[data-theme="dark"] li.page-num.active:hover span {
 	color: #333333;
 }
 .page-link {

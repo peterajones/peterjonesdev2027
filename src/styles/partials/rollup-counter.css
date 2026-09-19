@@ -8,7 +8,7 @@ span.count {
 .count {
 	font-size: 60px;
 }
-.dark .count {
+[data-theme="dark"] .count {
 	color: #f4f4f4;
 }
 .count-enter {
@@ -42,8 +42,8 @@ span.count {
 	background-color: #333333;
 	color: #f4f4f4;
 }
-.dark #increment,
-.dark #reset {
+[data-theme="dark"] #increment,
+[data-theme="dark"] #reset {
 	background-color: #f4f4f4;
 	color: #333333;
 	border-radius: 4px;

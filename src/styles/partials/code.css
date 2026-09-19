@@ -42,7 +42,7 @@ a:hover.btnLink {
 	padding-bottom: 20px;
 	color: #000000;
 }
-.dark .truncate span {
+[data-theme="dark"] .truncate span {
 	color: #f4f4f4;
 }
 .github-link {
@@ -50,7 +50,7 @@ a:hover.btnLink {
 	align-items: center;
 	padding: 10px 0 10px 0;
 }
-.dark .github-link span {
+[data-theme="dark"] .github-link span {
 	color: #f4f4f4;
 }
 .github-logo {
@@ -62,7 +62,7 @@ a:hover.btnLink {
 	margin: 0 10px;
 	transition: background-image 0.25s ease-in;
 }
-.dark .github-logo {
+[data-theme="dark"] .github-logo {
 	background-image: url(/images/code/github-logo-dark.png);
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -98,7 +98,7 @@ code.inline {
 	transition: background-color 0.25s ease-in;
 	overflow-x: hidden;
 }
-.dark .code-container {
+[data-theme="dark"] .code-container {
 	background-color: #333333;
 }
 .code-content {
@@ -108,13 +108,13 @@ code.inline {
 .code-content p {
 	color: #000000;
 }
-.dark .code-content p {
+[data-theme="dark"] .code-content p {
 	color: #f4f4f4;
 }
 .code-description-open li {
   color: #000;
 }
-.dark .code-description-open li {
+[data-theme="dark"] .code-description-open li {
   color: #fff;
 }
 .code-top h1 {
@@ -171,7 +171,7 @@ section.code pre {
 	font-style: italic;
 	transition: background-color 0.25s ease-in;
 }
-.dark .code-header {
+[data-theme="dark"] .code-header {
 	background-color: #464646;
 	color: #f4f4f4;
 }
@@ -191,14 +191,14 @@ section.code pre {
 	margin-bottom: 20px;
 	transition: all 0.25s ease-in;
 }
-.dark .cards a {
+[data-theme="dark"] .cards a {
 	border: 1px solid #ffba32;
 }
 .cards a:hover {
 	transform: scale(1.02);
 	box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.185);
 }
-.dark .cards a:hover {
+[data-theme="dark"] .cards a:hover {
 	box-shadow: 0px 0px 6px 1px #ffba32;
 }
 .card {
@@ -210,7 +210,7 @@ section.code pre {
 	min-height: 430px;
 	transition: border 0.25s ease-in;
 }
-.dark .card {
+[data-theme="dark"] .card {
 	background-color: #4a4a4a;
 }
 a .card-title {
@@ -222,7 +222,7 @@ a .card-title {
 	padding: 20px 0 10px 0;
 	transition: color 0.25s ease-in;
 }
-.dark a .card-title {
+[data-theme="dark"] a .card-title {
 	color: #fafafa;
 }
 a .card-intro {
@@ -236,10 +236,10 @@ a .card-image img {
 	color: #000000;
 	transition: color 0.25s ease-in;
 }
-.dark .stage h1 {
+[data-theme="dark"] .stage h1 {
 	color: #f4f4f4;
 }
-.dark .stage {
+[data-theme="dark"] .stage {
 	background-color: #464646;
 	border: 1px solid #000000;
 }
@@ -257,7 +257,7 @@ a .card-image img {
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 }
-.dark .btn-widget-description > button {
+[data-theme="dark"] .btn-widget-description > button {
 	border: 1px solid #f4f4f4;
 	background-color: transparent;
 	color: #f4f4f4;
@@ -271,17 +271,17 @@ a .card-image img {
 	padding: 4px 10px;
 	cursor: pointer;
 }
-.dark .btn-widget-description > button:hover {
+[data-theme="dark"] .btn-widget-description > button:hover {
 	border: 1px solid #ffa804;
 	background-color: #464646;
 	color: #ffa804;
 }
-.dark .btn-widget-code > button {
+[data-theme="dark"] .btn-widget-code > button {
 	border: 1px solid #f4f4f4;
 	background-color: transparent;
 	color: #f4f4f4;
 }
-.dark .btn-widget-code > button:hover {
+[data-theme="dark"] .btn-widget-code > button:hover {
 	border: 1px solid #ffa804;
 	background-color: #464646;
 	color: #ffa804;
@@ -310,7 +310,7 @@ span.btn-widget-code {
 	padding: 4px 10px;
 	cursor: pointer;
 }
-.dark .btn-widget-code > button {
+[data-theme="dark"] .btn-widget-code > button {
 	border: 1px solid #f4f4f4;
 	background-color: transparent;
 	color: #f4f4f4;

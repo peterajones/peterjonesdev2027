@@ -25,7 +25,7 @@ div.item-title {
   color: var(--dark-text);
 	transition: color 0.25s ease-in;
 }
-.dark div.item-title {
+[data-theme="dark"] div.item-title {
 	color: var(--light-text);
 }
 /* News articles */

@@ -16,6 +16,6 @@
 	margin-bottom: 20px;
 	transition: color 0.25s ease-in;
 }
-.dark .post-meta {
+[data-theme="dark"] .post-meta {
 	color: var(--light-text);
 }
