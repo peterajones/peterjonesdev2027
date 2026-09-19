@@ -39,15 +39,15 @@
 	border-radius: 50%;
 }
 /* Toggle Theme */
-// These previously targeted FontAwesome's rendered classes
-// (svg.svg-inline--fa.fa-sun etc.), leftover from before the icons were
-// swapped for plain inline SVGs (this project doesn't use FontAwesome —
-// see AGENTS.md). Never matched the actual markup (icon-sun/icon-moon/
-// icon-bell), in light mode or dark, so these icons rendered with
-// whatever ambient text color they inherited instead — in dark mode
-// that's black-on-dark-background, effectively invisible. fa-lock/
-// fa-unlock is dropped entirely: no lock/unlock icon exists anywhere in
-// the current navbar.
+/* These previously targeted FontAwesome's rendered classes */
+/* (svg.svg-inline--fa.fa-sun etc.), leftover from before the icons were */
+/* swapped for plain inline SVGs (this project doesn't use FontAwesome — */
+/* see AGENTS.md). Never matched the actual markup (icon-sun/icon-moon/ */
+/* icon-bell), in light mode or dark, so these icons rendered with */
+/* whatever ambient text color they inherited instead — in dark mode */
+/* that's black-on-dark-background, effectively invisible. fa-lock/ */
+/* fa-unlock is dropped entirely: no lock/unlock icon exists anywhere in */
+/* the current navbar. */
 .icon-sun,
 .icon-moon,
 .icon-bell {
@@ -106,4 +106,3 @@ button[name="toggle updates modal"] {
 	height: 25px;
 	border-radius: 50%;
 }
-/*# sourceMappingURL=Navbar.module.css.map */

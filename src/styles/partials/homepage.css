@@ -8,12 +8,12 @@
 .logged-in-message {
 	background-color: antiquewhite;
 }
-// Scoped to the five named homepage sections below, rather than a bare
-// `section {}` selector, which applied site-wide to every <section> on
-// every page (e.g. each project's CodeBlocks <section class="code">).
-// Currently harmless in practice — 1.5 matches the syntax highlighter's
-// own inline line-height, which wins regardless — but same leak pattern
-// as the bare `span` rule in _rollup-counter.scss, so scoped on principle.
+/* Scoped to the five named homepage sections below, rather than a bare */
+/* `section {}` selector, which applied site-wide to every <section> on */
+/* every page (e.g. each project's CodeBlocks <section class="code">). */
+/* Currently harmless in practice — 1.5 matches the syntax highlighter's */
+/* own inline line-height, which wins regardless — but same leak pattern */
+/* as the bare `span` rule in rollup-counter.css, so scoped on principle. */
 .section-one,
 .section-two,
 .section-three,

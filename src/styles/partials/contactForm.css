@@ -1,12 +1,12 @@
-// Scoped to .form-container (ContactForm.tsx's wrapper) — these were
-// previously bare `label`/`input`/`textarea` selectors, which applied
-// site-wide to every input/textarea/label on every page (checkboxes,
-// the weather-app search box, currency-converter/password-generator
-// inputs, etc.), not just this form. See the same bug in
-// _rollup-counter.scss (a bare `span` rule that broke every code block's
-// syntax highlighting) for how this class of leak happens: every partial
-// here compiles into one global stylesheet, so an unscoped tag selector
-// in any one of them applies everywhere, not just to its own widget.
+/* Scoped to .form-container (ContactForm.tsx's wrapper) — these were */
+/* previously bare `label`/`input`/`textarea` selectors, which applied */
+/* site-wide to every input/textarea/label on every page (checkboxes, */
+/* the weather-app search box, currency-converter/password-generator */
+/* inputs, etc.), not just this form. See the same bug in */
+/* rollup-counter.css (a bare `span` rule that broke every code block's */
+/* syntax highlighting) for how this class of leak happens: every partial */
+/* here compiles into one global stylesheet, so an unscoped tag selector */
+/* in any one of them applies everywhere, not just to its own widget. */
 .form-container label {
   display: inline-block;
   margin-top: 1rem;

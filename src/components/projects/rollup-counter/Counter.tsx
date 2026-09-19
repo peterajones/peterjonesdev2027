@@ -9,7 +9,7 @@ interface Slide {
   active: boolean;
 }
 
-// Matches the 0.25s CSS transition in _rollup-counter.scss, plus a small buffer.
+// Matches the 0.25s CSS transition in rollup-counter.css, plus a small buffer.
 const TRANSITION_DURATION = 300;
 
 export default function Counter() {

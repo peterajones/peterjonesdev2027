@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
-import styles from '../styles/News.module.scss';
+import styles from '../styles/News.module.css';
 
 interface Props {
   slug: string;

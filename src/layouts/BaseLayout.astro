@@ -1,5 +1,5 @@
 ---
-import '../styles/globals.scss';
+import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
@@ -26,6 +26,16 @@ const {
       content="Web Development, HTML5, CSS3, CSS, JavaScript, RSS News Feeds, ReactJS, Astro"
     />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" />
   </head>
   <body>
     <Navbar />

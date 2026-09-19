@@ -1,4 +1,4 @@
-/* Blog post detail page. Global _typography.scss already themes p/h1-h4/a
+/* Blog post detail page. Global typography.css already themes p/h1-h4/a
    for light+dark mode — this just constrains prose to a readable line
    length and styles the post date. */
 .blog-post {
