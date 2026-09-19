@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import CurrencyConverter from './CurrencyConverter';
 import CodeBlocks from './CodeBlocks';
+import styles from './CurrencyConverter.module.css';
 
 export default function CurrencyConverterWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         A handy currency converter. Build your own lists of currencies to compare several
         currencies at the same time!{' '}
@@ -90,6 +91,6 @@ export default function CurrencyConverterWidget() {
         </div>
       </div>
       <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
-    </>
+    </div>
   );
 }

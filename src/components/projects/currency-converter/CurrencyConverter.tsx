@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from './CurrencyConverter.module.css';
 
 interface Currency {
   name: string;
@@ -200,8 +201,8 @@ export default function CurrencyConverter() {
 
   if (!mounted) {
     return (
-      <div className="cc">
-        <div className="currency-container">
+      <div className={styles.cc}>
+        <div className={styles.currencyContainer}>
           <h1>Loading Currency Converter...</h1>
         </div>
       </div>
@@ -209,13 +210,15 @@ export default function CurrencyConverter() {
   }
 
   return (
-    <div className="cc">
-      <div className="currency-container">
-        <div className="currency-header">
+    <div className={styles.cc}>
+      <div className={styles.currencyContainer}>
+        <div className={styles.currencyHeader}>
           <h1>Currency Converter</h1>
         </div>
-        <div className="currency-date">
-          <span className={`currency-date-text ${dateText.includes('Enter amount') ? 'enter-prompt' : ''}`}>
+        <div className={styles.currencyDate}>
+          <span
+            className={`${styles.currencyDateText} ${dateText.includes('Enter amount') ? styles.enterPrompt : ''}`}
+          >
             {dateText}
           </span>
           <a href="https://exchangeratesapi.io/" target="_blank" rel="noopener noreferrer">
@@ -224,12 +227,12 @@ export default function CurrencyConverter() {
               alt="Powered by exchangeratesapi.io"
               width={153}
               height={20}
-              className="api-logo"
+              className={styles.apiLogo}
             />
           </a>
         </div>
         <div className="currency-fetch-error" />
-        <ul className="currency-list">
+        <ul className={styles.currencyList}>
           {selectedCurrencies.map((currencyAbbr) => {
             const currency = currencyData.find((c) => c.abbreviation === currencyAbbr);
             if (!currency) return null;
@@ -241,14 +244,19 @@ export default function CurrencyConverter() {
               inputValues[currencyAbbr] !== undefined ? inputValues[currencyAbbr] : formatAmount(displayAmount);
 
             return (
-              <li key={currencyAbbr} className={`currency-item ${isBase ? 'currency-base' : ''}`} id={currencyAbbr}>
-                <img src={currency.flagURL} alt="flag" className="currency-flag" width={60} height={40} />
-                <div className="currency-info">
-                  <p className="currency-input">
-                    <span className="currency-symbol">{currency.symbol}</span>
+              <li
+                key={currencyAbbr}
+                className={`${styles.currencyItem} ${isBase ? styles.currencyBase : ''}`}
+                id={currencyAbbr}
+              >
+                <img src={currency.flagURL} alt="flag" className={styles.currencyFlag} width={60} height={40} />
+                <div className={styles.currencyInfo}>
+                  <p className={styles.currencyInput}>
+                    <span className={styles.currencySymbol}>{currency.symbol}</span>
                     <input
                       id="currency-input"
                       name="currency-name"
+                      className={styles.currencyAmount}
                       placeholder=""
                       value={inputValue}
                       onChange={(e) => handleAmountChange(currencyAbbr, e.target.value.replace(/,/g, ''))}
@@ -268,36 +276,36 @@ export default function CurrencyConverter() {
                       }}
                     />
                   </p>
-                  <p className="currency-name">
+                  <p className={styles.currencyName}>
                     {currencyAbbr} - {currency.name}
                   </p>
-                  <p className="currency-rate">
+                  <p className={styles.currencyRate}>
                     1 {baseCurrency} ={' '}
                     {exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}{' '}
                     {currencyAbbr}
                   </p>
                 </div>
-                <span className="currency-close" onClick={() => handleRemoveCurrency(currencyAbbr)}>
+                <span className={styles.currencyClose} onClick={() => handleRemoveCurrency(currencyAbbr)}>
                   &times;
                 </span>
               </li>
             );
           })}
         </ul>
-        <div className="currency-controls">
-          <button className="currency-reset-btn" onClick={resetAmounts}>
+        <div className={styles.currencyControls}>
+          <button className={styles.currencyResetBtn} onClick={resetAmounts}>
             Reset Amounts
           </button>
-          <button className="currency-clear-btn" onClick={clearCurrencies}>
+          <button className={styles.currencyClearBtn} onClick={clearCurrencies}>
             Clear Currencies
           </button>
         </div>
         <button
-          className={`currency-add-btn ${addCurrencyOpen ? 'open' : ''}`}
+          className={`${styles.currencyAddBtn} ${addCurrencyOpen ? styles.open : ''}`}
           onClick={() => setAddCurrencyOpen((v) => !v)}
         >
           <svg
-            className="arrow-left-icon"
+            className={styles.arrowLeftIcon}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -308,15 +316,15 @@ export default function CurrencyConverter() {
           </svg>
           {addCurrencyOpen ? 'Back' : 'Add Currency'}
         </button>
-        <ul className="currency-add-list">
+        <ul className={styles.currencyAddList}>
           {currencyData.map((currency) => (
             <li
               key={currency.abbreviation}
               data-currency={currency.abbreviation}
-              className={selectedCurrencies.includes(currency.abbreviation) ? 'disabled' : ''}
+              className={selectedCurrencies.includes(currency.abbreviation) ? styles.disabled : ''}
               onClick={() => !selectedCurrencies.includes(currency.abbreviation) && handleAddCurrency(currency.abbreviation)}
             >
-              <img src={currency.flagURL} alt="flag" className="currency-flag" width={48} height={32} />
+              <img src={currency.flagURL} alt="flag" className={styles.currencyFlag} width={48} height={32} />
               <span>
                 {currency.abbreviation} - {currency.name}
               </span>
