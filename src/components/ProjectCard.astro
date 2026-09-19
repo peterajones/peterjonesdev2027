@@ -29,3 +29,27 @@ const { project } = Astro.props;
     </div>
   </a>
 </li>
+
+<style>
+  .card-badges > img {
+    width: 55px;
+    height: 22px;
+    margin-right: 6px;
+    border: 1px solid #d2d2d2;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 290px;
+    margin: 10px;
+    min-height: 430px;
+    background-color: var(--color-card-bg);
+    transition: border 0.25s ease-in;
+  }
+
+  a .card-image img {
+    position: relative;
+  }
+</style>
