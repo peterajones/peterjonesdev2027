@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Clock from './Clock';
 import CodeBlocks from './CodeBlocks';
+import styles from './Clock.module.css';
 
 export default function ClockWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         Here is a simple clock that generates the current time using the
         JavaScript <code className="inline">Date</code> object.{' '}
@@ -17,7 +18,7 @@ export default function ClockWidget() {
           </button>
         </span>
       </p>
-      <div className="stage clock">
+      <div className={`stage ${styles.clock}`}>
         <Clock />
       </div>
       <div className="code-content">
@@ -56,6 +57,6 @@ export default function ClockWidget() {
         </div>
         <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-    </>
+    </div>
   );
 }

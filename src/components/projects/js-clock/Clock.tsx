@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Clock.module.css';
 
 export default function Clock() {
   const [time, setTime] = useState<string | null>(null);
@@ -12,7 +13,7 @@ export default function Clock() {
 
   return (
     <h3>
-      <span className="clock fade-in-text">The time is: {time}</span>
+      <span className={`${styles.clock} ${styles.fadeInText}`}>The time is: {time}</span>
     </h3>
   );
 }
