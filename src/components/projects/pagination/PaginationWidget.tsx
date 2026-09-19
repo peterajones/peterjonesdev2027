@@ -58,8 +58,8 @@ export default function PaginationWidget() {
             </button>
           </span>
         </div>
+        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-      <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
     </div>
   );
 }
