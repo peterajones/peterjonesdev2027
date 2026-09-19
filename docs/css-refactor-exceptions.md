@@ -1,6 +1,6 @@
 # CSS Refactor — Exceptions Log
 
-**5 exceptions, all approved by Peter on 2026-09-19.**
+**6 exceptions, all approved by Peter on 2026-09-19.**
 
 Every intentional or unavoidable visual change from the pixel-identical baseline.
 
@@ -77,3 +77,11 @@ Each entry is `E<n>` and records:
 - **What to look for:** in dark mode, hovering the link turns its text the link-hover colour (`var(--color-link-hover)`, which is `#e43af4` in dark) instead of staying white. Light mode is unchanged (it already worked). The link's resting colour is unchanged in both themes.
 - **Commit:** see `git log --oneline -- src/styles/code.css`
 - **Approval:** approved (Peter, 2026-09-19 — browser review; Maps and the dark hover both confirmed working)
+
+### E6: Latest Updates modal — entry text at normal weight
+
+- **Where:** any page, open the navbar bell ("Latest Updates") modal, either theme. The modal is closed in every screenshot, so the gate shows zero diff.
+- **What changed and why:** Peter asked for it during the browser review. Each entry's Markdown body is a `<p>`, which inherited `font-weight: 300` from base.css's element rule and read too light in the modal. `.update-details :global(p)` now also sets `font-weight: 400`. Not a refactor artefact — a deliberate style change, scoped to the modal.
+- **What to look for:** entry text in the modal is slightly heavier than before; everything else, including the dates, is unchanged.
+- **Commit:** see `git log --oneline -- src/components/Navbar.astro`
+- **Approval:** approved (Peter, 2026-09-19 — he requested it)
