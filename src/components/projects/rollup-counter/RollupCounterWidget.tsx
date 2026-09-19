@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Counter from './Counter';
 import CodeBlocks from './CodeBlocks';
+import styles from './RollupCounter.module.css';
 
 export default function RollupCounterWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         This is a React version of a rolling digit counter, along with the
         original vanilla JavaScript it's based on.
@@ -55,6 +56,6 @@ export default function RollupCounterWidget() {
         </div>
         <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-    </>
+    </div>
   );
 }

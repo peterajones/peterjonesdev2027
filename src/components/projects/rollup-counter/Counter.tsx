@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import styles from './RollupCounter.module.css';
 
 type SlideState = 'idle' | 'enter' | 'exit';
 
@@ -9,7 +10,7 @@ interface Slide {
   active: boolean;
 }
 
-// Matches the 0.25s CSS transition in rollup-counter.css, plus a small buffer.
+// Matches the 0.25s CSS transition in RollupCounter.module.css, plus a small buffer.
 const TRANSITION_DURATION = 300;
 
 export default function Counter() {
@@ -54,24 +55,26 @@ export default function Counter() {
 
   const classNameFor = (s: Slide) => {
     if (s.state === 'idle') return undefined;
-    return s.active ? `count-${s.state} count-${s.state}-active` : `count-${s.state}`;
+    const base = s.state === 'enter' ? styles.countEnter : styles.countExit;
+    const active = s.state === 'enter' ? styles.countEnterActive : styles.countExitActive;
+    return s.active ? `${base} ${active}` : base;
   };
 
   return (
     <>
       <h1>Rollup Counter</h1>
-      <span className="count">
+      <span className={styles.count}>
         {slides.map((s) => (
           <span key={s.key} className={classNameFor(s)}>
             {s.value}
           </span>
         ))}
       </span>
-      <div className="buttons">
-        <button id="reset" onClick={() => change(0)}>
+      <div className={styles.buttons}>
+        <button id="reset" className={styles.counterBtn} onClick={() => change(0)}>
           Reset
         </button>
-        <button id="increment" onClick={() => change(count + 1)}>
+        <button id="increment" className={styles.counterBtn} onClick={() => change(count + 1)}>
           Increment
         </button>
       </div>

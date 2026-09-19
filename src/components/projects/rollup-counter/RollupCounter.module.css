@@ -1,36 +1,32 @@
-
-span.count {
+.count {
 	position: relative;
 	font-family: 'Open Sans', sans-serif;
 	display: inline-block;
 	overflow: hidden;
-}
-.count {
 	font-size: 60px;
 	color: var(--color-text-inherit);
 }
-.count-enter {
+.countEnter {
 	transform: translateY(100%);
 	transition: 0.25s ease-in-out;
 }
-.count-enter.count-enter-active {
+.countEnter.countEnterActive {
 	transform: translateY(0);
 }
-.count-exit {
+.countExit {
 	transition: 0.25s ease-in-out;
 	transform: translateY(0);
 	position: absolute;
 	left: 0;
 	bottom: 0;
 }
-.count-exit.count-exit-active {
+.countExit.countExitActive {
 	transform: translateY(-100%);
 }
 .buttons {
 	padding-bottom: 18px;
 }
-#increment,
-#reset {
+.counterBtn {
 	cursor: pointer;
 	font-weight: 500;
 	padding: 10px;
@@ -39,11 +35,4 @@ span.count {
 	border-radius: 4px;
 	background-color: var(--color-button-bg);
 	color: var(--color-button-text);
-}
-.comment {
-	position: relative;
-	max-width: 800px;
-	margin: 0 auto;
-	font-size: 18px;
-	font-family: Arial, Helvetica, sans-serif;
 }
