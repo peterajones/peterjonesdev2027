@@ -1,3 +1,8 @@
+body {
+	background-color: var(--color-bg);
+	scroll-behavior: smooth;
+	transition: background-color 0.25s ease-in;
+}
 :root {
 	font-family: 'Roboto', sans-serif;
 }
@@ -43,16 +48,4 @@ a:hover {
 ::selection {
 	color: #ffffff;
 	background-color: rebeccapurple;
-}
-/* homepage */
-li.users {
-	color: red;
-}
-li.users {
-	font-size: 1.15rem;
-	font-weight: 300;
-	line-height: 1.6;
-	padding: 10px 0;
-	color: #585858;
-	transition: color 0.25s ease-in;
 }

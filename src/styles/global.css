@@ -1,15 +1,20 @@
+@layer reset, base, layout, code;
+
 @import './tokens.css';
-@import './partials/reset.css';
+@import './reset.css' layer(reset);
+@import './base.css' layer(base);
+@import './layout.css' layer(layout);
+@import './code.css' layer(code);
+
+/* Not yet migrated to components — unlayered until their task moves them. */
 @import './partials/nprogress.css';
 @import './partials/navbar.css';
 @import './partials/signin.css';
 @import './partials/banner.css';
-@import './partials/layout.css';
-@import './partials/typography.css';
+@import './partials/nav-footer.css';
 @import './partials/homepage.css';
-@import './partials/code.css';
+@import './partials/card.css';
 @import './partials/atom-dark.css';
-@import './partials/items.css';
 @import './partials/weatherApp.css';
 @import './partials/currency-converter.css';
 @import './partials/password-generator.css';
