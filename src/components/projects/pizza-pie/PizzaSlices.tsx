@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from './PizzaPie.module.css';
 
 const OPTIONS = [
   { value: 0, label: 'Choose your slices' },
@@ -62,7 +63,7 @@ export default function PizzaSlices() {
       </p>
       <form id="pizza-form">
         <select
-          id="ddl"
+          className={styles.ddl}
           aria-label="dropdown select"
           value={slices}
           onChange={(e) => setSlices(Number(e.target.value))}
@@ -80,13 +81,16 @@ export default function PizzaSlices() {
           ))}
         </select>
       </form>
-      <div className="piechart">
-        <div className="common border" />
-        <div className="common base" />
+      <div className={styles.piechart}>
+        <div className={`${styles.common} ${styles.border}`} />
+        <div className={`${styles.common} ${styles.base}`} />
         {SLICE_INDEXES.map((index) => (
-          <div key={index} className={`common slice slice_${index + 1}_c`}>
+          <div
+            key={index}
+            className={`${styles.common} ${styles.slice} ${styles[`slice_${index + 1}_c`]}`}
+          >
             <div
-              className={`common slice slice_${index + 1}_w`}
+              className={`${styles.common} ${styles.slice} ${styles[`slice_${index + 1}_w`]}`}
               id={`slice_${index}_w`}
               style={{
                 opacity: slices > index ? 1 : 0,
@@ -96,11 +100,11 @@ export default function PizzaSlices() {
           </div>
         ))}
       </div>
-      <div id="eaten">
+      <div className={styles.eaten}>
         {eaten}
         {slices === 8 && (
           <button
-            className={`btn-start-over ${orderVisible ? 'btn-show' : 'btn-hide'}`}
+            className={`${styles.btnStartOver} ${orderVisible ? styles.btnShow : styles.btnHide}`}
             onClick={() => setSlices(0)}
           >
             Order Now

@@ -1,22 +1,8 @@
-
-/* body {
-	background-color: #f98611;
-} */
-.pizza-pie-container {
-	width: 100%;
-	margin: 0 auto;
-}
-.header {
-	margin-top: 50px;
-	margin-bottom: -90px;
-	font-family: Arial, sans-serif;
-	font-size: 24px;
-}
-.stage.pizza-pie {
+:global(.stage).pizzaPie {
 	min-height: 430px;
 	padding-top: 20px;
 }
-#ddl {
+.ddl {
 	position: relative;
 	top: 10px;
 	bottom: 10px;
@@ -31,7 +17,7 @@
 	-moz-appearance: none;
 	appearance: none;
 }
-[data-theme="dark"] #ddl {
+:global([data-theme="dark"]) .ddl {
 	color: #f4f4f4;
 }
 .piechart {
@@ -122,7 +108,7 @@
 	background-color: var(--color-slice);
 	transform: rotate(226deg);
 }
-#eaten {
+.eaten {
 	position: relative;
 	top: 40px;
 	font-family: Arial, sans-serif;
@@ -130,7 +116,7 @@
 	padding-bottom: 40px;
 	color: var(--color-text-inherit);
 }
-button.btn-start-over {
+button.btnStartOver {
 	position: relative;
 	margin: 0 auto;
 	left: 20px;
@@ -143,19 +129,19 @@ button.btn-start-over {
 }
 /* Dark-only escape: the light values are UA defaults. Must stay before the
    :hover rule below, which has the same specificity and has to win. */
-[data-theme="dark"] button.btn-start-over {
+:global([data-theme="dark"]) button.btnStartOver {
 	color: #f4f4f4;
 	background: #333333;
 }
-button.btn-start-over:hover {
+button.btnStartOver:hover {
 	cursor: pointer;
 	border-color: #333333;
 	background-color: var(--color-button-bg);
 	color: var(--color-button-text);
 }
-.btn-hide {
+.btnHide {
 	transform: scale(0);
 }
-.btn-show {
+.btnShow {
 	transform: scale(1);
 }

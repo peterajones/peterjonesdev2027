@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import PizzaSlices from './PizzaSlices';
 import CodeBlocks from './CodeBlocks';
+import styles from './PizzaPie.module.css';
 
 export default function PizzaPieWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         This was a prototype of an idea for a client.{' '}
         <span className="btn-widget-description">
@@ -16,7 +17,7 @@ export default function PizzaPieWidget() {
           </button>
         </span>
       </p>
-      <div className="stage pizza-pie">
+      <div className={`stage ${styles.pizzaPie}`}>
         <PizzaSlices />
       </div>
       <div className="code-content">
@@ -56,6 +57,6 @@ export default function PizzaPieWidget() {
         </div>
         <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-    </>
+    </div>
   );
 }
