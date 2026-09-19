@@ -116,8 +116,8 @@ export default function WeatherAppWidget() {
             </button>
           </span>
         </div>
+        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-      <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
     </div>
   );
 }
