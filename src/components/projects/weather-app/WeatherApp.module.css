@@ -1,3 +1,7 @@
+.root {
+	/* unstyled fragment wrapper, per audit §G */
+}
+
 .weatherOl {
 	color: var(--color-text);
 }
@@ -40,10 +44,6 @@ span.weatherConditions {
 	color: var(--color-weather-conditions);
 	font-weight: 600;
 }
-div#weatherOutput {
-	position: relative;
-	bottom: 0;
-}
 .currentWeatherWrapper {
 	position: relative;
 	bottom: 26px;
@@ -63,9 +63,6 @@ span.currentTemp {
 	font-size: 40px;
 	bottom: 2px;
 }
-/* label {
-	display: inline-block;
-} */
 .searchSection {
 	width: 100%;
 }
@@ -87,6 +84,9 @@ input.weatherSearchInput {
 	color: #282828;
 	padding-left: 4px;
 }
+:global([data-theme="dark"]) .weatherSearchInput::placeholder {
+	color: #ffffff;
+}
 input[type='submit'].weatherGoBtn {
 	position: relative;
 	top: 8px;
@@ -101,10 +101,6 @@ input[type='submit'].weatherGoBtn {
 	height: auto;
 	border-radius: 2px;
 }
-div.loading {
-	background-color: darkmagenta;
-	height: 100px;
-}
 .autocompleteDropdownContainer {
 	margin-top: 4px;
 	color: #282828;
@@ -115,11 +111,11 @@ div.loading {
 .suggestionItem:hover {
 	padding: 10px 0px;
 }
-#forecastOutput {
+.forecastOutput {
 	position: relative;
 	top: 10px;
 }
-#forecastOutput h4 {
+.forecastOutput h4 {
 	position: relative;
 	margin: 0 auto;
 	text-align: center;
@@ -133,9 +129,6 @@ div.loading {
 	display: flex;
 	justify-content: space-between;
 }
-/* footer {
-	height: 30px;
-} */
 .dayData {
 	position: relative;
 	width: 100%;
@@ -168,9 +161,6 @@ div.loading {
 }
 .widgetLeftMenu__links a:hover {
 	color: var(--color-weather-credit-hover);
-}
-.widgetLefMenu__links a:hover {
-	text-decoration: none !important;
 }
 .widgetLeftMenu__link:before {
 	content: '';

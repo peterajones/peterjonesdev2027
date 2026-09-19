@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import WeatherApp from './WeatherApp';
 import CodeBlocks from './CodeBlocks';
+import styles from './WeatherApp.module.css';
 
 export default function WeatherAppWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         Get the current weather for a city of your choice. Includes a 5 day forecast.{' '}
         <span className="btn-widget-description">
@@ -23,7 +24,7 @@ export default function WeatherAppWidget() {
         <div className={descriptionOpen ? 'code-description-open' : 'code-description-closed'}>
           <br />
           <p>This weather app with 5 day forecast uses 2 APIs:</p>
-          <ol className="weatherOl">
+          <ol className={styles.weatherOl}>
             <li>
               The{' '}
               <a href="https://developers.google.com/places/web-service/intro?hl=en_US" target="_new">
@@ -117,6 +118,6 @@ export default function WeatherAppWidget() {
         </div>
       </div>
       <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
-    </>
+    </div>
   );
 }

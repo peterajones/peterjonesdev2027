@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import styles from './WeatherApp.module.css';
 
 declare global {
   interface Window {
@@ -62,13 +63,14 @@ export default function WeatherApp() {
 
   if (!mounted) {
     return (
-      <div className="weatherContainer">
+      <div className={styles.weatherContainer}>
         <h1>Loading Weather App...</h1>
       </div>
     );
   }
 
   const handleClick = () => {
+    // literal "weatherOutput" class kept per audit P7 so this lookup keeps working
     const weatherOutput = document.getElementsByClassName('weatherOutput')[0];
     const forecastOutput = document.getElementById('forecastOutput');
     if (weatherOutput) weatherOutput.innerHTML = '';
@@ -149,7 +151,7 @@ export default function WeatherApp() {
         const weatherOutput = document.getElementsByClassName('weatherOutput')[0];
         if (weatherOutput) {
           weatherOutput.innerHTML = `
-          <p class="errorMsg">Looks like there was a problem... Please try again.</p>
+          <p class="${styles.errorMsg}">Looks like there was a problem... Please try again.</p>
         `;
         }
         const forecastOutput = document.getElementById('forecastOutput');
@@ -173,7 +175,7 @@ export default function WeatherApp() {
       if (!weatherOutput) return;
       weatherOutput.innerHTML += `
     <h2>${data.name}, ${data.sys.country}</h2>
-    <p class="dateTime">
+    <p class="${styles.dateTime}">
       ${days[date.getDay()]}
       ${date.getDate()}
       ${months[date.getMonth()]}.
@@ -181,15 +183,15 @@ export default function WeatherApp() {
         date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
       }
       ${date.getHours() > 12 ? 'PM' : 'AM'},
-      <span class="weatherConditions">${data.weather[0].description}</span>
+      <span class="${styles.weatherConditions}">${data.weather[0].description}</span>
     </p>
-    <div class="currentWeatherWrapper">
-      <div class="row1">
-        <span class="currentTemp">${(data.main.temp - 273.15).toFixed(1)}&#8451;</span>
+    <div class="${styles.currentWeatherWrapper}">
+      <div class="${styles.row1}">
+        <span class="${styles.currentTemp}">${(data.main.temp - 273.15).toFixed(1)}&#8451;</span>
         <span class="weatherIcon"><img src="https://openweathermap.org/img/wn/${icon}@2x.png" /></span>
       </div>
 
-      <div class="row2">
+      <div class="${styles.row2}">
         <span class="windSpeed">Wind: ${Math.round(data.wind.speed * 3.6)} Km/h</span>
         <span class="humidity">Humidity: ${data.main.humidity}%</span>
       </div>
@@ -222,21 +224,21 @@ export default function WeatherApp() {
       if (!forecastOutput) return;
       forecastOutput.innerHTML += `
     <h4>5 day forecast</h4>
-    <div class="forecast">`;
+    <div class="${styles.forecast}">`;
       for (let i = 1; i < forecast.list.length; i++) {
         const day = new Date(forecast.list[i].dt * 1000).getDay();
         const date = new Date(forecast.list[i].dt * 1000).getDate();
         if (forecast.list[i].dt_txt.includes('12:00:00')) {
           forecastOutput.innerHTML += `
-      <div class="dayData">
-        <div class='day'>
+      <div class="${styles.dayData}">
+        <div class='${styles.day}'>
             ${shortDays[day]}
             ${date < 10 ? '0' + date : date}
           </div>
-          <div class="icon">
+          <div class="${styles.icon}">
             <img src="https://openweathermap.org/img/wn/${forecast.list[i].weather[0].icon}@2x.png" />
           </div>
-          <div class="temps">${(forecast.list[i].main.temp - 273.15).toFixed(1)}&#8451;
+          <div class="${styles.temps}">${(forecast.list[i].main.temp - 273.15).toFixed(1)}&#8451;
           </div>
         </div>
       </div>
@@ -244,35 +246,35 @@ export default function WeatherApp() {
         }
       }
       forecastOutput.innerHTML += `
-    <footer class="weatherFooter">
-      <div class="widgetLeftMenu__links"><span>Powered by </span><a href="https://openweathermap.org/" target="_blank" class="widgetLeftMenu__link">OpenWeatherMap</a></div>
+    <footer class="${styles.weatherFooter}">
+      <div class="${styles.widgetLeftMenu__links}"><span>Powered by </span><a href="https://openweathermap.org/" target="_blank" class="${styles.widgetLeftMenu__link}">OpenWeatherMap</a></div>
     </footer>`;
     };
   };
 
   return (
-    <div className="weatherContainer">
+    <div className={styles.weatherContainer}>
       <h1>
-        Weather App <span className="tagline">with 5 day forecast</span>
+        Weather App <span className={styles.tagline}>with 5 day forecast</span>
       </h1>
-      <div className="searchSection">
-        <div className="searchInputs">
+      <div className={styles.searchSection}>
+        <div className={styles.searchInputs}>
           <input
             value={address}
             onChange={handleInputChange}
             onClick={handleClick}
             placeholder="Enter a City ..."
-            className="weatherSearchInput"
+            className={styles.weatherSearchInput}
             aria-label="weather-search-input"
           />
-          <input className="weatherGoBtn" type="submit" value="Go!" onClick={getData} />
+          <input className={styles.weatherGoBtn} type="submit" value="Go!" onClick={getData} />
         </div>
         {showSuggestions && (
-          <div className="autocompleteDropdownContainer">
+          <div className={styles.autocompleteDropdownContainer}>
             {suggestions.map((suggestion) => (
               <div
                 key={suggestion.placePrediction.placeId}
-                className="suggestionItem"
+                className={styles.suggestionItem}
                 style={{ backgroundColor: '#ffffff', cursor: 'pointer' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'rgba(51, 89, 153,0.75)';
@@ -290,8 +292,9 @@ export default function WeatherApp() {
           </div>
         )}
       </div>
-      <div className="weatherOutput" />
-      <div id="forecastOutput" />
+      {/* literal "weatherOutput" class kept alongside the module class per audit P7 */}
+      <div className={`weatherOutput ${styles.weatherOutput}`} />
+      <div id="forecastOutput" className={styles.forecastOutput} />
     </div>
   );
 }

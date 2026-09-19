@@ -36,9 +36,6 @@ input[name='email'] {
 	padding: 0 10px;
 	margin-bottom: 10px;
 }
-[data-theme="dark"] ::placeholder {
-	color: #ffffff;
-}
 .divider {
 	position: relative;
 	width: 100%;
