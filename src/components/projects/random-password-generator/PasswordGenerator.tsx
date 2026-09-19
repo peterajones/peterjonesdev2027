@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from './PasswordGenerator.module.css';
 
 const SYMBOLS = '!@#$%^&*+?=£()';
 
@@ -110,16 +111,21 @@ export default function PasswordGenerator() {
 
   return (
     <div className="stage">
-      <div className="PasswordGeneratorContainer">
-        <div className="pwg-container">
-          <h2 className="pwg">Password Generator</h2>
-          <div className="pwg-result-container">
-            <span id="pwg-result" className="pwg">
+      <div className={styles.passwordGeneratorContainer}>
+        <div className={styles.pwgContainer}>
+          <h2 className={styles.pwg}>Password Generator</h2>
+          <div className={styles.pwgResultContainer}>
+            <span id="pwg-result" className={styles.pwg}>
               {password}
             </span>
-            <button id="clipboard" onClick={handleCopy} title="Copy to clipboard...">
+            <button
+              id="clipboard"
+              className={styles.clipboard}
+              onClick={handleCopy}
+              title="Copy to clipboard..."
+            >
               <svg
-                className="clipboard-icon"
+                className={styles.clipboardIcon}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -131,12 +137,12 @@ export default function PasswordGenerator() {
               </svg>
             </button>
           </div>
-          <div id="msg" className={message ? 'fade-out' : undefined}>
+          <div id="msg" className={message ? `${styles.msg} ${styles.fadeOut}` : styles.msg}>
             {message}
           </div>
-          <div className="pwg-settings">
-            <div className="pwg-setting">
-              <label className="pwg">Password length</label>
+          <div className={styles.pwgSettings}>
+            <div className={styles.pwgSetting}>
+              <label className={styles.pwg}>Password length</label>
               <input
                 type="range"
                 min="1"
@@ -144,67 +150,88 @@ export default function PasswordGenerator() {
                 step="1"
                 value={length}
                 id="length"
+                className={styles.lengthSlider}
                 aria-label="range slider"
                 onChange={(e) => updateLength(Number(e.target.value))}
               />
-              <span id="length_disp" className="pwg">
+              <span id="length_disp" className={`${styles.lengthDisp} ${styles.pwg}`}>
                 {length}
               </span>
             </div>
-            <div className="pwg-setting">
-              <label className="pwg">
-                <span id="settings-upper" className={upper ? '' : 'line-through'}>
+            <div className={styles.pwgSetting}>
+              <label className={styles.pwg}>
+                <span
+                  id="settings-upper"
+                  className={upper ? '' : styles.lineThrough}
+                >
                   Include uppercase letters
                 </span>
                 <input
                   type="checkbox"
                   id="upper"
+                  className={styles.settingCheckbox}
                   checked={upper}
                   onChange={(e) => toggle('upper', e.target.checked, setUpper)}
                 />
               </label>
             </div>
-            <div className="pwg-setting">
-              <label className="pwg">
-                <span id="settings-lower" className={lower ? '' : 'line-through'}>
+            <div className={styles.pwgSetting}>
+              <label className={styles.pwg}>
+                <span
+                  id="settings-lower"
+                  className={lower ? '' : styles.lineThrough}
+                >
                   Include lowercase letters
                 </span>
                 <input
                   type="checkbox"
                   id="lower"
+                  className={styles.settingCheckbox}
                   checked={lower}
                   onChange={(e) => toggle('lower', e.target.checked, setLower)}
                 />
               </label>
             </div>
-            <div className="pwg-setting">
-              <label className="pwg">
-                <span id="settings-numbers" className={numbers ? '' : 'line-through'}>
+            <div className={styles.pwgSetting}>
+              <label className={styles.pwg}>
+                <span
+                  id="settings-numbers"
+                  className={numbers ? '' : styles.lineThrough}
+                >
                   Include numbers
                 </span>
                 <input
                   type="checkbox"
                   id="numbers"
+                  className={styles.settingCheckbox}
                   checked={numbers}
                   onChange={(e) => toggle('numbers', e.target.checked, setNumbers)}
                 />
               </label>
             </div>
-            <div className="pwg-setting">
-              <label className="pwg">
-                <span id="settings-symbols" className={symbols ? '' : 'line-through'}>
+            <div className={styles.pwgSetting}>
+              <label className={styles.pwg}>
+                <span
+                  id="settings-symbols"
+                  className={symbols ? '' : styles.lineThrough}
+                >
                   Include symbols
                 </span>
                 <input
                   type="checkbox"
                   id="symbols"
+                  className={styles.settingCheckbox}
                   checked={symbols}
                   onChange={(e) => toggle('symbols', e.target.checked, setSymbols)}
                 />
               </label>
             </div>
           </div>
-          <button className="pwg-btn pwg-btn-large" id="generate" onClick={handleGenerate}>
+          <button
+            className={`${styles.pwgBtn} ${styles.pwgBtnLarge} ${styles.generate}`}
+            id="generate"
+            onClick={handleGenerate}
+          >
             Generate password
           </button>
         </div>

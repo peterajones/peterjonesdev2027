@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import PasswordGenerator from './PasswordGenerator';
 import CodeBlocks from './CodeBlocks';
+import styles from './PasswordGenerator.module.css';
 
 export default function PasswordGeneratorWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         This is a random password generator written in JavaScript.{' '}
         <span className="btn-widget-description">
@@ -57,7 +58,7 @@ export default function PasswordGeneratorWidget() {
           </p>
           <br />
           <p>I made some design changes to the original Codepen:</p>
-          <ol className="pwg">
+          <ol className={styles.pwg}>
             <li>
               The password length selector was changed from a number input field to a range
               slider.
@@ -100,6 +101,6 @@ export default function PasswordGeneratorWidget() {
         </div>
       </div>
       <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
-    </>
+    </div>
   );
 }
