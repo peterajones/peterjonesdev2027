@@ -1,20 +1,24 @@
-.PaginationContainer {
+.root {
+	/* unstyled fragment wrapper, per audit §G */
+}
+
+.paginationContainer {
 	max-width: 1200px;
 	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 }
-.page-info {
+.pageInfo {
 	position: relative;
 	width: 100%;
 }
-.page-info p {
+.pageInfo p {
 	padding: 0;
 	margin: 0;
 	font-size: 16px;
 }
-ul.p-list {
+ul.pList {
 	position: relative;
 	list-style: none;
 	padding: 0;
@@ -24,7 +28,7 @@ ul.p-list {
 	width: 100%;
 	justify-content: space-evenly;
 }
-li.p-card {
+li.pCard {
 	display: flex;
 	justify-content: center;
 	text-align: left;
@@ -37,12 +41,12 @@ li.p-card {
 	min-width: 300px;
 	margin-bottom: 10px;
 }
-.p-card p {
+.pCard p {
 	line-height: 0.2;
 	padding: 10px 0;
 	margin: 0;
 }
-.p-card p.name {
+.pCard p.name {
 	font-weight: 600;
 	text-align: center;
 	margin-bottom: 10px;
@@ -53,17 +57,17 @@ li.p-card {
 	flex-wrap: wrap;
 	padding: 4px 0;
 }
-.email-icon {
+.emailIcon {
 	color: var(--color-contact-icon);
 	width: 18px;
 }
-.email-address {
+.emailAddress {
 	padding-left: 10px;
 }
-.email-address a {
+.emailAddress a {
 	color: var(--color-text);
 }
-.email-address a:hover {
+.emailAddress a:hover {
 	color: darkgreen;
 }
 .address {
@@ -72,16 +76,16 @@ li.p-card {
 	flex-wrap: wrap;
 	padding: 4px 0;
 }
-.address-icon {
+.addressIcon {
 	position: relative;
 	top: 2px;
 	color: var(--color-contact-icon);
 	width: 18px;
 }
-.address-details {
+.addressDetails {
 	padding-left: 9px;
 }
-.address-details p {
+.addressDetails p {
 	font-size: 16px;
 	line-height: 0;
 }
@@ -91,11 +95,11 @@ li.p-card {
 	flex-wrap: wrap;
 	padding: 4px 0;
 }
-.phone-icon {
+.phoneIcon {
 	color: var(--color-contact-icon-alt);
 	width: 18px;
 }
-.phone-number {
+.phoneNumber {
 	padding-left: 12px;
 	color: var(--color-text-inherit);
 }
@@ -105,20 +109,20 @@ li.p-card {
 	flex-wrap: wrap;
 	padding: 4px 0;
 }
-.website-icon {
+.websiteIcon {
 	color: var(--color-contact-icon-alt);
 	width: 18px;
 }
-.website-url {
+.websiteUrl {
 	padding-left: 10px;
 }
-.website-url a {
+.websiteUrl a {
 	color: var(--color-text);
 }
-.website-url a:hover {
+.websiteUrl a:hover {
 	color: var(--color-contact-icon-alt);
 }
-[data-theme="dark"] .info span {
+:global([data-theme="dark"]) .info span {
 	color: #fff;
 }
 .map {
@@ -127,7 +131,7 @@ li.p-card {
 	height: 220px;
 	background-color: gray;
 }
-.page-numbers {
+.pageNumbers {
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
@@ -138,11 +142,11 @@ li.p-card {
 	height: 60px;
 	list-style: none;
 }
-ul.page-nums {
+ul.pageNums {
 	display: flex;
 	padding-left: 0;
 }
-li.page-num {
+li.pageNum {
 	border: none;
 	padding: 10px;
 	margin-bottom: 6px;
@@ -158,35 +162,31 @@ li.page-num {
 	height: 30px;
 	transition: background-color 0.25s ease-in-out;
 }
-li.page-num:hover {
+li.pageNum:hover {
 	background-color: var(--color-page-num-hover-bg);
 	color: var(--color-page-num-hover-text);
 }
-li.page-num span {
+li.pageNum span {
 	position: relative;
 	top: -5px;
 	color: var(--color-page-num-text);
 	font-weight: 500;
 }
-li.page-num.active {
+li.pageNum.active {
 	background-color: darkgreen;
 }
-li.page-num.active:hover {
+li.pageNum.active:hover {
 	background-color: var(--color-page-num-active-hover-bg);
 }
-li.page-num.active span {
+li.pageNum.active span {
 	color: #f4f4f4;
 }
-li.page-num.active:hover span {
+li.pageNum.active:hover span {
 	color: #333333;
-}
-.page-link {
-	color: #000000;
-	text-decoration: none;
 }
 
 @media only screen and (max-width: 640px) {
-	li.p-card {
+	li.pCard {
 		flex-direction: column;
 	}
 	.info {
@@ -199,16 +199,16 @@ li.page-num.active:hover span {
 	}
 }
 @media only screen and (max-width: 320px) {
-	.page-info p {
+	.pageInfo p {
 		font-size: 15px;
 	}
-	li.p-card {
+	li.pCard {
 		max-width: 260px;
 	}
 	.info {
 		min-width: 240px;
 	}
-	.p-card p {
+	.pCard p {
 		font-size: 1rem;
 	}
 }

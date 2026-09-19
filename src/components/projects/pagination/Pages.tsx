@@ -1,3 +1,5 @@
+import styles from './Pagination.module.css';
+
 interface Props {
   usersPerPage: number;
   totalUsers: number;
@@ -14,14 +16,18 @@ export default function Pages({ usersPerPage, totalUsers, getPage, isActive, cur
   }
 
   return (
-    <div className="page-numbers">
-      <ul className="page-nums">
+    <div className={styles.pageNumbers}>
+      <ul className={styles.pageNums}>
         {pageNumbers.map((pageNumber) => (
           <li
             key={pageNumber}
             id={'page' + pageNumber}
             onClick={() => getPage(pageNumber)}
-            className={currentPage === pageNumber && isActive ? 'page-num active' : 'page-num'}
+            className={
+              currentPage === pageNumber && isActive
+                ? `${styles.pageNum} ${styles.active}`
+                : styles.pageNum
+            }
           >
             <span>{pageNumber}</span>
           </li>

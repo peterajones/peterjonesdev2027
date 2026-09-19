@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Data from './Data';
 import CodeBlocks from './CodeBlocks';
+import styles from './Pagination.module.css';
 
 export default function PaginationWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         Using a REST API and Google Maps in React.{' '}
         <span className="btn-widget-description">
@@ -59,6 +60,6 @@ export default function PaginationWidget() {
         </div>
       </div>
       <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
-    </>
+    </div>
   );
 }

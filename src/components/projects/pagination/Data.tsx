@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Users from './Users';
 import Pages from './Pages';
 import PageInfo from './PageInfo';
+import styles from './Pagination.module.css';
 
 const API = 'https://jsonplaceholder.typicode.com/users';
 
@@ -39,7 +40,7 @@ export default function Data() {
   };
 
   return (
-    <div className="PaginationContainer">
+    <div className={styles.paginationContainer}>
       <Pages
         usersPerPage={usersPerPage}
         totalUsers={users.length}

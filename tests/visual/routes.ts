@@ -28,7 +28,7 @@ const projects = [
 ];
 
 const masks: Record<string, string[]> = {
-  'project-pagination': ['.map'],
+  'project-pagination': ['[data-testid="map"]'],
 };
 
 export const routes: VisualRoute[] = [

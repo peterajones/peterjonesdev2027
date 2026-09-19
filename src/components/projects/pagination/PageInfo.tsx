@@ -1,3 +1,5 @@
+import styles from './Pagination.module.css';
+
 interface Props {
   currentPage: number;
   totalPages: number;
@@ -5,7 +7,7 @@ interface Props {
 
 export default function PageInfo({ currentPage, totalPages }: Props) {
   return (
-    <div className="page-info">
+    <div className={styles.pageInfo}>
       <p>
         Page {currentPage} of {Math.ceil(totalPages)}
       </p>

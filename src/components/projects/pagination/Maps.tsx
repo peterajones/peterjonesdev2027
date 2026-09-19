@@ -34,8 +34,8 @@ function Maps({ lat, lng, name }: Props) {
     return () => window.removeEventListener('google-maps-loaded', render);
   }, [lat, lng, name]);
 
-  // The parent <div className="map"> (in Users.tsx) already sizes this via
-  // CSS; fill it rather than duplicating the sizing on a second nested node.
+  // The parent <div className={styles.map}> (in Users.tsx) already sizes this
+  // via CSS; fill it rather than duplicating the sizing on a second nested node.
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 }
 
