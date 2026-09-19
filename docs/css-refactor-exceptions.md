@@ -18,4 +18,10 @@ Each entry is `E<n>` and records:
 
 ## Entries
 
-None yet.
+### E1: Currency Converter — code panel warning text darkens in light mode
+
+- **Where:** `/projects/currency-converter`, light theme, any width. Open the code panel: click "Read more..." to reveal the description, then click "Show me the code" at the bottom of it. The change is only visible while the code panel is open — the visual-suite screenshots capture it closed, so the gate shows zero diff.
+- **What changed and why:** Audit P9 found this widget rendered `<CodeBlocks>` as a sibling of `.code-content` instead of inside it, unlike the other four widgets that render a code panel (JS Clock, Pizza Pie, Rollup Counter, Checkbox Styling already had it inside). Moving `<CodeBlocks>` inside `.code-content` (this task's second commit) fixes that inconsistency, but it means the code panel's first paragraph — "The code displayed below is from my original iteration in HTML, CSS and JS." — now matches the `.code-content p` rule instead of the bare global `p` rule.
+- **What to look for:** With the code panel open in light mode, that first red-tinted warning paragraph is noticeably darker/blacker than before. Computed `color` on that `<p class="red-msg">`: **before** `rgb(88, 88, 88)` (`#585858`), **after** `rgb(0, 0, 0)` (`#000000`). Verified with a Playwright computed-style check against commit `262c40a` (module move, before this fix) vs the working tree (after), light theme, desktop viewport — confirmed via `getComputedStyle` directly, not a screenshot.
+- **Commit:** 9fe70ac
+- **Approval:** pending
