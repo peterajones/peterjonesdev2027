@@ -1,4 +1,4 @@
-/* Scoped to .form-container (ContactForm.tsx's wrapper) — these were */
+/* Scoped to .formContainer (ContactForm.tsx's wrapper) — these were */
 /* previously bare `label`/`input`/`textarea` selectors, which applied */
 /* site-wide to every input/textarea/label on every page (checkboxes, */
 /* the weather-app search box, currency-converter/password-generator */
@@ -7,14 +7,14 @@
 /* syntax highlighting) for how this class of leak happens: every partial */
 /* here compiles into one global stylesheet, so an unscoped tag selector */
 /* in any one of them applies everywhere, not just to its own widget. */
-.form-container label {
+.formContainer label {
   display: inline-block;
   margin-top: 1rem;
   font-size: 0.85rem;
   text-transform: uppercase;
   touch-action: manipulation;
 }
-.form-container input {
+.formContainer input {
   min-width: 300px;
   height: 50px;
   display: block;
@@ -22,16 +22,21 @@
   border-radius: 6px;
   font-size: 1.1rem;
 }
-.form-container input.contact-email {
+.formContainer input.contactEmail {
   box-shadow: none;
   width: auto;
   border: 1px solid #ccc;
+  /* Carried from signin.css's `input[name='email']` (audit P1): neither */
+  /* rule above sets padding or margin-bottom, so adding them here doesn't */
+  /* disturb precedence for anything else. */
+  padding: 0 10px;
+  margin-bottom: 10px;
 }
-[data-theme="dark"] .form-container input.contact-email {
+:global([data-theme="dark"]) .formContainer input.contactEmail {
   background-color: #ffffff;
   color: #333333;
 }
-.form-container textarea {
+.formContainer textarea {
   display: block;
   min-width: 300px;
   height: 60px;
@@ -40,7 +45,7 @@
   font-family: sans-serif;
   font-size: 1.1rem;
 }
-.btn-submit {
+.btnSubmit {
   width: auto;
   text-transform: uppercase;
   border: 1px solid #ccc;
@@ -51,8 +56,8 @@
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 }
-.btn-submit:hover,
-.btn-submit:focus {
+.btnSubmit:hover,
+.btnSubmit:focus {
   background-color: rebeccapurple;
   color: #fff;
 }

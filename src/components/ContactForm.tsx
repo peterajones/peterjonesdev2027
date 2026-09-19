@@ -1,4 +1,5 @@
 import { useState, type SubmitEvent } from 'react';
+import styles from './ContactForm.module.css';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -43,14 +44,14 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="form-container">
+      <div className={styles.formContainer}>
         <p>Thanks for reaching out — I'll get back to you as soon as I can.</p>
       </div>
     );
   }
 
   return (
-    <div className="form-container">
+    <div className={styles.formContainer}>
       <form name="contact" onSubmit={handleSubmit}>
         <p style={{ display: 'none' }}>
           <label>
@@ -63,7 +64,7 @@ export default function ContactForm() {
         </p>
         <p>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" className="contact-email" required />
+          <input type="email" id="email" name="email" className={styles.contactEmail} required />
         </p>
         <p>
           <label htmlFor="message">Message</label>
@@ -71,7 +72,7 @@ export default function ContactForm() {
         </p>
         {status === 'error' && <p className="red-msg">{errorMessage}</p>}
         <p>
-          <button type="submit" className="btn-submit" disabled={status === 'submitting'}>
+          <button type="submit" className={styles.btnSubmit} disabled={status === 'submitting'}>
             {status === 'submitting' ? 'Sending…' : 'Send'}
           </button>
         </p>
