@@ -223,17 +223,17 @@ The 12 remaining escapes are the end-state `[data-theme="dark"]` list. `grep -rn
 
 | File | Selector | Property | Why it can't be a token |
 |---|---|---|---|
-| `layout.css` | `[data-theme="dark"] nav` | box-shadow | The offsets and blur differ between themes as well as the colour, so it isn't a colour swap |
-| `navbar.css` | `[data-theme="dark"] .icon-sun`, `.icon-moon`, `.icon-bell` | transition | Timing differs by theme (`0.35s` light, `0.25s` dark). Not a colour |
-| `Navbar.astro` | `:global([data-theme="dark"]) .logo-light`, `.logo-dark`, `.icon-sun`, `.icon-moon` | display | Display toggles, not colours |
-| `code.css` | `[data-theme="dark"] .github-logo` | background-image | Not a colour, and `tokens.css` holds only `--color-*` tokens |
-| `pagination.css` | `[data-theme="dark"] .info span` | color | A light rule `.info span { color: currentColor }` would also style the spans Google Maps injects inside the outer `.info` (which wraps `.map`). Maps is aborted in the tests, so the gate couldn't catch a change there |
-| `latest-updates.css` | `[data-theme="dark"] .updates-container-inner` | border | Width and style change too (`4px double` becomes `1px solid`) |
-| `contactForm.css` | `[data-theme="dark"] .form-container input.contact-email` | background-color, color | The light values are UA defaults (`Field`/`FieldText`), which neither `transparent` nor `currentColor` reproduces. The values are now the literals `#ffffff` and `#333333` |
-| `signin.css` | `[data-theme="dark"] ::placeholder` | color | The light value is the UA placeholder colour. Literal `#ffffff`. Task 17 moves it to `WeatherApp.module.css` |
-| `pizza-pie.css` | `[data-theme="dark"] #ddl` | color | The light value is the UA `<select>` colour |
-| `pizza-pie.css` | `[data-theme="dark"] button.btn-start-over` | color, background | The light values are UA button defaults. The rule now sits before `button.btn-start-over:hover`, because both have the same specificity and the hover rule has to win |
-| `checkbox-styling.css` | `[data-theme="dark"] .checkbox-input` | color | The light value is the UA `<input>` colour |
+| `src/components/Navbar.astro:146` | `:global([data-theme="dark"]) nav` | box-shadow | The offsets and blur differ between themes as well as the colour, so it isn't a colour swap |
+| `src/components/Navbar.astro:196-198` | `:global([data-theme="dark"]) .icon-sun`, `.icon-moon`, `.icon-bell` | transition | Timing differs by theme (`0.35s` light, `0.25s` dark). Not a colour |
+| `src/components/Navbar.astro:220,223,229,232` | `:global([data-theme="dark"]) .logo-light`, `.logo-dark`, `.icon-sun`, `.icon-moon` | display | Display toggles, not colours |
+| `src/styles/code.css:18` | `[data-theme="dark"] .github-logo` | background-image | Not a colour, and `tokens.css` holds only `--color-*` tokens |
+| `src/components/projects/pagination/Pagination.module.css:125` | `:global([data-theme="dark"]) .info span` | color | A light rule `.info span { color: currentColor }` would also style the spans Google Maps injects inside the outer `.info` (which wraps `.map`). Maps is aborted in the tests, so the gate couldn't catch a change there |
+| `src/components/Navbar.astro:303` | `:global([data-theme="dark"]) .updates-container-inner` | border | Width and style change too (`4px double` becomes `1px solid`) |
+| `src/components/ContactForm.module.css:31` | `:global([data-theme="dark"]) .formContainer input.contactEmail` | background-color, color | The light values are UA defaults (`Field`/`FieldText`), which neither `transparent` nor `currentColor` reproduces. The values are now the literals `#ffffff` and `#333333` |
+| `src/components/projects/weather-app/WeatherApp.module.css:87` | `:global([data-theme="dark"]) .weatherSearchInput::placeholder` | color | The light value is the UA placeholder colour. Literal `#ffffff`. Moved here from `signin.css` (Task 17) |
+| `src/components/projects/pizza-pie/PizzaPie.module.css:24` | `:global([data-theme="dark"]) .ddl` | color | The light value is the UA `<select>` colour |
+| `src/components/projects/pizza-pie/PizzaPie.module.css:136` | `:global([data-theme="dark"]) button.btnStartOver` | color, background | The light values are UA button defaults. The rule now sits before `button.btnStartOver:hover`, because both have the same specificity and the hover rule has to win |
+| `src/components/projects/checkbox-styling/CheckboxStyling.module.css:12` | `:global([data-theme="dark"]) .checkboxInput` | color | The light value is the UA `<input>` colour |
 
 ## D. Token inventory
 

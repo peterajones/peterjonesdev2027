@@ -6,6 +6,22 @@ Every intentional or unavoidable visual change from the pixel-identical baseline
 
 **How to review:** run the branch build (`npm run build && node --env-file=.env ./dist/server/entry.mjs`, then open http://localhost:4321) and compare each entry against the same path on the live site, which still runs `main`. Set the theme with the navbar toggle and the width with devtools' responsive mode.
 
+### Interaction walkthrough
+
+The visual suite only screenshots each route at rest — closed panels, no hover, no typed input. It never captured the states below, so check them by hand against the live site:
+
+- Each project's code panel open (E1–E4's widgets plus the other four: js-clock, pizza-pie, rollup-counter, checkbox-styling)
+- Navbar "Latest Updates" modal open
+- Currency converter: add-currency list open, and the base-currency select open
+- Pizza pie: choose slices, then "Start Over" (hover, dark theme)
+- Password generator: Generate, Copy, and toggle the settings
+- Pagination: page 2, and hover over the page numbers
+- Checkbox styling: toggle each checkbox
+- Rollup counter: increment, reset
+- Weather app: search a valid city, search an invalid city, hover the credit link (autocomplete suggestions can't be verified locally)
+- Contact form: focus each field
+- Theme toggle on several pages, then a throttled (Slow 3G) reload in dark mode — confirm no flash of the wrong theme
+
 Nothing merges while any entry is `pending`.
 
 ## Entry format

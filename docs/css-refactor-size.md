@@ -5,8 +5,11 @@ each route in the production build and sums the bytes of every `<link
 rel="stylesheet">` response plus every inline `<style>` element in the page.
 Both numbers are **uncompressed** bytes (no gzip/brotli).
 
-**Before** (`docs/css-refactor-size-before.json`, recorded in Task 1 against
-`main`): every route loaded the same single site-wide stylesheet compiled
+**Before** (recorded in Task 1 against `main`, at commit `2e86981`; the
+capture file, `docs/css-refactor-size-before.json`, was deleted once this
+document was written — retrieve it with `git show
+2e86981:docs/css-refactor-size-before.json` if needed): every route loaded
+the same single site-wide stylesheet compiled
 from `globals.scss` — 41,472 bytes on every page, whether or not the route
 used most of what was in it. Inline bytes were whatever the page already
 inlined (the React widgets' small inline styles).

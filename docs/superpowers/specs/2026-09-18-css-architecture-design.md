@@ -54,7 +54,7 @@ src/styles/
   reset.css
   base.css     element typography (h1–h6, p, a, lists), body
   layout.css   shared layout classes (.content, .backBtn, .btnSpacer, …)
-  code.css     code-panel styles (from _code.scss) + Prism atom-dark theme
+  code.css     code-panel styles (from _code.scss)
 ```
 
 Everything else is colocated:
@@ -94,8 +94,8 @@ Global files are imported into their layer. Component styles are unlayered, so t
 - Tokens merge only values that are already identical. No value changes.
 - Colours that vary by theme are tokens in `tokens.css`, even if only one component uses them — they need the theme hook. Theme-invariant single-use colours stay in their component's CSS as literals.
 - Rewritten dark-mode rules use `[data-theme="dark"]` (without `:root`), which has the same specificity as the old `.dark` class.
-- Where a component needs a dark-only rule no token can express, it uses `:global(:root[data-theme="dark"]) .thing`. Each occurrence is noted in the audit as a candidate token.
-- The Prism atom-dark theme in `code.css` follows the same token approach.
+- Where a component needs a dark-only rule no token can express, it uses `:global([data-theme="dark"]) .thing` (keeps the old `.dark` class's specificity). Each occurrence is noted in the audit as a candidate token.
+- The Prism atom-dark theme was inert before the refactor — `react-syntax-highlighter` applies its theme inline, so the CSS never took effect — and was deleted rather than migrated (audit P8).
 
 ## Verification: visual regression
 

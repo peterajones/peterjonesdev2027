@@ -66,8 +66,8 @@ Component-level styling is scoped, not global:
   component's own template) uses `:global(...)`.
 - React widgets each get a co-located `<Widget>.module.css` (e.g.
   `src/components/projects/pizza-pie/PizzaPie.module.css` next to
-  `PizzaPie.tsx`), imported as `styles` and applied via
-  `className={styles.foo}`. A handful of classes shared across every
+  `PizzaPieWidget.tsx`/`PizzaSlices.tsx`), imported as `styles` and applied
+  via `className={styles.foo}`. A handful of classes shared across every
   project widget (the code-panel toggle chrome) stay as plain global
   strings from `code.css` rather than being duplicated per module.
 
@@ -82,11 +82,27 @@ theme) and flipped by `Navbar.astro`'s toggle script, both writing
 `document.documentElement.dataset.theme`.
 
 **Visual regression suite:** `npm run test:visual` screenshots every route
-in both themes and both a desktop and mobile width against committed
-baselines. Baselines and the recorded network HARs are gitignored, so a
-fresh clone (or `main` after this branch merges) has none — regenerate
-them with `VISUAL_RECORD_HAR=1 npx playwright test tests/visual
---update-snapshots` the first time the suite reports baselines missing.
+in both themes and both a desktop and mobile width and diffs them against
+local baselines. Baselines and the recorded network HARs are both
+gitignored (the HARs contain real API keys), so a fresh clone has neither.
+
+Capture baselines on a clean, known-good commit — `main`, or any commit
+before CSS edits start — never on a branch mid-refactor, or regressions
+get baked into the "known-good" baseline:
+
+```sh
+VISUAL_RECORD_HAR=1 npx playwright test tests/visual --update-snapshots
+```
+
+Prerequisites: a local `.env` (the suite's Playwright `webServer` runs the
+production build with `node --env-file=.env ./dist/server/entry.mjs`), and
+live network access with real API keys, since this run records the
+network traffic (SMTP, Google Maps, OpenWeatherMap, ExchangeRatesAPI) into
+the HAR files that later runs replay from.
+
+`npm run test:visual` runs the screenshot suite against those baselines;
+`npm run test:theme` runs the separate theme-toggle checks in
+`tests/theme.spec.ts`.
 
 ## Environment variables
 
@@ -113,6 +129,8 @@ doesn't affect the deployed app.
 | `npm run dev`          | Start local dev server at `localhost:4321`     |
 | `npm run build`        | Build production output to `./dist/`           |
 | `npm run preview`      | Preview the build locally                      |
+| `npm run test:visual`  | Run the visual regression screenshot suite     |
+| `npm run test:theme`   | Run the theme-toggle tests (`tests/theme.spec.ts`) |
 | `npx astro check`      | Type-check the project                        |
 
 ## Deployment (Coolify)
