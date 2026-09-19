@@ -1,3 +1,7 @@
+.root {
+	/* unstyled fragment wrapper, per audit §G */
+}
+
 :global(.stage).clock {
 	min-height: 200px;
 	display: flex;

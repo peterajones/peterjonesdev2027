@@ -1,3 +1,7 @@
+.root {
+	/* unstyled fragment wrapper, per audit §G */
+}
+
 .count {
 	position: relative;
 	font-family: 'Open Sans', sans-serif;

@@ -1,3 +1,7 @@
+.root {
+	/* unstyled fragment wrapper, per audit §G */
+}
+
 :global(.stage).pizzaPie {
 	min-height: 430px;
 	padding-top: 20px;

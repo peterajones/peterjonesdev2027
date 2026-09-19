@@ -9,7 +9,7 @@
 	margin: 0;
 }
 
-:global([data-theme='dark']) .checkboxInput {
+:global([data-theme="dark"]) .checkboxInput {
 	color: #f4f4f4;
 }
 

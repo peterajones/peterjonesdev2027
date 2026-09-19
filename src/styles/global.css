@@ -1,3 +1,9 @@
+/* This statement establishes layer order (and with it, cascade order) by
+   first appearance — the minifier drops the statement itself from the
+   built output, but the order it declared survives via the @import
+   layer(...) below. Never use @layer in component styles (Astro <style>
+   blocks or CSS Modules): a layered rule there would join this ordering
+   and could lose to an unlayered component rule it used to beat. */
 @layer reset, base, layout, code;
 
 @import './tokens.css';
