@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './CheckboxStyling.module.css';
 
 export default function Checkboxes() {
   const [newsletter1, setNewsletter1] = useState(false);
@@ -11,13 +12,13 @@ export default function Checkboxes() {
   return (
     <>
       <h2>Converting checkboxes to switches</h2>
-      <div id="forms-wrapper">
-        <form action="GET" id="form1">
-          <h4 className="checkbox-group">Conventional checkboxes</h4>
-          <div id="checkboxes">
-            <label className="checkbox-label">
+      <div id="forms-wrapper" className={styles.formsWrapper}>
+        <form action="GET" id="form1" className={styles.form1}>
+          <h4 className={styles.checkboxGroup}>Conventional checkboxes</h4>
+          <div id="checkboxes" className={styles.checkboxes}>
+            <label className={styles.checkboxLabel}>
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 id="newsletter-1"
                 name="newsletter-1"
                 type="checkbox"
@@ -26,9 +27,9 @@ export default function Checkboxes() {
               />
               Newsletter
             </label>
-            <label className="checkbox-label">
+            <label className={styles.checkboxLabel}>
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 name="notifications-1"
                 type="checkbox"
                 onChange={() => setNotifications1((v) => !v)}
@@ -36,9 +37,9 @@ export default function Checkboxes() {
               />
               Notifications
             </label>
-            <label className="checkbox-label">
+            <label className={styles.checkboxLabel}>
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 name="alerts-1"
                 type="checkbox"
                 onChange={() => setAlerts1((v) => !v)}
@@ -48,12 +49,12 @@ export default function Checkboxes() {
             </label>
           </div>
         </form>
-        <form action="GET" id="form2">
-          <h4 className="checkbox-group">Styled checkboxes</h4>
-          <div id="switches">
+        <form action="GET" id="form2" className={styles.form2}>
+          <h4 className={styles.checkboxGroup}>Styled checkboxes</h4>
+          <div id="switches" className={styles.switches}>
             <label htmlFor="newsletter-2">
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 type="checkbox"
                 name="newsletter-2"
                 id="newsletter-2"
@@ -65,7 +66,7 @@ export default function Checkboxes() {
             </label>
             <label htmlFor="notifications-2">
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 type="checkbox"
                 name="notifications-2"
                 id="notifications-2"
@@ -77,7 +78,7 @@ export default function Checkboxes() {
             </label>
             <label htmlFor="alerts-2">
               <input
-                className="checkbox-input"
+                className={styles.checkboxInput}
                 type="checkbox"
                 name="alerts-2"
                 id="alerts-2"

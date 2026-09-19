@@ -1,24 +1,19 @@
+:where(.root) input[type='checkbox'] {
+	margin-right: 0;
+	height: auto;
+	min-width: auto;
+}
 
-h4.checkbox-group {
+.checkboxGroup {
 	font-size: 18px;
 	margin: 0;
 }
 
-[data-theme="dark"] .checkbox-input {
+:global([data-theme='dark']) .checkboxInput {
 	color: #f4f4f4;
 }
 
-#container {
-	position: relative;
-	width: 920px;
-	height: 100%;
-	margin: 0 auto;
-	text-align: center;
-	background-color: #747474;
-	border: 1px solid rgba(0, 200, 0, 0.6);
-}
-
-#forms-wrapper {
+.formsWrapper {
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
@@ -26,17 +21,17 @@ h4.checkbox-group {
 	width: 100%;
 }
 
-form#form1 {
+.form1 {
 	width: 400px;
 	padding: 10px 0;
 }
 
-form#form2 {
+.form2 {
 	width: 400px;
 	padding: 10px 0;
 }
 
-#checkboxes {
+.checkboxes {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -46,25 +41,25 @@ form#form2 {
 	color: var(--color-text-inherit);
 }
 
-#checkboxes .checkbox-label {
+.checkboxes .checkboxLabel {
 	display: block;
 	margin-top: 0;
 	cursor: pointer;
 	line-height: 3;
 }
 
-#checkboxes input.checkbox-input {
+.checkboxes input.checkboxInput {
 	width: 24px;
 	transform: scale(1.5);
 	display: inline-block;
 	cursor: pointer;
 }
 
-#checkboxes input.checkbox-input:focus {
+.checkboxes input.checkboxInput:focus {
 	outline: none;
 }
 
-#switches {
+.switches {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -74,7 +69,7 @@ form#form2 {
 	color: var(--color-text-inherit);
 }
 
-#switches label {
+.switches label {
 	display: inline-block;
 	margin-top: 1rem;
 	font-size: 0.85rem;
@@ -83,7 +78,7 @@ form#form2 {
 	cursor: pointer;
 }
 
-#switches label span {
+.switches label span {
 	display: inline-block;
 	width: 50px;
 	height: 27px;
@@ -96,7 +91,7 @@ form#form2 {
 	transition: background-color 0.3s;
 }
 
-#switches label span::after {
+.switches label span::after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -109,27 +104,27 @@ form#form2 {
 	transition: left 0.3s;
 }
 
-#switches label input:checked + span {
+.switches label input:checked + span {
 	border-color: var(--color-switch-border);
 	background-color: rgb(0, 200, 0);
 }
 
-#switches label input:checked + span::after {
+.switches label input:checked + span::after {
 	left: calc(100% - 21px);
 	background-color: #fff;
 }
 
-#form2 label input {
+.form2 label input {
 	display: none;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
-	#checkboxes input.checkbox-input {
+	.checkboxes input.checkboxInput {
 		margin-right: 30px;
 	}
 }
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
-	#checkboxes input.checkbox-input {
+	.checkboxes input.checkboxInput {
 		margin-right: 30px;
 	}
 }

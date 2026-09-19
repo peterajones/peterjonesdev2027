@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Checkboxes from './Checkboxes';
 import CodeBlocks from './CodeBlocks';
+import styles from './CheckboxStyling.module.css';
 
 export default function CheckboxStylingWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
 
   return (
-    <>
+    <div className={styles.root}>
       <p style={{ paddingBottom: '30px' }}>
         An example of how checkboxes can be styled with CSS.{' '}
         <span className="btn-widget-description">
@@ -50,6 +51,6 @@ export default function CheckboxStylingWidget() {
         </div>
         <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
-    </>
+    </div>
   );
 }
