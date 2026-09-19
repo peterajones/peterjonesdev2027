@@ -70,7 +70,7 @@ export default function ContactForm() {
           <label htmlFor="message">Message</label>
           <textarea id="message" name="message" required></textarea>
         </p>
-        {status === 'error' && <p className="red-msg">{errorMessage}</p>}
+        {status === 'error' && <p>{errorMessage}</p>}
         <p>
           <button type="submit" className={styles.btnSubmit} disabled={status === 'submitting'}>
             {status === 'submitting' ? 'Sending…' : 'Send'}

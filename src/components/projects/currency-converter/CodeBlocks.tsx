@@ -452,7 +452,7 @@ ul.add-currency-list li span {
 export default function CodeBlocks({ open, onToggle }: Props) {
   return (
     <section className={open ? 'code is-open' : 'code is-closed'}>
-      <p className="red-msg">
+      <p>
         The code displayed below is from my original iteration in HTML, CSS and JS.
       </p>
       <div className="code-header">index.html</div>
