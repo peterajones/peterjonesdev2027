@@ -9,7 +9,6 @@
 /* Not yet migrated to components — unlayered until their task moves them. */
 @import './partials/nprogress.css';
 @import './partials/signin.css';
-@import './partials/banner.css';
 @import './partials/homepage.css';
 @import './partials/card.css';
 @import './partials/atom-dark.css';
