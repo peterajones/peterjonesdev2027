@@ -5,8 +5,3 @@
 @import './base.css' layer(base);
 @import './layout.css' layer(layout);
 @import './code.css' layer(code);
-
-/* Not yet migrated to components — unlayered until their task moves them. */
-@import './partials/nprogress.css';
-@import './partials/signin.css';
-@import './partials/atom-dark.css';
