@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-18
 - **Branch:** `refactor/css-architecture`
-- **Status:** Approved in brainstorming; awaiting spec review
+- **Status:** Implemented on refactor/css-architecture; pending exception review
 
 ## Problem
 

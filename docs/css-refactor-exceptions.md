@@ -1,5 +1,7 @@
 # CSS Refactor — Exceptions Log
 
+**4 exceptions, all pending Peter's browser review.**
+
 Every intentional or unavoidable visual change from the pixel-identical baseline.
 
 **How to review:** run the branch build (`npm run build && node --env-file=.env ./dist/server/entry.mjs`, then open http://localhost:4321) and compare each entry against the same path on the live site, which still runs `main`. Set the theme with the navbar toggle and the width with devtools' responsive mode.

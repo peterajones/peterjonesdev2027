@@ -48,29 +48,45 @@ nvm use 22
   (`glob()` from `astro/loaders`, `z` from `astro/zod` — not `astro:content`,
   deprecated there and removed in Astro 8).
 
-## Styling gotcha: `src/styles/partials/*.scss` is all global
+## Styling architecture
 
-`globals.scss` `@use`-concatenates every partial into one shared
-stylesheet — there's no per-component scoping between them (unlike Astro's
-own `<style>` blocks in `.astro` files, which *do* auto-scope). A bare
-tag selector in any partial (e.g. `span { ... }`, `input { ... }`) applies
-to that element **everywhere on the site**, not just the widget the partial
-is named for. This has already caused two real bugs, both from leftover
-selectors that made sense in whatever more-isolated context they were
-originally written for, but not once concatenated globally:
-- an unscoped `span { display: inline-block; }` in `_rollup-counter.scss`
-  broke every project's syntax-highlighted code block (a `\n` inside an
-  `inline-block` box doesn't propagate a line break to the surrounding
-  flow, even under `white-space: pre`) — fixed by removing it, since
-  `span.count` already covers what that widget actually needs.
-- unscoped `label`/`input`/`textarea` in `_contactForm.scss` forced
-  `min-width: 300px; height: 50px` onto every input/textarea/label
-  site-wide — fixed by scoping to `.form-container`.
+Plain CSS, no Sass. `src/styles/tokens.css` holds the `--color-*` custom
+properties (light values on `:root`, dark overrides under
+`:root[data-theme="dark"]`); `src/styles/global.css` declares
+`@layer reset, base, layout, code;`, imports `tokens.css`, then the four
+layer files in that order. Everything in those layers is genuinely
+site-wide (typography, resets, the page shell, the shared code-panel
+chrome for the project widgets) — a bare tag selector there really is
+meant to apply everywhere.
 
-When adding to an existing partial or writing a new one, scope selectors
-to that widget's actual class/container rather than bare tag names, unless
-the rule is genuinely meant to be global (as in `_typography.scss`,
-`_reset.scss`, `_footer.scss`, `_layout.scss` — site-wide by design).
+Component-level styling is scoped, not global:
+- `.astro` components use their own `<style>` block, which Astro
+  auto-scopes per component. A rule that needs to reach into rendered
+  Markdown (which Astro can't scope, since it isn't part of the
+  component's own template) uses `:global(...)`.
+- React widgets each get a co-located `<Widget>.module.css` (e.g.
+  `src/components/projects/pizza-pie/PizzaPie.module.css` next to
+  `PizzaPie.tsx`), imported as `styles` and applied via
+  `className={styles.foo}`. A handful of classes shared across every
+  project widget (the code-panel toggle chrome) stay as plain global
+  strings from `code.css` rather than being duplicated per module.
+
+Because both `<style>` and CSS Modules are unlayered, they win over
+anything in the four layers regardless of specificity — that's what makes
+them safe to add to without risking a site-wide leak the way the old
+Sass partials could.
+
+Theme is `data-theme="light"|"dark"` on `<html>`, set by an inline script
+in `BaseLayout`'s `<head>` before first paint (no flash of the wrong
+theme) and flipped by `Navbar.astro`'s toggle script, both writing
+`document.documentElement.dataset.theme`.
+
+**Visual regression suite:** `npm run test:visual` screenshots every route
+in both themes and both a desktop and mobile width against committed
+baselines. Baselines and the recorded network HARs are gitignored, so a
+fresh clone (or `main` after this branch merges) has none — regenerate
+them with `VISUAL_RECORD_HAR=1 npx playwright test tests/visual
+--update-snapshots` the first time the suite reports baselines missing.
 
 ## Environment variables
 
