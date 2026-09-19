@@ -130,6 +130,90 @@ const updates = await Promise.all(
 </script>
 
 <style>
+  .nav {
+    border-bottom: 1px solid var(--color-nav-border);
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background-color: var(--color-nav-bg);
+    -webkit-box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.85);
+    top: 0;
+    z-index: 10;
+    -webkit-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
+  }
+  :global([data-theme="dark"]) nav {
+    box-shadow: 0 -12px 26px 0px rgb(255 255 255 / 85%);
+  }
+
+  .navContent {
+    position: relative;
+    width: 80vw;
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .topNavLinks a {
+    margin-left: 20px;
+  }
+  /* Toggle Theme */
+  /* These previously targeted FontAwesome's rendered classes */
+  /* (svg.svg-inline--fa.fa-sun etc.), leftover from before the icons were */
+  /* swapped for plain inline SVGs (this project doesn't use FontAwesome — */
+  /* see AGENTS.md). Never matched the actual markup (icon-sun/icon-moon/ */
+  /* icon-bell), in light mode or dark, so these icons rendered with */
+  /* whatever ambient text color they inherited instead — in dark mode */
+  /* that's black-on-dark-background, effectively invisible. fa-lock/ */
+  /* fa-unlock is dropped entirely: no lock/unlock icon exists anywhere in */
+  /* the current navbar. */
+  .icon-sun,
+  .icon-moon,
+  .icon-bell {
+    color: var(--color-accent);
+    -webkit-transition: color 0.35s ease-in;
+    transition: color 0.35s ease-in;
+    width: 18px;
+    height: 18px;
+  }
+  .icon-sun:hover,
+  .icon-sun:focus,
+  .icon-moon:hover,
+  .icon-moon:focus,
+  .icon-bell:hover,
+  .icon-bell:focus {
+    color: var(--color-icon-hover);
+    -webkit-transition: color 0.25s ease-in;
+    transition: color 0.25s ease-in;
+  }
+  :global([data-theme="dark"]) .icon-sun,
+  :global([data-theme="dark"]) .icon-moon,
+  :global([data-theme="dark"]) .icon-bell {
+    transition: color 0.25s ease-in;
+  }
+
+  button.faIcon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 4px;
+  }
+
+  button[name="toggle updates modal"] {
+    margin-left: 8px;
+  }
+
   .logo-dark {
     display: none;
   }
@@ -147,5 +231,155 @@ const updates = await Promise.all(
   }
   :global([data-theme="dark"]) .icon-moon {
     display: inline;
+  }
+
+  /* Latest Updates modal */
+  .updates-bg {
+    position: absolute;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    opacity: 0.9;
+    z-index: 9999999;
+    transition: all 0.35s ease-in-out;
+  }
+  .updates-bg.open {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.87);
+    top: 0;
+    bottom: 0;
+  }
+  .updates-container {
+    position: fixed;
+    margin: 0 auto;
+    width: 80vw;
+    top: 20vh;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: 80vh;
+    transform: scale(0);
+    transition: transform 0.35s 0.15s cubic-bezier(0.4, 0, 0.05, 1.64);
+  }
+  .updates-container.open {
+    top: 10vh;
+    width: 82vw;
+    transform: scale(1);
+    background-color: transparent;
+    color: #000000;
+    padding: 10px 10px;
+  }
+  .updates-container.closed {
+    top: 0;
+    transform: scale(0);
+  }
+  .modal-title {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    top: 0px;
+    background-color: var(--color-modal-title-bg);
+    padding: 4px;
+    width: 160px;
+    font-weight: 700;
+    color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .updates-container-inner {
+    position: relative;
+    width: auto;
+    height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text-inherit);
+    border: 4px double #000;
+    padding: 10px;
+    overflow-y: scroll;
+    transition: background-color 0.25s ease-in;
+  }
+  :global([data-theme="dark"]) .updates-container-inner {
+    border: 1px solid #f4f4f4;
+  }
+  .update-content {
+    position: relative;
+    padding: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid var(--color-update-divider);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .update-content:last-child {
+    border-bottom: none;
+  }
+  .update-date {
+    font-size: 15px;
+    font-style: italic;
+    margin-bottom: 2px;
+  }
+  .update-details {
+    margin-bottom: 4px;
+  }
+  /* <Content /> renders a real <p> for each entry's Markdown body — global */
+  /* typography.css's `p { padding: 10px 0; }` would otherwise stack with */
+  /* .update-content/.update-date's own spacing, adding extra vertical gap */
+  /* per entry versus the plain-text rendering this replaced. */
+  .update-details :global(p) {
+    margin: 0;
+    padding: 0;
+  }
+  @media only screen and (max-width: 1200px) {
+    .updates-container.open {
+      top: 10vh;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    .updates-container.open {
+      top: 12vh;
+    }
+    .updates-container-inner {
+      height: 70vh;
+    }
+  }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+    .updates-container.open {
+      top: 0 !important;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.65);
+    }
+    .modal-title {
+      top: 10px;
+    }
+    .updates-container-inner {
+      height: 90vh;
+      top: 10px;
+    }
+  }
+  /* iPhone X/11 */
+  @media only screen and (min-device-width: 375px) and (max-device-width: 896px) and (orientation: landscape) {
+    .updates-container.open {
+      top: 7px;
+    }
+    .updates-container-inner {
+      height: 82vh;
+    }
+  }
+  /* iPhone 6/7/8 */
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+    .updates-container.open {
+      top: 2vh;
+      width: 94vw;
+      max-height: 80vh;
+    }
+    .updates-container-inner {
+      height: 88vh;
+    }
+    .modal-title {
+      font-size: 14px;
+      padding: 0px;
+    }
   }
 </style>
