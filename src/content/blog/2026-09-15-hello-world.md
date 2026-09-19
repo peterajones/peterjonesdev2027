@@ -1,7 +1,7 @@
 ---
 title: "Hello, Blog"
 description: "Kicking off the new blog section, built on Astro Content Collections."
-pubDate: 2026-09-15
+pubDate: 2026-09-15 9:00 AM
 tags: ["meta"]
 ---
 

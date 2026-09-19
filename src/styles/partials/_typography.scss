@@ -50,9 +50,10 @@ a {
 	color: rebeccapurple;
 	text-decoration: none;
 	transition: all 0.15s ease-in;
+	font-weight: 500;
 }
 a:hover {
-	color: #000000;
+	color: #ffa804;
 	text-decoration: none;
 }
 .dark a {
@@ -61,7 +62,7 @@ a:hover {
 	transition: all 0.15s ease-in;
 }
 .dark a:hover {
-	color: #000000;
+	color: #e43af4;
 	text-decoration: none;
 }
 ::selection {
