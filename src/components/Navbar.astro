@@ -302,6 +302,9 @@ const updates = await Promise.all(
   }
   :global([data-theme="dark"]) .updates-container-inner {
     border: 1px solid #f4f4f4;
+    /* Modal-only: overrides --color-bg (#333333 in dark), which the page
+       background and other surfaces still use. */
+    background-color: #000000;
   }
   .update-content {
     position: relative;

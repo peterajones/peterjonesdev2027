@@ -1,6 +1,6 @@
 # CSS Refactor — Exceptions Log
 
-**6 exceptions, all approved by Peter on 2026-09-19.**
+**7 exceptions, all approved by Peter on 2026-09-19.**
 
 Every intentional or unavoidable visual change from the pixel-identical baseline.
 
@@ -83,5 +83,13 @@ Each entry is `E<n>` and records:
 - **Where:** any page, open the navbar bell ("Latest Updates") modal, either theme. The modal is closed in every screenshot, so the gate shows zero diff.
 - **What changed and why:** Peter asked for it during the browser review. Each entry's Markdown body is a `<p>`, which inherited `font-weight: 300` from base.css's element rule and read too light in the modal. `.update-details :global(p)` now also sets `font-weight: 400`. Not a refactor artefact — a deliberate style change, scoped to the modal.
 - **What to look for:** entry text in the modal is slightly heavier than before; everything else, including the dates, is unchanged.
+- **Commit:** see `git log --oneline -- src/components/Navbar.astro`
+- **Approval:** approved (Peter, 2026-09-19 — he requested it)
+
+### E7: Latest Updates modal — black panel in dark mode
+
+- **Where:** any page, open the navbar bell modal, dark theme. Closed in every screenshot, so the gate shows zero diff.
+- **What changed and why:** Peter asked for it during the browser review. The panel took its background from `--color-bg`, which is `#333333` in dark — the same grey as the page behind it. The modal's own dark rule now sets `background-color: #000000`. Set on the modal rather than on the token, so the page background and other surfaces keep `#333333`.
+- **What to look for:** in dark mode the modal panel is black against the grey page; light mode is unchanged (white). Verified in Chromium: dark modal `rgb(0, 0, 0)` with page `rgb(51, 51, 51)`; light modal `rgb(255, 255, 255)`.
 - **Commit:** see `git log --oneline -- src/components/Navbar.astro`
 - **Approval:** approved (Peter, 2026-09-19 — he requested it)
