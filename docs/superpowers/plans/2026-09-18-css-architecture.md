@@ -32,7 +32,7 @@ npx astro check
 npx playwright test tests/visual
 ```
 
-Expected: `astro check` reports 0 errors; Playwright reports `84 passed` and `2 skipped` (the opt-in CSS-size spec, once per project). If `astro check` reports errors on the untouched branch before your change, record that baseline count in the audit and gate on "no new errors" instead. On any screenshot failure:
+Expected: `astro check` reports 0 errors; Playwright reports `80 passed` and `2 skipped` (20 routes; the repo has 6 news feeds) (the opt-in CSS-size spec, once per project). If `astro check` reports errors on the untouched branch before your change, record that baseline count in the audit and gate on "no new errors" instead. On any screenshot failure:
 
 1. `npx playwright show-report` and inspect the diff.
 2. If unintended: fix the CSS and re-run. Do not update baselines.
@@ -491,6 +491,8 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ### Task 3: Sass to plain CSS, structure unchanged
 
+**Audit rulings (binding, from Task 2):** Audit §E / P3: all 6 unique font URLs load today — every one becomes a `<link>` in §E order; none is dropped. Also delete the stray `/*# sourceMappingURL=Navbar.module.css.map */` line in navbar.css.
+
 **Files:**
 - Rename: every `src/styles/partials/_<name>.scss` → `src/styles/partials/<name>.css`; `src/styles/globals.scss` → `src/styles/global.css`; `src/styles/News.module.scss` → `src/styles/News.module.css`
 - Modify: `src/layouts/BaseLayout.astro`, `src/components/NewsFeed.tsx:3`
@@ -717,6 +719,8 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ### Task 5: Semantic tokens replace dark-mode rules
 
+**Audit rulings (binding, from Task 2):** Spec over audit on escapes: a §C row marked **escape** becomes a token whenever its light value can be written exactly — `background`/`background-color` light = `transparent`, `color`/`border-color` light = `currentColor`. Only rows whose light value truly cannot be expressed stay as `[data-theme="dark"]` escapes; list them in §C. P5: `var(--black)` (undefined) maps to `--color-text`. P4-H1: NewsFeed `.title` gets `color: var(--color-news-title)`. Verify dark-only results the screenshots cover via the gate; nothing else needed here.
+
 **Files:**
 - Create: `src/styles/tokens.css`
 - Delete: `src/styles/partials/colors.css`
@@ -783,6 +787,8 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 ---
 
 ### Task 6: Layered global stylesheet
+
+**Audit rulings (binding, from Task 2):** Audit P8: do **not** append `atom-dark.css` to `code.css` — it is inert; leave it as an unlayered partial import for Task 19 to delete. P4-H3: `btnLink` and `backBtn` both go to `layout.css` in original order (btnLink first). P4-H1: add `.title:hover { color: var(--color-link-hover) }` beside NewsFeed's `.title` rule (still in `src/styles/News.module.css`). Hover is invisible to the gate: after the layer split, write a scratch Playwright script (in the task workspace, not committed) that hovers every `a` on `/`, `/news/cbc-world-news`, `/projects/weather-app`, and one CodeBlocks back link, in light and dark, and compares computed `color`/`background-color`/`border-color` against the same script run on commit `0101eb7` (checked out into a temporary `git worktree`, removed afterwards). Report both outputs; any difference is fixed or logged as an exception.
 
 **Files:**
 - Create: `src/styles/reset.css`, `src/styles/base.css`, `src/styles/layout.css`, `src/styles/code.css`
@@ -888,6 +894,8 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 9: Pages
 
+**Audit rulings (binding, from Task 2):** Audit P2: `article > p:nth-of-type(2)` from news.css belongs to `blog/[...slug].astro` as `article > :global(p:nth-of-type(2))`, not NewsFeed.
+
 **Files:** `src/pages/index.astro` (`homepage.css`), `src/pages/blog/index.astro` and `src/pages/blog/[...slug].astro` (`blog.css`), `src/pages/news/index.astro` (`news.css` per §A), `src/pages/projects/index.astro` (per §A)
 
 - [ ] **Step 1:** Procedure A for the home page (`.section-two` … `.section-five`, `.left`, `.right`). Gate. Commit `Scope home page styles to the page`.
@@ -897,12 +905,16 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 10: Checkbox Styling widget
 
+**Audit rulings (binding, from Task 2):** Audit P6: add `:where(.root) input[type='checkbox'] { margin-right: 0; height: auto; min-width: auto; }` to `CheckboxStyling.module.css` so the password generator's global checkbox rule stops mattering once Task 15 scopes it.
+
 **Files:** `src/components/projects/checkbox-styling/{CheckboxStylingWidget,Checkboxes}.tsx`; partial `checkbox-styling.css`; create `CheckboxStyling.module.css`
 
 - [ ] **Step 1:** Procedure B. IDs `#checkboxes`, `#container`, `#switches` → classes per §H.
 - [ ] **Step 2:** Gate. Commit `Move Checkbox Styling widget styles into a CSS Module`.
 
 ### Task 11: Currency Converter widget
+
+**Audit rulings (binding, from Task 2):** Audit P9: this widget renders `<CodeBlocks>` outside `.code-content`. Do the module move first (commit 1, gate zero-diff). Then, as a **separate commit**, move `<CodeBlocks>` inside `.code-content` (the missing-wrapper fix) and add an exceptions-log entry (pending) describing the open-code-panel change (`.code-content p` `#000000` vs `p` `#585858` in light mode) — the gate won't show it because the panel is closed in screenshots.
 
 **Files:** `src/components/projects/currency-converter/{CurrencyConverterWidget,CurrencyConverter}.tsx`; partial `currency-converter.css`; create `CurrencyConverter.module.css`
 
@@ -911,12 +923,16 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 12: JS Clock widget
 
+**Audit rulings (binding, from Task 2):** Audit P10: `.stage.clock` becomes `:global(.stage).clock` in the module to keep (0,2,0). `.clock` appears on two elements (§B).
+
 **Files:** `src/components/projects/js-clock/{ClockWidget,Clock}.tsx`; partial `js-clock.css`; create `Clock.module.css`
 
 - [ ] **Step 1:** Procedure B. `.stage` is shared (§B) — follow §B's destination.
 - [ ] **Step 2:** Gate. Commit `Move JS Clock widget styles into a CSS Module`.
 
 ### Task 13: Pagination widget
+
+**Audit rulings (binding, from Task 2):** Audit P9: this widget renders `<CodeBlocks>` outside `.code-content`. Do the module move first (commit 1, gate zero-diff). Then, as a **separate commit**, move `<CodeBlocks>` inside `.code-content` and add an exceptions-log entry (pending) for the open-code-panel colour change.
 
 **Files:** `src/components/projects/pagination/{PaginationWidget,Data,PageInfo,Pages,Users,Maps,icons}.tsx`; partial `pagination.css`; create `Pagination.module.css`
 
@@ -925,12 +941,16 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 14: Pizza Pie widget
 
+**Audit rulings (binding, from Task 2):** Audit P10: `.stage.pizza-pie` becomes `:global(.stage).pizzaPie` in the module to keep (0,2,0).
+
 **Files:** `src/components/projects/pizza-pie/{PizzaPieWidget,PizzaSlices}.tsx`; partial `pizza-pie.css`; create `PizzaPie.module.css`
 
 - [ ] **Step 1:** Procedure B. IDs such as `#ddl`, `#eaten` per §H.
 - [ ] **Step 2:** Gate. Commit `Move Pizza Pie widget styles into a CSS Module`.
 
 ### Task 15: Random Password Generator widget
+
+**Audit rulings (binding, from Task 2):** Audit P9: this widget renders `<CodeBlocks>` outside `.code-content`. Do the module move first (commit 1, gate zero-diff). Then, as a **separate commit**, move `<CodeBlocks>` inside `.code-content` and add an exceptions-log entry (pending). Audit P6: its `input[type='checkbox']` rule is scoped into this module; Task 10 already neutralised the checkbox widget's dependence on it.
 
 **Files:** `src/components/projects/random-password-generator/{PasswordGeneratorWidget,PasswordGenerator}.tsx`; partial `password-generator.css`; create `PasswordGenerator.module.css`
 
@@ -946,6 +966,8 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 17: Weather App widget
 
+**Audit rulings (binding, from Task 2):** Audit P7: `getElementsByClassName('weatherOutput')` (`WeatherApp.tsx:72,149,172`) must keep working — keep the literal `weatherOutput` class on that element alongside `styles.weatherOutput`. Audit P1: add the dark placeholder escape from signin.css (`.dark ::placeholder` → `:global([data-theme="dark"]) .weatherSearchInput::placeholder`, value from §C/§D) and remove that rule from signin.css. P4-H2: verify the credit link hover (`--color-weather-credit-hover`) with a computed-style check after a live search, light and dark. Audit P9: module move first (commit 1), then the `<CodeBlocks>`-inside-`.code-content` fix as a **separate commit** with a pending exceptions-log entry.
+
 **Files:** `src/components/projects/weather-app/{WeatherAppWidget,WeatherApp}.tsx`; partial `weatherApp.css`; create `WeatherApp.module.css`
 
 - [ ] **Step 1:** Procedure B. Most output is built as strings via `innerHTML` (`WeatherApp.tsx:151`, `:174`, `:223`, `:230`, `:246`) — every `class="…"` inside those template literals becomes `class="${styles.x}"`. `#forecastOutput` per §H.
@@ -954,12 +976,16 @@ Each task below names its component files and partials; these procedures define 
 
 ### Task 18: ContactForm and NewsFeed
 
+**Audit rulings (binding, from Task 2):** Audit P1: carry `padding: 0 10px; margin-bottom: 10px` from signin.css `input[name='email']` onto the email input's module rule (`.formContainer input.contactEmail`), and delete that rule from signin.css. P4-H1: confirm NewsFeed `.title` hover colour light and dark with a computed-style check.
+
 **Files:** `src/components/ContactForm.tsx` (`contactForm.css` → create `src/components/ContactForm.module.css`); `src/components/NewsFeed.tsx` (`src/styles/News.module.css` → `git mv` to `src/components/NewsFeed.module.css`, plus `news.css` rules §A assigns to it)
 
 - [ ] **Step 1:** Procedure B for ContactForm (`.form-container`, `.btn-submit` — check §B for other users). Gate. Commit `Move ContactForm styles into a CSS Module`.
 - [ ] **Step 2:** `git mv src/styles/News.module.css src/components/NewsFeed.module.css`, update the import to `./NewsFeed.module.css`, merge in §A's news rules. Gate. Commit `Colocate NewsFeed CSS Module with its component`.
 
 ### Task 19: Remove dead code
+
+**Audit rulings (binding, from Task 2):** Audit P1/P8 replace Step 1's substring criterion: `signin.css` is dead only after Tasks 17–18 moved its two live rules — confirm by grepping signin.css for `input[name='email']` and `::placeholder` (both gone) and citing audit §A runtime evidence for the rest. `nprogress.css` is dead per §A. `atom-dark.css` is inert per §A/P8 — delete it too. The gate proves all three deletions pixel-neutral.
 
 **Files:** `src/styles/partials/signin.css`, `src/styles/partials/nprogress.css`, `src/components/projects/password-generator/` (empty), plus any §A `delete` rows
 
