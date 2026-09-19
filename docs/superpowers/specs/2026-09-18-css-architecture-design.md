@@ -92,7 +92,8 @@ Global files are imported into their layer. Component styles are unlayered, so t
 - `tokens.css` defines light values on `:root` and overrides only what differs under `:root[data-theme="dark"]`. This is the only place dark mode is named.
 - Role-based names: `--color-text`, `--color-text-muted`, `--color-bg`, `--color-surface`, `--color-border`, `--color-link`, `--color-link-hover`, `--color-accent`, `--color-button`, … The final set comes from the audit's usage inventory.
 - Tokens merge only values that are already identical. No value changes.
-- Single-use colours stay in their component's CSS as literals or local custom properties.
+- Colours that vary by theme are tokens in `tokens.css`, even if only one component uses them — they need the theme hook. Theme-invariant single-use colours stay in their component's CSS as literals.
+- Rewritten dark-mode rules use `[data-theme="dark"]` (without `:root`), which has the same specificity as the old `.dark` class.
 - Where a component needs a dark-only rule no token can express, it uses `:global(:root[data-theme="dark"]) .thing`. Each occurrence is noted in the audit as a candidate token.
 - The Prism atom-dark theme in `code.css` follows the same token approach.
 
@@ -106,13 +107,13 @@ Global files are imported into their layer. Component styles are unlayered, so t
   - Routes: `/`, `/blog`, each blog post (enumerated from the content collection), `/projects`, the 8 project pages, `/news` and its feed pages, `/contact`.
 - Theme set via `localStorage.theme` in an init script before navigation, so the real head script is exercised.
 - Animations and transitions disabled; fonts awaited.
-- Non-deterministic regions masked: news feed items, clock, weather output, Google Maps, currency rates, rollup counter, and any others the audit finds.
+- Determinism by fixing inputs rather than hiding regions, so dynamic widgets' CSS is still verified: external requests (fonts, APIs, the site's `/api/` proxies) recorded once to local HAR files and replayed; clock fixed; `Math.random` seeded. Masking is the fallback for anything that stays non-deterministic (Google Maps at minimum). The suite must pass three consecutive runs before baselines are trusted.
 
 ### Workflow
 
-1. Baselines are captured on this branch against the **unchanged** CSS and committed first.
+1. Baselines are captured on this branch against the **unchanged** CSS before any CSS change. Baselines and HAR recordings are **gitignored**: the screenshots are Claude's safety net (Peter reviews in the browser), they are regenerable from `main`, and HARs contain API keys in request URLs.
 2. After every migration step, `npx playwright test` must pass with **zero diff** — no tolerance threshold.
-3. An intended difference updates its baseline in a dedicated commit that references its exceptions-log entry.
+3. An intended difference gets an exceptions-log entry committed on its own, and its local baseline is updated.
 
 ### Exceptions log
 
@@ -142,7 +143,7 @@ Each step is one commit (or a small group), and the visual suite passes before t
 3. **Global layer.** Split `reset`, `base`, `layout`, `code` into layered files behind `global.css`.
 4. **Components, one per commit.** Navbar, Footer, Banner, ProjectCard → pages (home, blog, news, contact, projects index) → 8 project widgets (add consistent root; fix missing wrapper) → ContactForm, NewsFeed (`.module.scss` → `.module.css`). Delete each partial once empty.
 5. **Dead code**, own commit: `_signin`, `_nprogress`, empty `password-generator/`, plus anything else the audit confirms unused.
-6. **Wrap-up.** Remove `sass`; record per-page CSS sizes; update the CSS-scoping notes in `CLAUDE.md` (added in `2f7b70b`); finalise the exceptions log for browser walkthrough.
+6. **Wrap-up.** Remove `sass`; record per-page CSS sizes; update the CSS-scoping notes in `README.md` (added in `2f7b70b`); finalise the exceptions log for browser walkthrough.
 
 No push, PR, or merge without explicit approval.
 
