@@ -27,13 +27,10 @@ li.item:hover {
 }
 .card-title {
 	text-decoration: none;
-	color: #000;
+	color: var(--color-text);
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 700;
 	padding: 10px;
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] .card-title {
-	color: var(--light-text);
 }

@@ -12,9 +12,6 @@
 	border: 1px solid black;
 	border-radius: 5px;
 }
-[data-theme="dark"] .sign-in-container {
-	border: 1px solid var(--white);
-}
 /* .email-form-container {
 	width: 80%;
 	margin: 0 auto;
@@ -39,13 +36,8 @@ input[name='email'] {
 	padding: 0 10px;
 	margin-bottom: 10px;
 }
-[data-theme="dark"] input[name='email'] {
-	background-color: var(--light-gray);
-	color: var(--white);
-	border: 1px solid var(--white);
-}
 [data-theme="dark"] ::placeholder {
-	color: var(--white);
+	color: #ffffff;
 }
 .divider {
 	position: relative;
@@ -74,9 +66,4 @@ input[name='email'] {
 	box-shadow: 0 0.15rem 0.3rem rgba(0, 0, 0, 0.15),
 		inset 0 0.1rem 0.2rem rgba(0, 0, 0, 0.15),
 		inset 0 -0.1rem 0.1rem rgba(0, 0, 0, 0.05);
-}
-[data-theme="dark"] .button {
-	background-color: var(--light-gray);
-	border: 1px solid var(--white);
-	color: var(--white);
 }

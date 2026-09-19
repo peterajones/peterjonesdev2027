@@ -4,10 +4,6 @@ h4.checkbox-group {
 	margin: 0;
 }
 
-[data-theme="dark"] h4.checkbox-group {
-	color: #f4f4f4;
-}
-
 [data-theme="dark"] .checkbox-input {
 	color: #f4f4f4;
 }
@@ -20,22 +16,6 @@ h4.checkbox-group {
 	text-align: center;
 	background-color: #747474;
 	border: 1px solid rgba(0, 200, 0, 0.6);
-}
-
-[data-theme="dark"] #checkboxes {
-	color: #f4f4f4;
-}
-
-[data-theme="dark"] #switches {
-	color: #f4f4f4;
-}
-
-[data-theme="dark"] #switches label span {
-	border: 2px solid #f4f4f4;
-}
-
-[data-theme="dark"] #switches label input:checked + span {
-	border: 2px solid #f4f4f4;
 }
 
 #forms-wrapper {
@@ -63,6 +43,7 @@ form#form2 {
 	justify-content: center;
 	margin-left: calc(50% - 70px);
 	text-align: left;
+	color: var(--color-text-inherit);
 }
 
 #checkboxes .checkbox-label {
@@ -90,6 +71,7 @@ form#form2 {
 	justify-content: center;
 	margin-left: calc(50% - 70px);
 	text-align: left;
+	color: var(--color-text-inherit);
 }
 
 #switches label {
@@ -109,7 +91,7 @@ form#form2 {
 	top: 8px;
 	right: 8px;
 	border-radius: 16px;
-	border: 2px solid rgba(97, 96, 96, 0.6);
+	border: 2px solid var(--color-switch-border);
 	background-color: rgba(255, 0, 0, 0.8);
 	transition: background-color 0.3s;
 }
@@ -128,7 +110,7 @@ form#form2 {
 }
 
 #switches label input:checked + span {
-	border-color: rgba(97, 96, 96, 0.6);
+	border-color: var(--color-switch-border);
 	background-color: rgb(0, 200, 0);
 }
 

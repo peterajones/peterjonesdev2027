@@ -12,10 +12,7 @@
 .post-meta {
 	font-size: 0.95rem;
 	font-style: italic;
-	color: var(--light-grey);
+	color: var(--color-text-muted);
 	margin-bottom: 20px;
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] .post-meta {
-	color: var(--light-text);
 }

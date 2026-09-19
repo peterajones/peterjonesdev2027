@@ -54,20 +54,14 @@ li.p-card {
 	padding: 4px 0;
 }
 .email-icon {
-	color: darkgreen;
+	color: var(--color-contact-icon);
 	width: 18px;
-}
-[data-theme="dark"] .email-icon {
-	color: #ffa804;
 }
 .email-address {
 	padding-left: 10px;
 }
 .email-address a {
-	color: #000;
-}
-[data-theme="dark"] .email-address a {
-	color: #f4f4f4;
+	color: var(--color-text);
 }
 .email-address a:hover {
 	color: darkgreen;
@@ -81,11 +75,8 @@ li.p-card {
 .address-icon {
 	position: relative;
 	top: 2px;
-	color: darkgreen;
+	color: var(--color-contact-icon);
 	width: 18px;
-}
-[data-theme="dark"] .address-icon {
-	color: #ffa804;
 }
 .address-details {
 	padding-left: 9px;
@@ -101,17 +92,12 @@ li.p-card {
 	padding: 4px 0;
 }
 .phone-icon {
-	color: darkgreen;
+	color: var(--color-contact-icon-alt);
 	width: 18px;
-}
-[data-theme="dark"] .phone-icon {
-	color: #faa804;
 }
 .phone-number {
 	padding-left: 12px;
-}
-[data-theme="dark"] .phone-number {
-	color: #f4f4f4;
+	color: var(--color-text-inherit);
 }
 .website {
 	display: flex;
@@ -120,29 +106,20 @@ li.p-card {
 	padding: 4px 0;
 }
 .website-icon {
-	color: darkgreen;
+	color: var(--color-contact-icon-alt);
 	width: 18px;
-}
-[data-theme="dark"] .website-icon {
-	color: #faa804;
 }
 .website-url {
 	padding-left: 10px;
 }
 .website-url a {
-	color: #000000;
-}
-[data-theme="dark"] .website-url a {
-	color: #f4f4f4;
+	color: var(--color-text);
 }
 .website-url a:hover {
-	color: darkgreen;
+	color: var(--color-contact-icon-alt);
 }
-[data-theme="dark"] .website-url a:hover {
-	color: #faa804;
-}
-[data-theme="dark"] .info span {
-	color: #fff;
+.info span {
+	color: var(--color-user-info-text);
 }
 .map {
 	position: relative;
@@ -174,7 +151,7 @@ li.page-num {
 	border: 1px solid darkgreen;
 	color: #fff;
 	border-radius: 4px;
-	background-color: #f4f4f4;
+	background-color: var(--color-page-num-bg);
 	text-transform: capitalize;
 	cursor: pointer;
 	list-style: none;
@@ -182,44 +159,25 @@ li.page-num {
 	transition: background-color 0.25s ease-in-out;
 }
 li.page-num:hover {
-	background-color: #faa804;
-}
-[data-theme="dark"] li.page-num {
-	background-color: #ffa804;
-	transition: background-color 0.25s ease-in-out;
-}
-[data-theme="dark"] li.page-num:hover {
-	background-color: #f4f4f4;
-	color: #333333;
+	background-color: var(--color-page-num-hover-bg);
+	color: var(--color-page-num-hover-text);
 }
 li.page-num span {
 	position: relative;
 	top: -5px;
-	color: darkgreen;
+	color: var(--color-page-num-text);
 	font-weight: 500;
-}
-[data-theme="dark"] li.page-num span {
-	color: #333333;
 }
 li.page-num.active {
 	background-color: darkgreen;
 }
 li.page-num.active:hover {
-	background-color: #ffa804;
-}
-[data-theme="dark"] li.page-num.active:hover {
-	background-color: #f4f4f4;
+	background-color: var(--color-page-num-active-hover-bg);
 }
 li.page-num.active span {
 	color: #f4f4f4;
 }
-[data-theme="dark"] li.page-num.active span {
-	color: #f4f4f4;
-}
 li.page-num.active:hover span {
-	color: #333333;
-}
-[data-theme="dark"] li.page-num.active:hover span {
 	color: #333333;
 }
 .page-link {

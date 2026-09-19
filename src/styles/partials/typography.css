@@ -3,65 +3,41 @@
 }
 h1 {
 	font-size: 3.1573345183rem;
-	color: var(--black);
+	color: var(--color-text);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] h1 {
-	color: var(--light-text);
 }
 h2 {
 	font-size: 2.368593037rem;
-	color: var(--dark-text);
+	color: var(--color-text);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] h2 {
-	color: var(--light-text);
 }
 h3 {
 	font-size: 1.776889rem;
-	color: var(--dark-text);
+	color: var(--color-text);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] h3 {
-	color: var(--light-text);
 }
 h4 {
 	font-size: 1.333rem;
-	color: var(--dark-text);
+	color: var(--color-text);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] h4 {
-	color: var(--light-text);
 }
 p {
 	font-size: 1.15rem;
 	font-weight: 300;
 	line-height: 1.6;
 	padding: 10px 0;
-	color: var(--light-grey);
+	color: var(--color-text-muted);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] p {
-	color: var(--light-text);
 }
 /* links */
 a {
-	color: rebeccapurple;
+	color: var(--color-accent);
 	text-decoration: none;
 	transition: all 0.15s ease-in;
 	font-weight: 500;
 }
 a:hover {
-	color: #ffa804;
-	text-decoration: none;
-}
-[data-theme="dark"] a {
-	color: #ffa804;
-	text-decoration: none;
-	transition: all 0.15s ease-in;
-}
-[data-theme="dark"] a:hover {
-	color: #e43af4;
+	color: var(--color-link-hover);
 	text-decoration: none;
 }
 ::selection {
@@ -77,9 +53,6 @@ li.users {
 	font-weight: 300;
 	line-height: 1.6;
 	padding: 10px 0;
-	color: var(--light-grey);
+	color: #585858;
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] li.users {
-	color: var(--white);
 }

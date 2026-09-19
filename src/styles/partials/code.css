@@ -40,35 +40,24 @@ a:hover.btnLink {
 }
 .truncate span {
 	padding-bottom: 20px;
-	color: #000000;
-}
-[data-theme="dark"] .truncate span {
-	color: #f4f4f4;
+	color: var(--color-text);
 }
 .github-link {
 	display: flex;
 	align-items: center;
 	padding: 10px 0 10px 0;
 }
-[data-theme="dark"] .github-link span {
-	color: #f4f4f4;
+.github-link span {
+	color: var(--color-text-inherit);
 }
 .github-logo {
-	background-image: url(/images/code/github-logo.png);
+	background-image: var(--image-github-logo);
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 26px;
 	height: 26px;
 	margin: 0 10px;
 	transition: background-image 0.25s ease-in;
-}
-[data-theme="dark"] .github-logo {
-	background-image: url(/images/code/github-logo-dark.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	width: 26px;
-	height: 26px;
-	margin: 0 10px;
 }
 .snippets-intro {
 	padding: 0;
@@ -98,24 +87,15 @@ code.inline {
 	transition: background-color 0.25s ease-in;
 	overflow-x: hidden;
 }
-[data-theme="dark"] .code-container {
-	background-color: #333333;
-}
 .code-content {
 	width: 50vw;
 	margin: 0 auto;
 }
 .code-content p {
-	color: #000000;
-}
-[data-theme="dark"] .code-content p {
-	color: #f4f4f4;
+	color: var(--color-text);
 }
 .code-description-open li {
-  color: #000;
-}
-[data-theme="dark"] .code-description-open li {
-  color: #fff;
+  color: var(--color-list-text);
 }
 .code-top h1 {
 	top: 10px;
@@ -146,7 +126,8 @@ a:hover.backBtn {
 	width: 50vw;
 	margin: 0 auto;
 	text-align: center;
-	border: 1px solid #464646;
+	background-color: var(--color-stage-bg);
+	border: 1px solid var(--color-stage-border);
 }
 section.code {
 	/* width: 50vw; */
@@ -160,7 +141,8 @@ section.code pre {
 .code-header {
 	position: relative;
 	text-align: right;
-	background-color: #fff;
+	background-color: var(--color-code-header-bg);
+	color: var(--color-text-inherit);
 	border-top: 1px solid #000000;
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;
@@ -170,10 +152,6 @@ section.code pre {
 	padding: 2px 6px;
 	font-style: italic;
 	transition: background-color 0.25s ease-in;
-}
-[data-theme="dark"] .code-header {
-	background-color: #464646;
-	color: #f4f4f4;
 }
 .cards {
 	position: relative;
@@ -191,15 +169,9 @@ section.code pre {
 	margin-bottom: 20px;
 	transition: all 0.25s ease-in;
 }
-[data-theme="dark"] .cards a {
-	border: 1px solid #ffba32;
-}
 .cards a:hover {
 	transform: scale(1.02);
 	box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.185);
-}
-[data-theme="dark"] .cards a:hover {
-	box-shadow: 0px 0px 6px 1px #ffba32;
 }
 .card {
 	position: relative;
@@ -208,22 +180,17 @@ section.code pre {
 	width: 290px;
 	margin: 10px;
 	min-height: 430px;
+	background-color: var(--color-card-bg);
 	transition: border 0.25s ease-in;
-}
-[data-theme="dark"] .card {
-	background-color: #4a4a4a;
 }
 a .card-title {
 	text-decoration: none;
-	color: #000000;
+	color: var(--color-card-title);
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 700;
 	padding: 20px 0 10px 0;
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] a .card-title {
-	color: #fafafa;
 }
 a .card-intro {
 	text-align: center;
@@ -233,58 +200,31 @@ a .card-image img {
 	position: relative;
 }
 .stage h1 {
-	color: #000000;
+	color: var(--color-text);
 	transition: color 0.25s ease-in;
-}
-[data-theme="dark"] .stage h1 {
-	color: #f4f4f4;
-}
-[data-theme="dark"] .stage {
-	background-color: #464646;
-	border: 1px solid #000000;
 }
 .btnSpacer {
 	margin-bottom: 30px;
 }
 .btn-widget-description > button {
-	border: 1px solid #464646;
+	border: 1px solid var(--color-widget-btn-border);
 	margin-left: 10px;;
 	border-radius: 6px;
 	font-size: 1rem;
-	background-color: #464646;
+	background-color: var(--color-widget-btn-bg);
 	color: #f4f4f4;
 	padding: 4px 10px;
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 }
-[data-theme="dark"] .btn-widget-description > button {
-	border: 1px solid #f4f4f4;
-	background-color: transparent;
-	color: #f4f4f4;
-}
 .btn-widget-description > button:hover {
-	border: 1px solid rebeccapurple;
+	border: 1px solid var(--color-accent);
 	border-radius: 6px;
 	font-size: 1rem;
-	background-color: transparent;
-	color: rebeccapurple;
+	background-color: var(--color-widget-btn-hover-bg);
+	color: var(--color-accent);
 	padding: 4px 10px;
 	cursor: pointer;
-}
-[data-theme="dark"] .btn-widget-description > button:hover {
-	border: 1px solid #ffa804;
-	background-color: #464646;
-	color: #ffa804;
-}
-[data-theme="dark"] .btn-widget-code > button {
-	border: 1px solid #f4f4f4;
-	background-color: transparent;
-	color: #f4f4f4;
-}
-[data-theme="dark"] .btn-widget-code > button:hover {
-	border: 1px solid #ffa804;
-	background-color: #464646;
-	color: #ffa804;
 }
 span.btn-widget-code {
 	position: relative;
@@ -292,28 +232,23 @@ span.btn-widget-code {
 	margin-bottom: 20px;
 }
 .btn-widget-code > button {
-	border: 1px solid #464646;
+	border: 1px solid var(--color-widget-btn-border);
 	border-radius: 6px;
 	font-size: 1rem;
-	background-color: #464646;
+	background-color: var(--color-widget-btn-bg);
 	color: #f4f4f4;
 	padding: 4px 10px;
 	cursor: pointer;
 	transition: all 0.35s ease-in-out;
 }
 .btn-widget-code > button:hover {
-	border: 1px solid rebeccapurple;
+	border: 1px solid var(--color-accent);
 	border-radius: 6px;
 	font-size: 1rem;
-	background-color: transparent;
-	color: rebeccapurple;
+	background-color: var(--color-widget-btn-hover-bg);
+	color: var(--color-accent);
 	padding: 4px 10px;
 	cursor: pointer;
-}
-[data-theme="dark"] .btn-widget-code > button {
-	border: 1px solid #f4f4f4;
-	background-color: transparent;
-	color: #f4f4f4;
 }
 .code-description-closed {
 	max-height: 0;

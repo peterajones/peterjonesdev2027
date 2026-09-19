@@ -1,5 +1,5 @@
 .title {
-	color: #047fa5;
+	color: var(--color-news-title);
 	text-decoration: none;
 	line-height: inherit;
 	font-size: 1.5rem;

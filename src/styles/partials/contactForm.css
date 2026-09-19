@@ -28,8 +28,8 @@
   border: 1px solid #ccc;
 }
 [data-theme="dark"] .form-container input.contact-email {
-  background-color: var(--white);
-  color: var(--dark-gray);
+  background-color: #ffffff;
+  color: #333333;
 }
 .form-container textarea {
   display: block;

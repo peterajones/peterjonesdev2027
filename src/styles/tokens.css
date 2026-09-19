@@ -1,0 +1,123 @@
+/* Semantic design tokens. The only place dark mode is defined.
+   Light values on :root, dark overrides under :root[data-theme="dark"].
+   Values are copied verbatim from the rules they replaced (see
+   docs/css-refactor-audit.md §D); tokens merge only values that were
+   already identical. */
+:root {
+	/* Text and page */
+	--color-text: #000000;
+	--color-text-muted: #585858;
+	/* currentColor = inherit in light mode; a fixed colour in dark mode. */
+	--color-text-inherit: currentColor;
+	--color-bg: #ffffff;
+
+	/* Links and accents */
+	--color-accent: rebeccapurple;
+	--color-link-hover: #ffa804;
+	--color-news-title: #047fa5;
+	--color-icon-hover: #ff0000;
+
+	/* Navbar */
+	--color-nav-bg: rgba(255, 255, 255, 0.95);
+	--color-nav-border: rebeccapurple;
+
+	/* Cards and code pages */
+	--color-card-title: #000000;
+	--color-card-bg: transparent;
+	--color-list-text: #000;
+	--color-code-header-bg: #fff;
+	--color-stage-bg: transparent;
+	--color-stage-border: #464646;
+	--color-widget-btn-bg: #464646;
+	--color-widget-btn-border: #464646;
+	--color-widget-btn-hover-bg: transparent;
+	--image-github-logo: url(/images/code/github-logo.png);
+
+	/* Latest updates modal */
+	--color-modal-title-bg: rgb(144, 75, 213);
+	--color-update-divider: rgba(63, 63, 63, 0.4);
+
+	/* Pagination project */
+	--color-contact-icon: darkgreen;
+	--color-contact-icon-alt: darkgreen;
+	--color-user-info-text: currentColor;
+	--color-page-num-bg: #f4f4f4;
+	--color-page-num-hover-bg: #faa804;
+	--color-page-num-hover-text: #fff;
+	--color-page-num-text: darkgreen;
+	--color-page-num-active-hover-bg: #ffa804;
+
+	/* Widgets */
+	--color-surface: #f6f6f6;
+	--color-control-border: #333333;
+	--color-button-bg: #333333;
+	--color-button-text: #f4f4f4;
+	--color-slice: silver;
+	--color-switch-border: rgba(97, 96, 96, 0.6);
+
+	/* Weather app */
+	--color-weather-bg: rgba(19, 146, 180, 0.25);
+	--color-weather-text: rgba(56, 56, 57, 0.85);
+	--color-weather-conditions: #484848;
+	--color-weather-credit: #484848;
+	--color-weather-credit-hover: #ffa804;
+}
+
+:root[data-theme="dark"] {
+	/* Text and page */
+	--color-text: #f4f4f4;
+	--color-text-muted: #f4f4f4;
+	--color-text-inherit: #f4f4f4;
+	--color-bg: #333333;
+
+	/* Links and accents */
+	--color-accent: #ffa804;
+	--color-link-hover: #e43af4;
+	--color-news-title: #ffa804;
+	--color-icon-hover: #ff7272;
+
+	/* Navbar */
+	--color-nav-bg: rgba(51, 51, 51, 0.95);
+	--color-nav-border: rgba(255, 235, 59, 0.35);
+
+	/* Cards and code pages */
+	--color-card-title: #fafafa;
+	--color-card-bg: #4a4a4a;
+	--color-list-text: #fff;
+	--color-code-header-bg: #464646;
+	--color-stage-bg: #464646;
+	--color-stage-border: #000000;
+	--color-widget-btn-bg: transparent;
+	--color-widget-btn-border: #f4f4f4;
+	--color-widget-btn-hover-bg: #464646;
+	--image-github-logo: url(/images/code/github-logo-dark.png);
+
+	/* Latest updates modal */
+	--color-modal-title-bg: rgba(201, 44, 44, 1);
+	--color-update-divider: rgba(244, 244, 244, 0.4);
+
+	/* Pagination project */
+	--color-contact-icon: #ffa804;
+	--color-contact-icon-alt: #faa804;
+	--color-user-info-text: #fff;
+	--color-page-num-bg: #ffa804;
+	--color-page-num-hover-bg: #f4f4f4;
+	--color-page-num-hover-text: #333333;
+	--color-page-num-text: #333333;
+	--color-page-num-active-hover-bg: #f4f4f4;
+
+	/* Widgets */
+	--color-surface: #464646;
+	--color-control-border: #aaaaaa;
+	--color-button-bg: #f4f4f4;
+	--color-button-text: #333333;
+	--color-slice: dimgrey;
+	--color-switch-border: #f4f4f4;
+
+	/* Weather app */
+	--color-weather-bg: rgba(0, 201, 255, 0.75);
+	--color-weather-text: #f4f4f4;
+	--color-weather-conditions: #f4f4f4;
+	--color-weather-credit: #282828;
+	--color-weather-credit-hover: #4c0295;
+}

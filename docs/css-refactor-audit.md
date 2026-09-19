@@ -132,7 +132,7 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _latest-updates | `.dark button[name='toggle updates']` (+ `:hover`) | color | `#fff` / `#ffa804` | `#ffa804` / `#ff7272` | dead (button is named `toggle updates modal`) |
 | _latest-updates | `.dark .modal-title` | background-color | `rgb(144, 75, 213)` (`.modal-title`) | `rgba(201, 44, 44, 1)` | token `--color-modal-title-bg` |
 | _latest-updates | `.dark .updates-container-inner` | background-color | `#fff` (`.updates-container-inner`) | `#333333` | token `--color-bg` |
-| _latest-updates | `.dark .updates-container-inner` | color | inherited `#000000` (`.updates-container.open`) | `#f4f4f4` | escape (light inherits) |
+| _latest-updates | `.dark .updates-container-inner` | color | inherited `#000000` (`.updates-container.open`) | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted, light `currentColor`) |
 | _latest-updates | `.dark .updates-container-inner` | border | `4px double #000` | `1px solid #f4f4f4` | escape (width and style change too) |
 | _latest-updates | `.dark .update-content` | border-bottom | `1px solid rgba(63, 63, 63, 0.4)` | `1px solid rgba(244, 244, 244, 0.4)` | token `--color-update-divider` |
 | _latest-updates | `.dark .update-content:last-child` | border-bottom | `none` | `none` | redundant |
@@ -140,19 +140,19 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _news | `.dark div.item-title` | color | `var(--dark-text)` | `var(--light-text)` | token `--color-text` |
 | _items | `.dark .card-title` | color | `#000` (`.card-title`) | `var(--light-text)` | token `--color-text` (always out-specified by `a .card-title`, kept for fidelity) |
 | _code | `.dark .truncate span` | color | `#000000` | `#f4f4f4` | token `--color-text` |
-| _code | `.dark .github-link span` | color | inherited from `a` (`rebeccapurple`, `#ffa804` on hover) | `#f4f4f4` | escape (a token would break light-mode hover inheritance) |
-| _code | `.dark .github-logo` | background-image | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | escape (not a colour; candidate `--image-github-logo`) |
+| _code | `.dark .github-link span` | color | inherited from `a` (`rebeccapurple`, `#ffa804` on hover) | `#f4f4f4` | token `--color-text-inherit` on a new light rule `.github-link span` (Task 5: light `currentColor` keeps the hover inheritance) |
+| _code | `.dark .github-logo` | background-image | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | token `--image-github-logo` (Task 5: escape converted; not a colour, so not `--color-*`) |
 | _code | `.dark .github-logo` | background-size, background-repeat, width, height, margin | same | same | redundant |
 | _code | `.dark .code-container` | background-color | `#f6f6f6` | `#333333` | dead (no `.code-container` in markup) |
 | _code | `.dark .code-content p` | color | `#000000` | `#f4f4f4` | token `--color-text` |
 | _code | `.dark .code-description-open li` | color | `#000` | `#fff` | token `--color-list-text` |
 | _code | `.dark .code-header` | background-color | `#fff` | `#464646` | token `--color-code-header-bg` |
-| _code | `.dark .code-header` | color | inherited (`#000`) | `#f4f4f4` | escape (light inherits) |
+| _code | `.dark .code-header` | color | inherited (`#000`) | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _code | `.dark .cards a`, `.dark .cards a:hover` | border, box-shadow | `rebeccapurple` / `rgba(0,0,0,.185)` shadow | `#ffba32` | dead (no `.cards` in markup) |
-| _code | `.dark .card` | background-color | initial (transparent) | `#4a4a4a` | escape (light is initial) |
+| _code | `.dark .card` | background-color | initial (transparent) | `#4a4a4a` | token `--color-card-bg` (Task 5: escape converted, light `transparent`) |
 | _code | `.dark a .card-title` | color | `#000000` (`a .card-title`) | `#fafafa` | token `--color-card-title` |
 | _code | `.dark .stage h1` | color | `#000000` (`.stage h1`) | `#f4f4f4` | token `--color-text` |
-| _code | `.dark .stage` | background-color | initial (transparent) | `#464646` | escape (light is initial) |
+| _code | `.dark .stage` | background-color | initial (transparent) | `#464646` | token `--color-stage-bg` (Task 5: escape converted, light `transparent`) |
 | _code | `.dark .stage` | border | `1px solid #464646` | `1px solid #000000` | token `--color-stage-border` |
 | _code | `.dark .btn-widget-description > button`, `.dark .btn-widget-code > button` (2 copies) | border | `1px solid #464646` | `1px solid #f4f4f4` | token `--color-widget-btn-border` |
 | _code | (same) | background-color | `#464646` | `transparent` | token `--color-widget-btn-bg` |
@@ -169,8 +169,8 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _pagination | `.dark .email-icon`, `.dark .address-icon` | color | `darkgreen` | `#ffa804` | token `--color-contact-icon` |
 | _pagination | `.dark .phone-icon`, `.dark .website-icon`, `.dark .website-url a:hover` | color | `darkgreen` | `#faa804` (sic, not `#ffa804`) | token `--color-contact-icon-alt` |
 | _pagination | `.dark .email-address a`, `.dark .website-url a` | color | `#000` / `#000000` | `#f4f4f4` | token `--color-text` |
-| _pagination | `.dark .phone-number` | color | inherited | `#f4f4f4` | escape (light inherits) |
-| _pagination | `.dark .info span` | color | inherited | `#fff` | escape (light inherits) |
+| _pagination | `.dark .phone-number` | color | inherited | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
+| _pagination | `.dark .info span` | color | inherited | `#fff` | token `--color-user-info-text` on a new light rule `.info span` (Task 5: escape converted, light `currentColor`) |
 | _pagination | `.dark li.page-num` | background-color | `#f4f4f4` | `#ffa804` | token `--color-page-num-bg` |
 | _pagination | `.dark li.page-num` | transition | same | same | redundant |
 | _pagination | `.dark li.page-num:hover` | background-color | `#faa804` | `#f4f4f4` | token `--color-page-num-hover-bg` |
@@ -179,14 +179,14 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _pagination | `.dark li.page-num.active:hover` | background-color | `#ffa804` | `#f4f4f4` | token `--color-page-num-active-hover-bg` |
 | _pagination | `.dark li.page-num.active span`, `.dark li.page-num.active:hover span` | color | `#f4f4f4` / `#333333` | same | redundant (the light `.active` rules already out-specify `li.page-num span`) |
 | _password-generator | `.dark .PasswordGeneratorContainer` | background-color | `#f6f6f6` | `#464646` | token `--color-surface` |
-| _password-generator | `.dark ol.pwg` | color | inherited | `#f4f4f4` | escape (verified: changes the collapsed list items' colour) |
+| _password-generator | `.dark ol.pwg` | color | inherited | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _password-generator | `.dark h4` | color | — | `#f4f4f4` | redundant (duplicate of `_typography`'s `.dark h4`, same value; verified no change when either copy is removed) |
 | _pizza-pie | `.dark .code-top h1` | color | — | `#f4f4f4` | dead (no `.code-top`) |
 | _pizza-pie | `.dark #ddl` | border | `1px solid #333333` | `1px solid #aaaaaa` | token `--color-control-border` |
 | _pizza-pie | `.dark #ddl` | color | UA default | `#f4f4f4` | escape (light is UA default) |
 | _pizza-pie | `.dark #ddl` | background | `#ffffff` | `#333333` | token `--color-bg` |
 | _pizza-pie | `.dark .slice_1_w` … `.dark .slice_8_w` (8) | background-color | `silver` | `dimgrey` | token `--color-slice` |
-| _pizza-pie | `.dark #eaten` | color | inherited | `#f4f4f4` | escape (light inherits) |
+| _pizza-pie | `.dark #eaten` | color | inherited | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _pizza-pie | `.dark button.btn-start-over` | border | `1px solid #ccc` then `border-color: #333333` | `1px solid #aaaaaa` | token `--color-control-border` (on `border-color`) |
 | _pizza-pie | `.dark button.btn-start-over` | color, background | UA default | `#f4f4f4` / `#333333` | escape (light is UA default) |
 | _pizza-pie | `.dark button.btn-start-over` | transition | same | same | redundant |
@@ -194,20 +194,20 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _pizza-pie | `.dark button.btn-start-over:hover` | color | `#f4f4f4` | `#333333` | token `--color-button-text` |
 | _pizza-pie | `.dark button.btn-start-over:hover` | background | `#333333` (`background-color`) | `#f4f4f4` | token `--color-button-bg` |
 | _pizza-pie | `.dark button.btn-start-over:hover` | cursor | `pointer` | `pointer` | redundant |
-| _rollup-counter | `.dark .count` | color | inherited | `#f4f4f4` | escape (light inherits) |
+| _rollup-counter | `.dark .count` | color | inherited | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _rollup-counter | `.dark #increment`, `.dark #reset` | background-color | `#333333` | `#f4f4f4` | token `--color-button-bg` |
 | _rollup-counter | `.dark #increment`, `.dark #reset` | color | `#f4f4f4` | `#333333` | token `--color-button-text` |
 | _rollup-counter | `.dark #increment`, `.dark #reset` | border-radius | `4px` | `4px` | redundant |
 | _checkbox-styling | `.dark h4.checkbox-group` | color | `#000000` via `h4` | `#f4f4f4` | redundant (the `h4` token already gives this) |
 | _checkbox-styling | `.dark .checkbox-input` | color | UA default | `#f4f4f4` | escape (verified computed change; native checkboxes probably don't paint it) |
-| _checkbox-styling | `.dark #checkboxes`, `.dark #switches` | color | inherited (`#000`) | `#f4f4f4` | escape (light inherits; candidate `--color-text`) |
+| _checkbox-styling | `.dark #checkboxes`, `.dark #switches` | color | inherited (`#000`) | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _checkbox-styling | `.dark #switches label span`, `.dark #switches label input:checked + span` | border / border-color | `2px solid rgba(97, 96, 96, 0.6)` / `border-color: rgba(97, 96, 96, 0.6)` | `2px solid #f4f4f4` | token `--color-switch-border` |
 | _weatherApp | `.dark .weatherOl` | color | `#000000` | `rgb(244, 244, 244)` | token `--color-text` |
 | _weatherApp | `.dark .weatherContainer` | background-color | `rgba(19, 146, 180, 0.25)` | `rgba(0, 201, 255, 0.75)` | token `--color-weather-bg` |
 | _weatherApp | `.dark .weatherContainer`, `.dark .dateTime`, `.dark .weatherOutput h2` | color | `rgba(56, 56, 57, 0.85)` (`.weatherOutput > h2` for the h2) | `#f4f4f4` | token `--color-weather-text` |
 | _weatherApp | `.dark .weatherContainer h1` | color (`!important`) | `rgba(56, 56, 57, 0.85) !important` | `#f4f4f4 !important` | token `--color-weather-text` (keep `!important` on the light rule) |
 | _weatherApp | `.dark span.weatherConditions` | color | `#484848` | `#f4f4f4` | token `--color-weather-conditions` |
-| _weatherApp | `.dark .currentWeatherWrapper` | color | inherited `rgba(56, 56, 57, 0.85)` | `#f4f4f4` | escape (light inherits; candidate `--color-weather-text`) |
+| _weatherApp | `.dark .currentWeatherWrapper` | color | inherited `rgba(56, 56, 57, 0.85)` | `#f4f4f4` | token `--color-text-inherit` (Task 5: escape converted) |
 | _weatherApp | `.dark #forecastOutput h4` | color | `#000000` via `h4` | `#f4f4f4` | redundant (the `h4` token already gives this) |
 | _weatherApp | `.dark .widgetLeftMenu__links span` | color | `#484848` | `#282828` | token `--color-weather-credit` |
 | _weatherApp | `.dark .widgetLeftMenu__links span` | font-weight, opacity, font-size | same | same | redundant |
@@ -215,11 +215,27 @@ Every `.dark` declaration in the partials, plus `Navbar.astro`'s four `:global(b
 | _weatherApp | `.dark .widgetLeftMenu__links a:hover` | color | `#ffa804` (`a:hover` out-specifies `.widgetLeftMenu__link`) | `#4c0295` | token `--color-weather-credit-hover` — needs a new light rule `.widgetLeftMenu__links a:hover` (**hazard H2**) |
 | _weatherApp | `.dark p.error-msg` | color | — | `#860202` | dead (the class is `errorMsg`) |
 
-Counts: 106 rows. **57 token, 23 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal. The 23 escapes are the Task 5 end-state `[data-theme="dark"]` list; `grep -rn 'data-theme' src/styles src/components` should show only these plus `tokens.css`.
+Counts: 106 rows. **57 token, 23 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal (Task 2).
+
+**Task 5 update.** Under the binding audit ruling (an escape becomes a token wherever its light value can be written exactly: `transparent` for backgrounds, `currentColor` for inherited colours), 13 of the 23 escapes became tokens: 10 inherited-colour rows (`--color-text-inherit`, `--color-user-info-text`), 2 transparent backgrounds (`--color-card-bg`, `--color-stage-bg`) and the GitHub logo image (`--image-github-logo`). Final tally: **70 token, 10 escape**, 15 redundant, 9 dead, 1 no-effect, 1 literal.
+
+The 10 remaining escapes are the end-state `[data-theme="dark"]` list. `grep -rn 'data-theme' src/styles src/components` shows only these plus `tokens.css`:
+
+| File | Selector | Property | Why it can't be a token |
+|---|---|---|---|
+| `layout.css` | `[data-theme="dark"] nav` | box-shadow | The offsets and blur differ between themes as well as the colour, so it isn't a colour swap |
+| `navbar.css` | `[data-theme="dark"] .icon-sun`, `.icon-moon`, `.icon-bell` | transition | Timing differs by theme (`0.35s` light, `0.25s` dark). Not a colour |
+| `Navbar.astro` | `:global([data-theme="dark"]) .logo-light`, `.logo-dark`, `.icon-sun`, `.icon-moon` | display | Display toggles, not colours |
+| `latest-updates.css` | `[data-theme="dark"] .updates-container-inner` | border | Width and style change too (`4px double` becomes `1px solid`) |
+| `contactForm.css` | `[data-theme="dark"] .form-container input.contact-email` | background-color, color | The light values are UA defaults (`Field`/`FieldText`), which neither `transparent` nor `currentColor` reproduces. The values are now the literals `#ffffff` and `#333333` |
+| `signin.css` | `[data-theme="dark"] ::placeholder` | color | The light value is the UA placeholder colour. Literal `#ffffff`. Task 17 moves it to `WeatherApp.module.css` |
+| `pizza-pie.css` | `[data-theme="dark"] #ddl` | color | The light value is the UA `<select>` colour |
+| `pizza-pie.css` | `[data-theme="dark"] button.btn-start-over` | color, background | The light values are UA button defaults. The rule now sits before `button.btn-start-over:hover`, because both have the same specificity and the hover rule has to win |
+| `checkbox-styling.css` | `[data-theme="dark"] .checkbox-input` | color | The light value is the UA `<input>` colour |
 
 ## D. Token inventory
 
-Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Each token merges only colour pairs that are already identical: `#000` = `#000000`, `#fff` = `#ffffff` and `rgb(244, 244, 244)` = `#f4f4f4` render the same, and the source spellings are listed under "Replaces". All 36 tokens differ between themes.
+Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Each token merges only colour pairs that are already identical: `#000` = `#000000`, `#fff` = `#ffffff` and `rgb(244, 244, 244)` = `#f4f4f4` render the same, and the source spellings are listed under "Replaces". All 36 tokens differ between themes. Task 5 added 5 more when it converted escapes. They are listed after the original 36.
 
 | Token | Light | Dark | Replaces |
 |---|---|---|---|
@@ -259,6 +275,11 @@ Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Eac
 | `--color-weather-conditions` | `#484848` | `#f4f4f4` | `span.weatherConditions` |
 | `--color-weather-credit` | `#484848` | `#282828` | `.widgetLeftMenu__links span`, `.widgetLeftMenu__link` |
 | `--color-weather-credit-hover` | `#ffa804` | `#4c0295` | new light rule `.widgetLeftMenu__links a:hover` (today the light value comes from `a:hover`; H2) |
+| `--color-text-inherit` *(Task 5)* | `currentColor` | `#f4f4f4` | escapes whose light colour is inherited: `.updates-container-inner`, `.github-link span` (new light rule), `.code-header`, `.phone-number`, `ol.pwg`, `#eaten`, `.count`, `#checkboxes`, `#switches`, `.currentWeatherWrapper` |
+| `--color-user-info-text` *(Task 5)* | `currentColor` | `#fff` | `.info span` (new light rule; the dark value differs from `--color-text-inherit`) |
+| `--color-card-bg` *(Task 5)* | `transparent` | `#4a4a4a` | `.card` background |
+| `--color-stage-bg` *(Task 5)* | `transparent` | `#464646` | `.stage` background |
+| `--image-github-logo` *(Task 5)* | `url(/images/code/github-logo.png)` | `url(/images/code/github-logo-dark.png)` | `.github-logo` background-image |
 
 ### Existing `_colors.scss` custom properties
 
@@ -266,11 +287,11 @@ Light values go on `:root`; dark values go under `:root[data-theme="dark"]`. Eac
 |---|---|---|
 | `--white` | `#ffffff` | `--color-bg` (light) in `body`/`.content`; the `.dark .form-container input.contact-email` escape becomes the literal `#ffffff`; `_signin` uses are deleted |
 | `--light-gray` | `#585858` | only `_signin` (deleted) → drop |
-| `--light-grey` | `#585858` | `--color-text-muted` (light) |
+| `--light-grey` | `#585858` | `--color-text-muted` (light). The dead `li.users` light rule got the literal `#585858` in Task 5 |
 | `--dark-gray` | `#333333` | contactForm dark escape → literal `#333333` |
 | `--dark-grey` | `#333333` | `--color-bg` (dark) |
 | `--red` | `#ff0000` | `--color-icon-hover` (light) |
-| `--purple` | `rebeccapurple` | only dead uses (fa-svg, nprogress) → drop |
+| `--purple` | `rebeccapurple` | only dead uses (fa-svg, nprogress) → drop. Task 5 wrote the literal `rebeccapurple` into those still-present dead light rules |
 | `--orange` | `#ffa804` | only dead uses (nprogress) → drop |
 | `--btn-blue` | `#4979ff` | unused → drop |
 | `--light-text` | `#f4f4f4` | dark value of `--color-text` / `--color-text-muted` |

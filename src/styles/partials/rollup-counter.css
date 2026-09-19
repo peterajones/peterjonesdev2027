@@ -7,9 +7,7 @@ span.count {
 }
 .count {
 	font-size: 60px;
-}
-[data-theme="dark"] .count {
-	color: #f4f4f4;
+	color: var(--color-text-inherit);
 }
 .count-enter {
 	transform: translateY(100%);
@@ -39,14 +37,8 @@ span.count {
 	margin: 5px;
 	font-size: 1rem;
 	border-radius: 4px;
-	background-color: #333333;
-	color: #f4f4f4;
-}
-[data-theme="dark"] #increment,
-[data-theme="dark"] #reset {
-	background-color: #f4f4f4;
-	color: #333333;
-	border-radius: 4px;
+	background-color: var(--color-button-bg);
+	color: var(--color-button-text);
 }
 .comment {
 	position: relative;
