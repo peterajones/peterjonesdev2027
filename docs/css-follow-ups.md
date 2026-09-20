@@ -92,6 +92,15 @@ final whole-branch review.
   the last links sat 114px past the viewport (170px at 320px), unreachable
   because the page doesn't scroll sideways. Now a flex row with gaps, a
   `min(80vw, 1200px)` container, and breakpoints at 600px and 400px. Measured
-  clean at 1280/900/600/390/320. Not yet done there: a current-page indicator
-  (`aria-current`), focus styles on the four text links (the icon buttons have
-  them, the links don't), and the fixed 60px header height on phones.
+  clean at 1280/900/600/390/320.
+
+- **Current-page indicator and focus styles** (2026-09-20). `aria-current="page"`
+  derived from `Astro.url.pathname`, styled bold in light and with a glow in
+  dark (colour only below 400px, where bold costs up to 20px on the longest
+  label). Site-wide `:focus-visible` ring in `base.css`. Still open in the
+  header: the fixed 60px height on phones.
+
+Found while measuring, not yet fixed: **`/projects/random-password-generator`
+overflows its viewport** — 29px at 390px, 67px at 320px — from the widget's
+clipboard button and the `span.token` elements in its code sample, not from the
+nav. One of the mobile issues in item 15.
