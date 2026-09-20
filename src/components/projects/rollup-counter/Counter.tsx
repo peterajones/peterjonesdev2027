@@ -62,7 +62,6 @@ export default function Counter() {
 
   return (
     <>
-      <h1>Rollup Counter</h1>
       <span className={styles.count}>
         {slides.map((s) => (
           <span key={s.key} className={classNameFor(s)}>
