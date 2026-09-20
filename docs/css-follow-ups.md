@@ -69,8 +69,29 @@ final whole-branch review.
     comment warning never to use `@layer` in a component; a lint rule would make
     that mechanical.
 
+14. **Consolidate the breakpoints.** 15 media queries across 13 files with no
+    shared scale: 1200, 1024, 1000, 724, 667, 600, 400 all appear. Worse, some
+    use `min-device-width`/`max-device-width` with `orientation` (the old
+    iPhone-targeting style), which keys off the physical device rather than the
+    window — so they don't fire when a desktop browser is resized, and almost
+    certainly never fire in the Playwright suite, which sets a viewport. Those
+    blocks are effectively untested. Pick a scale, convert everything to
+    `max-width`, and re-verify.
+
 ## Known, out of scope
 
-13. **Mobile layout issues.** Peter flagged these before the refactor started and
-    they were deliberately excluded, so the 390px baselines capture them as they
-    are. Fixing them means updating those baselines in the same commit.
+15. **Remaining mobile layout issues.** Peter flagged these before the refactor
+    started and they were deliberately excluded, so the 390px baselines captured
+    them as they were. The header was fixed afterwards (see below); the rest are
+    still open, and fixing each means updating its baselines in the same commit.
+
+## Done since
+
+- **Responsive header** (2026-09-19). The nav had no width rules and no media
+  queries of its own: at 390px the logo was clipped 11px off the left edge and
+  the last links sat 114px past the viewport (170px at 320px), unreachable
+  because the page doesn't scroll sideways. Now a flex row with gaps, a
+  `min(80vw, 1200px)` container, and breakpoints at 600px and 400px. Measured
+  clean at 1280/900/600/390/320. Not yet done there: a current-page indicator
+  (`aria-current`), focus styles on the four text links (the icon buttons have
+  them, the links don't), and the fixed 60px header height on phones.

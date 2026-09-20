@@ -76,7 +76,15 @@ Google Maps only renders on **port 4321** (the API key is referrer-restricted)
 and is blocked entirely in the suite.
 
 Deliberate visual changes get an entry in `docs/css-refactor-exceptions.md`
-rather than a quietly updated baseline.
+rather than a quietly updated baseline. When a change is *meant* to alter the
+layout (responsive work, say), update the baselines in the same commit and say
+so in the message — the diff is the evidence, so it should be deliberate.
+
+Breakpoints are not yet standardised (see `docs/css-follow-ups.md`). The nav
+uses `max-width: 600px` and `max-width: 400px`. Prefer `max-width` queries:
+several older blocks use `min-device-width`/`max-device-width` with
+`orientation`, which key off the physical device, so they never fire in a
+resized desktop browser or in the Playwright suite.
 
 ## Documentation
 
