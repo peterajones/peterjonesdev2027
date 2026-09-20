@@ -1,6 +1,22 @@
 ---
 import { getCollection, render } from 'astro:content';
 
+// Current-page indicator. Prefix match so a project or post page still marks
+// its section ("/projects/js-clock" → Projects); "/" would match everything,
+// so it is compared exactly. The home page has no nav link of its own — the
+// logo is the way back — so nothing is marked there.
+const navLinks = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/news', label: 'News' },
+  { href: '/contact', label: 'Contact' },
+];
+const pathname = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/'
+    ? pathname === '/'
+    : pathname === href || pathname.startsWith(`${href}/`);
+
 const updateEntries = (await getCollection('updates')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
@@ -46,10 +62,13 @@ const updates = await Promise.all(
       </a>
     </div>
     <div class="topNavLinks">
-      <a href="/projects">Projects</a>
-      <a href="/blog">Blog</a>
-      <a href="/news">News</a>
-      <a href="/contact">Contact</a>
+      {
+        navLinks.map(({ href, label }) => (
+          <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+            {label}
+          </a>
+        ))
+      }
       <button
         id="theme-toggle"
         name="toggle theme"
@@ -165,6 +184,18 @@ const updates = await Promise.all(
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+  /* Current section: bold in light, where a glow would just look smudged on
+     white; the glow itself in dark, where it has a dark field to bleed into. */
+  .topNavLinks a[aria-current="page"] {
+    color: var(--color-link-hover);
+    font-weight: 700;
+  }
+  :global([data-theme="dark"]) .topNavLinks a[aria-current="page"] {
+    font-weight: 500;
+    text-shadow:
+      0 0 4px currentColor,
+      0 0 12px currentColor;
   }
   /* Toggle Theme */
   /* These previously targeted FontAwesome's rendered classes */
@@ -377,6 +408,11 @@ const updates = await Promise.all(
     .topNavLinks {
       gap: 5px;
       font-size: 0.78rem;
+    }
+    /* Colour alone carries the current page here. Bold costs up to 20px of
+       width on the longest label, which 320px screens don't have. */
+    .topNavLinks a[aria-current="page"] {
+      font-weight: 500;
     }
     .logo img {
       max-width: 88px;

@@ -45,6 +45,15 @@ a:hover {
 	color: var(--color-link-hover);
 	text-decoration: none;
 }
+/* Keyboard focus, site-wide. :focus-visible shows the ring for keyboard
+   navigation but not for mouse clicks, and the token keeps it legible in
+   both themes rather than relying on the browser default. */
+a:focus-visible,
+button:focus-visible {
+	outline: 2px solid var(--color-link-hover);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
 ::selection {
 	color: #ffffff;
 	background-color: rebeccapurple;
