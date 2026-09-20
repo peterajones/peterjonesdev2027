@@ -2,7 +2,7 @@
 
 - **Date:** 2026-09-18
 - **Branch:** `refactor/css-architecture`
-- **Status:** Implemented on refactor/css-architecture; pending exception review
+- **Status:** Landed on `main` at `b295587` (2026-09-19). All seven exceptions approved; follow-ups tracked in `docs/css-follow-ups.md`.
 
 ## Problem
 
@@ -156,6 +156,9 @@ No push, PR, or merge without explicit approval.
 - Every page ships only the CSS it uses; before/after sizes recorded.
 
 ## Follow-ups (separate tasks)
+
+Superseded by `docs/css-follow-ups.md`, which merges this list with what the
+implementation and the final review turned up. Kept here as the original set:
 
 1. **Consolidate `CodeBlocks.tsx`** — 8 near-duplicate copies (~2,100 lines) into one shared component fed each project's samples.
 2. **Shared `ProjectShell` component** — the back button / spacer / heading repeated in the 8 project pages.

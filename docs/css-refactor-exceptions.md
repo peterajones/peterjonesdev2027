@@ -1,10 +1,10 @@
 # CSS Refactor — Exceptions Log
 
-**7 exceptions, all approved by Peter on 2026-09-19.**
+**7 exceptions, all approved by Peter on 2026-09-19. Merged to `main` at `b295587`.**
 
-Every intentional or unavoidable visual change from the pixel-identical baseline.
+This is now a record, not a gate: every intentional visual change the refactor made, so a later reader can tell a deliberate change from a regression. The interaction walkthrough below is still the checklist for any future CSS work, since the screenshot suite never captures those states.
 
-**How to review:** run the branch build (`npm run build && node --env-file=.env ./dist/server/entry.mjs`) and open http://localhost:4321, then compare each entry against the same path on the live site, which still runs `main`. Set the theme with the navbar toggle and the width with devtools' responsive mode.
+**How to re-check an entry:** run the build (`npm run build && node --env-file=.env ./dist/server/entry.mjs`) and open http://localhost:4321. Set the theme with the navbar toggle and the width with devtools' responsive mode. The "before" side was the deployed site while it still ran the pre-refactor CSS; once this work is pushed, production shows the "after" state, and the before/after values recorded in each entry are the reference.
 
 Use port **4321** specifically. The Google Maps API key is referrer-restricted, so the pagination widget's maps only render on that port; on any other port — and in the Playwright suite, which blocks Maps outright — the map area stays empty.
 
@@ -24,7 +24,7 @@ The visual suite only screenshots each route at rest — closed panels, no hover
 - Contact form: focus each field
 - Theme toggle on several pages, then a throttled (Slow 3G) reload in dark mode — confirm no flash of the wrong theme
 
-Nothing merges while any entry is `pending`.
+(Before the merge, this log gated it: nothing merged while an entry was `pending`.)
 
 ## Entry format
 
