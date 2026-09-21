@@ -78,12 +78,36 @@ final whole-branch review.
     blocks are effectively untested. Pick a scale, convert everything to
     `max-width`, and re-verify.
 
+16. **Replace the clipboard button's painted overhang.** The Password Generator's
+    copy button sits inside the password field but is drawn outside it, via
+    `position: relative; left: 50px`. That works at every width down to 280px
+    because the field shrinks with the panel, but the clearance at 320px is 1px,
+    so it is one layout tweak away from pushing the page sideways again. The
+    structural fix is to make the button a sibling of the field in a flex row and
+    push it right with `margin-left: auto`, deleting the magic number. Measured
+    cost: the dark field narrows by 4px on desktop (270px → 266px) and more on
+    phones, so it needs desktop baselines and its own before/after. Deferred as
+    out of proportion to the bug it would prevent — the overflow itself is fixed
+    (see below).
+
 ## Known, out of scope
 
 15. **Remaining mobile layout issues.** Peter flagged these before the refactor
     started and they were deliberately excluded, so the 390px baselines captured
     them as they were. The header was fixed afterwards (see below); the rest are
     still open, and fixing each means updating its baselines in the same commit.
+
+    Measured on 2026-09-21, production build, at the two widths every figure here
+    is quoted at. Only these routes scroll sideways:
+
+    | Route | 390px | 320px |
+    |---|---|---|
+    | `/projects/pizza-pie` | 5px | 40px |
+    | `/contact` | — | 20px |
+    | `/blog`, `/projects`, `/news` | — | 3px each |
+
+    `/projects/random-password-generator` was the worst of them (29px / 67px) and
+    is now fixed. Every other route is clean at both widths.
 
 ## Done since
 
@@ -100,7 +124,26 @@ final whole-branch review.
   label). Site-wide `:focus-visible` ring in `base.css`. Still open in the
   header: the fixed 60px height on phones.
 
-Found while measuring, not yet fixed: **`/projects/random-password-generator`
-overflows its viewport** — 29px at 390px, 67px at 320px — from the widget's
-clipboard button and the `span.token` elements in its code sample, not from the
-nav. One of the mobile issues in item 15.
+- **Password Generator viewport overflow** (2026-09-21). The page scrolled 29px
+  past a 390px viewport and 67px past 320px. Cause was a single rule: a
+  `@media (max-width: 400px)` override giving the clipboard button
+  `left: 118px`, inherited from the legacy site in the original scaffold
+  (`f1311a4`) and never re-measured. Because the button is only relatively
+  offset, its painted box escaped the panel and set the document's width — at
+  390px the button's right edge *was* the 419px scrollWidth. Deleting the
+  override drops it back to the base `left: 50px`, which tracks the panel and
+  stays inside the viewport at 1280/600/390/360/320/280. Desktop is untouched:
+  every desktop baseline passed unchanged, and the button's geometry at 1280px
+  is identical before and after. The 390px baselines shrank from 419px to 390px
+  wide, which is the fix in evidence.
+
+  An earlier note here blamed "the clipboard button and the `span.token`
+  elements in its code sample". The `span.token` runs were a red herring — they
+  sit inside an `overflow`-clipped ancestor, so they can't widen the document.
+  The button was the whole cause.
+
+  Guarded by `tests/overflow.spec.ts`, which asserts `scrollWidth ===
+  clientWidth` at 390px and 320px and names the widest unclipped element when it
+  fails. The visual suite cannot catch this class of bug: it screenshots
+  `fullPage`, so an overflowing page expands the screenshot and still matches its
+  own baseline. Extend that spec's route list as the item 15 routes are fixed.
