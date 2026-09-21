@@ -12,11 +12,9 @@ import { test, expect } from '@playwright/test';
 // phone still in use. Both are widths the layout has to survive, and the
 // widths every measurement in docs/css-follow-ups.md is quoted at.
 //
-// Deliberately narrow for now — it guards the one route fixed in this commit.
-// `/projects/pizza-pie` also overflows (5px at 390px, 40px at 320px), as do
-// several routes at 320px only; those are item 15 in docs/css-follow-ups.md
-// and each needs its own fix and baselines. Add routes here as they're fixed.
-const ROUTES = ['/projects/random-password-generator'];
+// Add routes here as they're fixed. `/contact`, `/blog`, `/projects` and
+// `/news` still overflow at 320px only — item 15 in docs/css-follow-ups.md.
+const ROUTES = ['/projects/random-password-generator', '/projects/pizza-pie'];
 
 const WIDTHS = [390, 320];
 

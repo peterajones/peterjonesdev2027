@@ -30,6 +30,13 @@
 	top: 30px;
 	height: 200px;
 	width: 200px;
+	/* Each slice is a 200px square rotated ~45deg, so its bounding box is
+	   283px and reaches 41px past this container on both sides. None of that
+	   is painted — the clip and border-radius keep the wedge inside the
+	   circle — but it still counted as scrollable overflow and pushed the
+	   whole page sideways on phones (20px at 360px, 40px at 320px). Nothing
+	   is meant to render outside the 200px circle, so clip it here. */
+	overflow: hidden;
 }
 .common {
 	position: absolute;
