@@ -121,7 +121,12 @@ li.item {
 	position: relative;
 	display: flex;
 	justify-content: center;
-	min-width: 325px;
+	/* 325px was a hard floor, so below a 365px viewport the card was wider
+	   than the 20px-guttered column and pushed the page sideways (3px at
+	   320px). The min() lets it fall back to the column width once there
+	   isn't room, which only engages below ~365px — at 390px and above the
+	   card is still exactly 325px. */
+	min-width: min(325px, 100%);
 	border: 1px solid #ccc;
 	cursor: pointer;
 	transition: all 0.25s ease-in;

@@ -98,18 +98,49 @@ final whole-branch review.
     still open, and fixing each means updating its baselines in the same commit.
 
     Measured on 2026-09-21, production build, at the two widths every figure here
-    is quoted at. Only these routes scroll sideways:
+    is quoted at. **`/contact` is the only route still scrolling sideways** —
+    20px at 320px, and clean at 390px. Everything else is now clean at both.
 
-    | Route | 390px | 320px |
-    |---|---|---|
-    | `/projects/pizza-pie` | 5px | 40px |
-    | `/contact` | — | 20px |
-    | `/blog`, `/projects`, `/news` | — | 3px each |
+    Fixed in that pass, worst first: `/projects/random-password-generator`
+    (29px at 390px, 67px at 320px), `/projects/pizza-pie` (5px / 40px), and
+    `/blog`, `/projects` and `/news` (3px each at 320px, one shared cause).
+    All five are guarded by `tests/overflow.spec.ts`.
 
-    `/projects/random-password-generator` was the worst of them (29px / 67px) and
-    is now fixed. Every other route is clean at both widths.
+    Two things that fall outside the 320–390px band and are left alone: at
+    280px `/projects` still overflows 15px, because `.card` in
+    `ProjectCard.astro` is a fixed 290px — no phone is that narrow (320px is
+    the floor in practice). And `/contact` needs its own look; it was the one
+    route in the group whose cause isn't the card grid.
 
 ## Done since
+
+- **Pizza pie's rotated slices contained** (2026-09-21). Each slice is a 200px
+  square rotated ~45°, so its bounding box is 283px and reached 41px past the
+  200px `.piechart` on both sides. Nothing painted there — the clip rect and
+  the circle's `border-radius` keep the wedge inside — but an unpainted
+  bounding box still counts as scrollable overflow, so the page grew sideways
+  (5px at 390px, 40px at 320px). `overflow: hidden` on `.piechart` says what
+  was always true: nothing renders outside the circle. Two wrong hypotheses
+  first, recorded so nobody retries them — the slice's
+  `clip: rect(0, 101px, 300px, 0)` declares a 300px bottom on a 200px box and
+  looks exactly like the 100px `clientWidth`/`scrollWidth` gap, but correcting
+  it to 200px, and swapping it for the `clip-path` equivalent, each changed
+  nothing at any width.
+
+- **Card grid stops forcing 325px** (2026-09-21). `li.item` had
+  `min-width: 325px`, a hard floor wider than the 20px-guttered column below a
+  365px viewport, so `/blog`, `/projects` and `/news` each scrolled 3px at
+  320px — one cause, three routes. Now `min(325px, 100%)`, which only engages
+  below ~365px: at 390px and 1280px the card is still exactly 325px and the
+  per-row counts are unchanged, so **no baseline moved** — the whole visual
+  suite passed untouched at its zero tolerance.
+
+  A note for anyone measuring this grid: `li.item` carries
+  `transition: all 0.25s`, and a transition in flight outranks even an inline
+  `!important`. Injecting CSS and reading `getBoundingClientRect` straight
+  after returns the *old* width, which made a correct fix look like it did
+  nothing and a desktop-breaking one look clean. Wait out the transition
+  before believing any number from this page.
 
 - **Responsive header** (2026-09-19). The nav had no width rules and no media
   queries of its own: at 390px the logo was clipped 11px off the left edge and
