@@ -80,7 +80,13 @@
 				background-color: #264d73;
 			}
 
+			/* A real <button> so it's reachable by keyboard; reset.css already
+			   gives it font: inherit, so clearing the UA border, background
+			   and margin leaves it drawn exactly like the old <span>. */
 			.currencyClose {
+				background: none;
+				border: 0;
+				margin: 0;
 				position: absolute;
 				top: 0;
 				right: 0;

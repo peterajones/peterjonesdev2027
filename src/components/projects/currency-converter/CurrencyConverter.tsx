@@ -248,12 +248,13 @@ export default function CurrencyConverter() {
                 key={currencyAbbr}
                 className={`${styles.currencyItem} ${isBase ? styles.currencyBase : ''}`}
               >
-                <img src={currency.flagURL} alt="flag" className={styles.currencyFlag} width={60} height={40} />
+                <img src={currency.flagURL} alt="" className={styles.currencyFlag} width={60} height={40} />
                 <div className={styles.currencyInfo}>
                   <p className={styles.currencyInput}>
                     <span className={styles.currencySymbol}>{currency.symbol}</span>
                     <input
                       name="currency-name"
+                      aria-label={`${currency.name} amount`}
                       className={styles.currencyAmount}
                       placeholder=""
                       value={inputValue}
@@ -283,9 +284,14 @@ export default function CurrencyConverter() {
                     {currencyAbbr}
                   </p>
                 </div>
-                <span className={styles.currencyClose} onClick={() => handleRemoveCurrency(currencyAbbr)}>
+                <button
+                  type="button"
+                  className={styles.currencyClose}
+                  aria-label={`Remove ${currency.name}`}
+                  onClick={() => handleRemoveCurrency(currencyAbbr)}
+                >
                   &times;
-                </span>
+                </button>
               </li>
             );
           })}
@@ -322,7 +328,7 @@ export default function CurrencyConverter() {
               className={selectedCurrencies.includes(currency.abbreviation) ? styles.disabled : ''}
               onClick={() => !selectedCurrencies.includes(currency.abbreviation) && handleAddCurrency(currency.abbreviation)}
             >
-              <img src={currency.flagURL} alt="flag" className={styles.currencyFlag} width={48} height={32} />
+              <img src={currency.flagURL} alt="" className={styles.currencyFlag} width={48} height={32} />
               <span>
                 {currency.abbreviation} - {currency.name}
               </span>

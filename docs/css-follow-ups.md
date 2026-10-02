@@ -105,6 +105,28 @@ final whole-branch review.
 
 ## Done since
 
+- **Currency converter accessibility** (2026-10-02). Three fixes, no pixel
+  changed:
+  - Each row's amount input had no label, so a screen reader announced every
+    one as a bare "edit text". Each now carries
+    `aria-label={`${currency.name} amount`}` ("US Dollar amount", …), which
+    contains the row's visible currency name. Checked: names unique, a
+    currency added from the list gets one too, and typing into an input found
+    by its name still converts the others.
+  - The × that removes a row was a clickable `<span>`, unreachable by
+    keyboard. It's now a `<button type="button">` named "Remove <currency>",
+    with the UA border, background and margin cleared (reset.css already
+    gives buttons `font: inherit`). Its box, colour and hover colour were
+    measured identical to the old span in both themes at 1280 and 390px; Tab
+    reaches it from the row's input, it shows the site focus ring, and Enter
+    removes the row.
+  - The flags (rows and the Add Currency list, 36 in all) had `alt="flag"`,
+    read out beside every currency name. Now `alt=""`: the name is right next
+    to each one.
+
+  Still open: the Add Currency list's items are clickable `<li>`s, so adding
+  a currency can't be done from the keyboard either.
+
 - **One `CodeBlocks` component** (2026-10-02). The eight per-project
   `CodeBlocks.tsx` copies (2,100 lines) differed only in data: which files
   each shows, in what order, under what header, in what language. Now
@@ -152,8 +174,8 @@ final whole-branch review.
   (checked on all 20). No pixel changed; checked in a browser that the slider
   is named "Password length" and focuses from its label, and that generating,
   the settings, the counter, all six checkboxes, the pizza select, pagination
-  and currency conversion still work. Still open, and not an ID matter: the
-  currency converter's amount inputs have no label at all.
+  and currency conversion still work. The currency converter's amount inputs
+  had no label at all, which wasn't an ID matter; fixed separately (below).
 
 - **`code.css` loads only on project pages** (2026-10-02). The `code` layer —
   the project widgets' code-panel chrome — was imported by `global.css`, so all
