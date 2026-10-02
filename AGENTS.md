@@ -62,7 +62,7 @@ the reasoning). The short version, and the rules that keep it intact:
 ```
 npx astro check                                       # expect 0 errors/warnings/hints
 npx playwright test tests/theme.spec.ts tests/visual   # expect 84 passed, 2 skipped
-npx playwright test tests/overflow.spec.ts             # expect 2 passed, 2 skipped
+npx playwright test tests/overflow.spec.ts             # expect 10 passed, 10 skipped
 ```
 
 The visual suite screenshots every route in both themes at 390px and 1280px and
@@ -73,9 +73,9 @@ gitignored, so a fresh clone has none: capture them on a known-good commit
 The visual suite is blind to horizontal overflow: it screenshots `fullPage`, so
 a page wider than the viewport just produces a wider screenshot that still
 matches its own baseline. `tests/overflow.spec.ts` is the gate for that,
-asserting `scrollWidth === clientWidth` at 390px and 320px. It covers one route
-so far; `docs/css-follow-ups.md` item 15 lists the routes still overflowing, to
-be added as each is fixed.
+asserting `scrollWidth === clientWidth` at 390px and 320px. It covers five routes
+so far; `docs/css-follow-ups.md` item 15 lists the one still overflowing
+(`/contact`, at 320px), to be added once it's fixed.
 
 The suite only captures each page at rest — no hover, no open panels or modals,
 no typed input. Those states need a computed-style check or a browser pass;
