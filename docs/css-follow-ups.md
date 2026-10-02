@@ -49,14 +49,7 @@ final whole-branch review.
     60px tall at every width; with the logo now centred in it, that was left
     as it is.
 
-14. **Consolidate the breakpoints.** 15 media queries across 13 files with no
-    shared scale: 1200, 1024, 1000, 724, 667, 600, 400 all appear. Worse, some
-    use `min-device-width`/`max-device-width` with `orientation` (the old
-    iPhone-targeting style), which keys off the physical device rather than the
-    window — so they don't fire when a desktop browser is resized, and almost
-    certainly never fire in the Playwright suite, which sets a viewport. Those
-    blocks are effectively untested. Pick a scale, convert everything to
-    `max-width`, and re-verify.
+14. ~~**Consolidate the breakpoints.**~~ Done 2026-10-02 — see "Done since".
 
 16. **Replace the clipboard button's painted overhang.** The Password Generator's
     copy button sits inside the password field but is drawn outside it, via
@@ -90,6 +83,33 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Breakpoints on one scale** (2026-10-02). 18 width queries used 11
+  different widths, five of them `device-width` + `orientation`. Now every
+  query is `max-width` on **320 / 400 / 600 / 1024 / 1460** (Peter kept 320
+  as its own tier), and phones held sideways are
+  `(orientation: landscape) and (max-height: 500px)`. Mapping: 1200 → 1024
+  (and then deleted: the Latest Updates `top: 10vh` it set was already the
+  base value), 640 → 600 (pagination cards stack), 411 → 600 (weather
+  widget), 724 deleted (it repeated the 1460 block's `.github-link` rule),
+  device-width portrait → 600 (Navbar modal, checkbox margins), device-width
+  landscape → the short-landscape query (with `max-width: 667px` added to the
+  smaller-phone modal block, to keep its distinction).
+
+  The item's premise was half wrong: the portrait `device-width` blocks did
+  fire in the suite's 390×844 run (Playwright sets the emulated screen to the
+  viewport). What they missed was a narrowed desktop browser, whose
+  device-width is the monitor's. No baseline moved at 390 or 1280 (exact
+  comparison). Checked computed styles against `main` across a device matrix
+  — identical for phones in portrait, small phones in landscape, 412px
+  Android, 1100, 1280 and both iPad orientations. What changes, all intended
+  and approved: a narrowed desktop browser now gets the phone modal and
+  checkbox margins; at 601–640px the pagination cards stay side by side; at
+  412–600px the weather widget loses its 20px top and bottom margin (as
+  narrower phones already did; Peter chose this over keeping 411); and in
+  Chrome's landscape emulation the checkbox margin now applies, as it
+  already did on real iPhones (iOS reports the portrait width as
+  device-width). Exception E11.
 
 - **Near-duplicate colours merged, and the suite made truly exact**
   (2026-10-02). Four merges, chosen by Peter, each under 8/255 per channel:

@@ -100,11 +100,14 @@ rather than a quietly updated baseline. When a change is *meant* to alter the
 layout (responsive work, say), update the baselines in the same commit and say
 so in the message — the diff is the evidence, so it should be deliberate.
 
-Breakpoints are not yet standardised (see `docs/css-follow-ups.md`). The nav
-uses `max-width: 600px` and `max-width: 400px`. Prefer `max-width` queries:
-several older blocks use `min-device-width`/`max-device-width` with
-`orientation`, which key off the physical device, so they never fire in a
-resized desktop browser or in the Playwright suite.
+Breakpoints use one scale, all `max-width`: **320, 400, 600, 1024, 1460**
+(narrow phone, phone, large phone/small tablet, tablet, wide). Phones held
+sideways are `(orientation: landscape) and (max-height: 500px)`. Pick from
+the scale rather than adding a width; the one exception is the Latest
+Updates modal's small-landscape-phone block, which adds `max-width: 667px`.
+Never use `device-width`: it keys off the screen rather than the window, so
+a narrowed desktop browser never sees phone rules (and iOS reports the
+portrait width even in landscape).
 
 ## Documentation
 

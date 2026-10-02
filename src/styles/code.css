@@ -171,9 +171,3 @@ span.btn-widget-code {
 		width: 94vw;
 	}
 }
-
-@media only screen and (max-width: 724px) {
-	.github-link {
-		width: 94vw;
-	}
-}

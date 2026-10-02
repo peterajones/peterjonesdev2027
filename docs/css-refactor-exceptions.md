@@ -118,3 +118,11 @@ Each entry is `E<n>` and records:
 - **Commit:** see `git log --oneline -- src/styles/tokens.css`
 - **Approval:** approved (Peter, 2026-10-02 — he chose all four merges)
 
+### E11: Breakpoints moved onto one scale
+
+- **Where:** a desktop browser narrowed to phone width (open the Latest Updates bell; `/projects/checkbox-styling`); `/projects/pagination` at 601–640px; `/projects/weather-app` at 412–600px; `/projects/checkbox-styling` on a phone held sideways. Either theme. Not visible at 390 or 1280px, so no baseline moved.
+- **What changed and why:** every media query now uses `max-width` on one scale, 320/400/600/1024/1460, and `device-width` queries are gone (follow-ups item 14). A narrowed desktop browser now gets the same phone rules as a phone: the full-screen Latest Updates modal and the 30px checkbox margin. Pagination cards stack at 600px instead of 640px. The weather widget drops its 20px vertical margin up to 600px instead of 411px. Phones held sideways are matched by height (`max-height: 500px`) rather than by iPhone model widths.
+- **What to look for:** the narrowed-browser modal fills the screen as on a phone; at 620px the pagination cards are side by side; at 412–600px the weather widget sits flush with no 20px gap above and below. Measured against `main`: phones in portrait, 412px Android, 1100px, 1280px and both iPad orientations are unchanged.
+- **Commit:** see `git log --oneline -- src/components/Navbar.astro`
+- **Approval:** approved (Peter, 2026-10-02 — the scale, keeping 320, and 600 for the weather widget)
+
