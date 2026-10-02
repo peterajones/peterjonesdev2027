@@ -25,10 +25,7 @@ final whole-branch review.
    nothing is written to storage until the visitor toggles (that groundwork was
    done deliberately). Defaulting to `prefers-color-scheme`, optionally with a
    light/dark/system control, is the remaining step.
-5. **Consolidate colours.** 39 tokens still include near-duplicates the refactor
-   had to preserve exactly — `#ffa804` next to `#faa804`, several greys. Also
-   rename `--color-text-inherit`, which is named for its mechanism
-   (`currentColor` in light, a fixed value in dark) rather than its role.
+5. ~~**Consolidate colours.**~~ Done 2026-10-02 — see "Done since".
 6. ~~**Revisit the escapes.**~~ Done 2026-10-02 — see "Done since".
 
 ## Structure
@@ -93,6 +90,29 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Near-duplicate colours merged, and the suite made truly exact**
+  (2026-10-02). Four merges, chosen by Peter, each under 8/255 per channel:
+  `#faa804` → `#ffa804` (pagination page-number hover, light; contact icons,
+  dark), `#fafafa` → `#f4f4f4` (card titles, dark), `#fff` → `#f4f4f4`
+  (code-panel description list text, dark) and `#4a4a4a` → `#464646` (card
+  background, dark). Three tokens then duplicated others in both themes and
+  were removed: `--color-contact-icon-alt` (now `--color-contact-icon`),
+  `--color-card-title` and `--color-list-text` (now `--color-text`).
+  `--color-text-inherit` is renamed `--color-text-ambient`, for its role:
+  text that takes its surroundings' colour in light and is pinned in dark.
+  Exception E10.
+
+  The merges exposed a gap in the visual suite: every screenshot still
+  "matched", though `#4a4a4a` → `#464646` alone moved 915,000 pixels.
+  `maxDiffPixels: 0` counts only pixels past Playwright's per-pixel
+  `threshold`, which defaults to 0.2. With `threshold: 0` set temporarily,
+  exactly the 6 expected dark screenshots failed (`/blog`, `/projects`,
+  `/projects/pagination`, both widths), and every changed pixel was one of
+  the four merges or its anti-aliased edge (max 7/255). `threshold: 0` is now
+  permanent: 15 consecutive full runs at it were clean. Earlier "no baseline
+  moved" claims were made at 0.2: they hold for layout, and the
+  colour-sensitive items (2 and 6) were also checked with computed styles.
 
 - **Dark-only rules trimmed** (2026-10-02). There were 16 dark-only rules
   (`[data-theme="dark"] …`), not the 13 counted in September: the nav work

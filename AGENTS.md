@@ -72,7 +72,11 @@ npx playwright test tests/overflow.spec.ts             # expect 18 passed, 18 sk
 ```
 
 The visual suite screenshots every route in both themes at 390px and 1280px and
-compares pixel-for-pixel with **zero** tolerance. Baselines and HARs are
+compares pixel-for-pixel with **zero** tolerance: `maxDiffPixels: 0` *and*
+`threshold: 0`. The second was only added on 2026-10-02; before that,
+Playwright's default per-pixel threshold (0.2) let colour shifts of up to
+~20% pass, so older "no baseline moved" claims cover layout but not subtle
+colour changes. Baselines and HARs are
 gitignored, so a fresh clone has none: capture them on a known-good commit
 *before* editing CSS (README has the command), never mid-change.
 

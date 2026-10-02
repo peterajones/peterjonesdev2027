@@ -19,7 +19,13 @@ export default defineConfig({
   workers: '50%',
   reporter: [['list'], ['html', { open: 'never' }]],
   expect: {
-    toHaveScreenshot: { maxDiffPixels: 0, animations: 'disabled', caret: 'hide', scale: 'css' },
+    // threshold: 0 makes "zero tolerance" literal. Without it Playwright's
+    // default per-pixel threshold (0.2) let any colour shift under ~20% pass
+    // unnoticed: merging #4a4a4a into #464646 moved 915,000 pixels and every
+    // screenshot still "matched". Rendering here is deterministic enough for
+    // exact comparison: 15 consecutive full runs on 2026-10-02 (1,200
+    // comparisons) were all clean.
+    toHaveScreenshot: { maxDiffPixels: 0, threshold: 0, animations: 'disabled', caret: 'hide', scale: 'css' },
   },
   use: {
     baseURL: `http://localhost:${PORT}`,
