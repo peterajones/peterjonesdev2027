@@ -40,8 +40,8 @@ final whole-branch review.
 7. **Merge the eight `CodeBlocks.tsx` copies** (~2,100 lines) into one component
    fed each project's samples. They already share the same markup and the same
    global class names.
-8. **Shared `ProjectShell` component** for the back button, spacer and heading
-   repeated across the eight project pages.
+8. ~~**Shared `ProjectShell` component.**~~ Done 2026-10-02 — see "Done
+   since".
 9. ~~**Tidy the IDs.**~~ Done 2026-10-02 — see "Done since".
 
 ## Test harness
@@ -105,6 +105,17 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **`ProjectShell` component** (2026-10-02). The eight project pages each
+  repeated the same block — `<div class="content">`, the "Back to Projects"
+  link, the `btnSpacer`, and the `<h1>` — around their widget, and
+  `PortPending.astro` had a ninth copy. That block is now
+  `src/components/ProjectShell.astro` (`heading` prop, widget in the default
+  slot); pages keep `BaseLayout`, their per-page font `<link slot="head">` and
+  `GoogleMapsScript` exactly where they were. Verified byte for byte: the
+  server-rendered HTML of all eight project pages and `/projects` is identical
+  before and after (each page was first confirmed stable between two requests,
+  so no normalising was needed). No baseline moved.
 
 - **Widget IDs tidied** (2026-10-02). One rule now: an element keeps an `id`
   only if something reads it. 29 removed across six widgets (rollup-counter,

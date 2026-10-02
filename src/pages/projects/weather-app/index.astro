@@ -1,15 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import GoogleMapsScript from '../../../components/GoogleMapsScript.astro';
 import WeatherAppWidget from '../../../components/projects/weather-app/WeatherAppWidget';
 ---
 
 <BaseLayout title="Peter Jones | Weather App">
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Weather App</h1>
+  <ProjectShell heading="Weather App">
     <WeatherAppWidget client:load />
-  </div>
+  </ProjectShell>
   <GoogleMapsScript libraries="places" />
 </BaseLayout>

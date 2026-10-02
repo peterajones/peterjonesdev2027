@@ -1,14 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import CurrencyConverterWidget from '../../../components/projects/currency-converter/CurrencyConverterWidget';
 ---
 
 <BaseLayout title="Peter Jones | Currency Converter">
   <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Currency Converter</h1>
+  <ProjectShell heading="Currency Converter">
     <CurrencyConverterWidget client:load />
-  </div>
+  </ProjectShell>
 </BaseLayout>

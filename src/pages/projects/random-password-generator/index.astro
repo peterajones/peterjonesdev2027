@@ -1,14 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import PasswordGeneratorWidget from '../../../components/projects/random-password-generator/PasswordGeneratorWidget';
 ---
 
 <BaseLayout title="Peter Jones | Random Password Generator">
   <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap" />
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Random Password Generator</h1>
+  <ProjectShell heading="Random Password Generator">
     <PasswordGeneratorWidget client:load />
-  </div>
+  </ProjectShell>
 </BaseLayout>

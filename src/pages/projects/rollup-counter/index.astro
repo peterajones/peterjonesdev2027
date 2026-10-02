@@ -1,14 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import RollupCounterWidget from '../../../components/projects/rollup-counter/RollupCounterWidget';
 ---
 
 <BaseLayout title="Peter Jones | Javascript Rollup Counter">
   <link slot="head" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" />
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Javascript Rollup Counter</h1>
+  <ProjectShell heading="Javascript Rollup Counter">
     <RollupCounterWidget client:load />
-  </div>
+  </ProjectShell>
 </BaseLayout>

@@ -1,13 +1,11 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import PizzaPieWidget from '../../../components/projects/pizza-pie/PizzaPieWidget';
 ---
 
 <BaseLayout title="Peter Jones | Pizza Pie">
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Pizza Pie</h1>
+  <ProjectShell heading="Pizza Pie">
     <PizzaPieWidget client:load />
-  </div>
+  </ProjectShell>
 </BaseLayout>

@@ -23,7 +23,9 @@ nvm use 22
   per page, not loaded site-wide. See `src/pages/projects/js-clock/index.astro`
   for the reference pattern (widget component + `CodeBlocks.tsx` showing the
   original vanilla HTML/CSS/JS + a `*Widget.tsx` wiring up the description/
-  code toggles) — all eight `/projects/*` pages now follow it.
+  code toggles) — all eight `/projects/*` pages now follow it. Each page
+  wraps its widget in `src/components/ProjectShell.astro`, which supplies the
+  shared back link, spacer and heading (`<ProjectShell heading="…">`).
 - **Google Maps, when a widget needs it**, loads via
   `src/components/GoogleMapsScript.astro` rather than a per-page script tag —
   conditional on `PUBLIC_GOOGLE_MAPS_API_KEY`, bridging its load callback to a

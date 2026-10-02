@@ -1,0 +1,16 @@
+---
+// The frame every project page shares: the way back to /projects, the
+// spacer under it, and the page heading. The widget (or, for PortPending,
+// the not-yet-ported note) goes in the default slot.
+interface Props {
+  heading: string;
+}
+const { heading } = Astro.props;
+---
+
+<div class="content">
+  <a href="/projects" class="backBtn">Back to Projects</a>
+  <div class="btnSpacer"></div>
+  <h1>{heading}</h1>
+  <slot />
+</div>

@@ -1,13 +1,11 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectShell from '../../../components/ProjectShell.astro';
 import CheckboxStylingWidget from '../../../components/projects/checkbox-styling/CheckboxStylingWidget';
 ---
 
 <BaseLayout title="Peter Jones | CSS - Checkbox Styling">
-  <div class="content">
-    <a href="/projects" class="backBtn">Back to Projects</a>
-    <div class="btnSpacer"></div>
-    <h1>Checkbox Styling</h1>
+  <ProjectShell heading="Checkbox Styling">
     <CheckboxStylingWidget client:load />
-  </div>
+  </ProjectShell>
 </BaseLayout>
