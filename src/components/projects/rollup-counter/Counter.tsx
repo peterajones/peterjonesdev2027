@@ -70,10 +70,10 @@ export default function Counter() {
         ))}
       </span>
       <div className={styles.buttons}>
-        <button id="reset" className={styles.counterBtn} onClick={() => change(0)}>
+        <button className={styles.counterBtn} onClick={() => change(0)}>
           Reset
         </button>
-        <button id="increment" className={styles.counterBtn} onClick={() => change(count + 1)}>
+        <button className={styles.counterBtn} onClick={() => change(count + 1)}>
           Increment
         </button>
       </div>

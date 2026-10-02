@@ -21,7 +21,6 @@ export default function Pages({ usersPerPage, totalUsers, getPage, isActive, cur
         {pageNumbers.map((pageNumber) => (
           <li
             key={pageNumber}
-            id={'page' + pageNumber}
             onClick={() => getPage(pageNumber)}
             className={
               currentPage === pageNumber && isActive

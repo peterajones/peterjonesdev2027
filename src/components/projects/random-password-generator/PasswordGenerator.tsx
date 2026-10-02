@@ -115,11 +115,10 @@ export default function PasswordGenerator() {
         <div className={styles.pwgContainer}>
           <h2 className={styles.pwg}>Password Generator</h2>
           <div className={styles.pwgResultContainer}>
-            <span id="pwg-result" className={styles.pwg}>
+            <span className={styles.pwg}>
               {password}
             </span>
             <button
-              id="clipboard"
               className={styles.clipboard}
               onClick={handleCopy}
               title="Copy to clipboard..."
@@ -137,12 +136,14 @@ export default function PasswordGenerator() {
               </svg>
             </button>
           </div>
-          <div id="msg" className={message ? `${styles.msg} ${styles.fadeOut}` : styles.msg}>
+          <div className={message ? `${styles.msg} ${styles.fadeOut}` : styles.msg}>
             {message}
           </div>
           <div className={styles.pwgSettings}>
             <div className={styles.pwgSetting}>
-              <label className={styles.pwg}>Password length</label>
+              <label htmlFor="length" className={styles.pwg}>
+                Password length
+              </label>
               <input
                 type="range"
                 min="1"
@@ -151,24 +152,19 @@ export default function PasswordGenerator() {
                 value={length}
                 id="length"
                 className={styles.lengthSlider}
-                aria-label="range slider"
                 onChange={(e) => updateLength(Number(e.target.value))}
               />
-              <span id="length_disp" className={`${styles.lengthDisp} ${styles.pwg}`}>
+              <span className={`${styles.lengthDisp} ${styles.pwg}`}>
                 {length}
               </span>
             </div>
             <div className={styles.pwgSetting}>
               <label className={styles.pwg}>
-                <span
-                  id="settings-upper"
-                  className={upper ? '' : styles.lineThrough}
-                >
+                <span className={upper ? '' : styles.lineThrough}>
                   Include uppercase letters
                 </span>
                 <input
                   type="checkbox"
-                  id="upper"
                   className={styles.settingCheckbox}
                   checked={upper}
                   onChange={(e) => toggle('upper', e.target.checked, setUpper)}
@@ -177,15 +173,11 @@ export default function PasswordGenerator() {
             </div>
             <div className={styles.pwgSetting}>
               <label className={styles.pwg}>
-                <span
-                  id="settings-lower"
-                  className={lower ? '' : styles.lineThrough}
-                >
+                <span className={lower ? '' : styles.lineThrough}>
                   Include lowercase letters
                 </span>
                 <input
                   type="checkbox"
-                  id="lower"
                   className={styles.settingCheckbox}
                   checked={lower}
                   onChange={(e) => toggle('lower', e.target.checked, setLower)}
@@ -194,15 +186,11 @@ export default function PasswordGenerator() {
             </div>
             <div className={styles.pwgSetting}>
               <label className={styles.pwg}>
-                <span
-                  id="settings-numbers"
-                  className={numbers ? '' : styles.lineThrough}
-                >
+                <span className={numbers ? '' : styles.lineThrough}>
                   Include numbers
                 </span>
                 <input
                   type="checkbox"
-                  id="numbers"
                   className={styles.settingCheckbox}
                   checked={numbers}
                   onChange={(e) => toggle('numbers', e.target.checked, setNumbers)}
@@ -211,15 +199,11 @@ export default function PasswordGenerator() {
             </div>
             <div className={styles.pwgSetting}>
               <label className={styles.pwg}>
-                <span
-                  id="settings-symbols"
-                  className={symbols ? '' : styles.lineThrough}
-                >
+                <span className={symbols ? '' : styles.lineThrough}>
                   Include symbols
                 </span>
                 <input
                   type="checkbox"
-                  id="symbols"
                   className={styles.settingCheckbox}
                   checked={symbols}
                   onChange={(e) => toggle('symbols', e.target.checked, setSymbols)}
@@ -229,7 +213,6 @@ export default function PasswordGenerator() {
           </div>
           <button
             className={`${styles.pwgBtn} ${styles.pwgBtnLarge} ${styles.generate}`}
-            id="generate"
             onClick={handleGenerate}
           >
             Generate password

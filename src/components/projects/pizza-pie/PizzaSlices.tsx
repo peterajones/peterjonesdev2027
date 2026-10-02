@@ -58,10 +58,10 @@ export default function PizzaSlices() {
   return (
     <>
       <h1 style={{ marginBottom: '0', fontSize: '1.6rem' }}>Grab a slice!</h1>
-      <p style={{ marginTop: '0' }} id="how_many">
+      <p style={{ marginTop: '0' }}>
         {howMany}
       </p>
-      <form id="pizza-form">
+      <form>
         <select
           className={styles.ddl}
           aria-label="dropdown select"
@@ -72,7 +72,6 @@ export default function PizzaSlices() {
             <option
               key={option.value}
               value={option.value}
-              id={String(option.value)}
               className="select-value"
               disabled={option.value < slices}
             >
@@ -91,7 +90,6 @@ export default function PizzaSlices() {
           >
             <div
               className={`${styles.common} ${styles.slice} ${styles[`slice_${index + 1}_w`]}`}
-              id={`slice_${index}_w`}
               style={{
                 opacity: slices > index ? 1 : 0,
                 transition: slices > index ? 'all 0.85s ease-in 0s' : undefined,

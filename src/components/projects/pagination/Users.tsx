@@ -86,7 +86,7 @@ export default function Users({ users, loading }: Props) {
                 Lat: {user.address.geo.lat}, Lng: {user.address.geo.lng}
               </span>
             </div>
-            <div id={'map' + user.id} className={styles.map} data-testid="map">
+            <div className={styles.map} data-testid="map">
               <Maps
                 lat={user.address.geo.lat}
                 lng={user.address.geo.lng}

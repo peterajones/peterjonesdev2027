@@ -12,14 +12,13 @@ export default function Checkboxes() {
   return (
     <>
       <h2>Converting checkboxes to switches</h2>
-      <div id="forms-wrapper" className={styles.formsWrapper}>
-        <form action="GET" id="form1" className={styles.form1}>
+      <div className={styles.formsWrapper}>
+        <form action="GET" className={styles.form1}>
           <h4 className={styles.checkboxGroup}>Conventional checkboxes</h4>
-          <div id="checkboxes" className={styles.checkboxes}>
+          <div className={styles.checkboxes}>
             <label className={styles.checkboxLabel}>
               <input
                 className={styles.checkboxInput}
-                id="newsletter-1"
                 name="newsletter-1"
                 type="checkbox"
                 onChange={() => setNewsletter1((v) => !v)}
@@ -49,9 +48,9 @@ export default function Checkboxes() {
             </label>
           </div>
         </form>
-        <form action="GET" id="form2" className={styles.form2}>
+        <form action="GET" className={styles.form2}>
           <h4 className={styles.checkboxGroup}>Styled checkboxes</h4>
-          <div id="switches" className={styles.switches}>
+          <div className={styles.switches}>
             <label htmlFor="newsletter-2">
               <input
                 className={styles.checkboxInput}

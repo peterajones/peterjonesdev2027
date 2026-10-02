@@ -247,14 +247,12 @@ export default function CurrencyConverter() {
               <li
                 key={currencyAbbr}
                 className={`${styles.currencyItem} ${isBase ? styles.currencyBase : ''}`}
-                id={currencyAbbr}
               >
                 <img src={currency.flagURL} alt="flag" className={styles.currencyFlag} width={60} height={40} />
                 <div className={styles.currencyInfo}>
                   <p className={styles.currencyInput}>
                     <span className={styles.currencySymbol}>{currency.symbol}</span>
                     <input
-                      id="currency-input"
                       name="currency-name"
                       className={styles.currencyAmount}
                       placeholder=""

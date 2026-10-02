@@ -42,11 +42,7 @@ final whole-branch review.
    global class names.
 8. **Shared `ProjectShell` component** for the back button, spacer and heading
    repeated across the eight project pages.
-9. **Tidy the IDs.** ID handling ended up inconsistent: pizza-pie dropped its
-   unread `#ddl`/`#eaten`, while checkbox-styling, password-generator and
-   rollup-counter kept theirs. Harmless, but worth one pass. In the same sweep,
-   the currency converter renders a duplicated `id="currency-input"` per list
-   item, which is invalid HTML (pre-existing, and now unstyled).
+9. ~~**Tidy the IDs.**~~ Done 2026-10-02 — see "Done since".
 
 ## Test harness
 
@@ -109,6 +105,23 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Widget IDs tidied** (2026-10-02). One rule now: an element keeps an `id`
+  only if something reads it. 29 removed across six widgets (rollup-counter,
+  checkbox-styling, currency-converter, password-generator, pizza-pie,
+  pagination) — none was referenced by any CSS, script, label or test. Five
+  stay: `forecastOutput` (the weather app's `getElementById`), the three
+  `htmlFor`-linked styled checkboxes in checkbox-styling, and the password
+  generator's slider, which gained its reader: its "Password length" `<label>`
+  was orphaned (no `htmlFor`, not wrapping the input), so the slider's only
+  name was `aria-label="range slider"`. The label now points at it and the
+  `aria-label` is gone. The currency converter's per-row
+  `id="currency-input"` duplicate is gone, so no route has a duplicated `id`
+  (checked on all 20). No pixel changed; checked in a browser that the slider
+  is named "Password length" and focuses from its label, and that generating,
+  the settings, the counter, all six checkboxes, the pizza select, pagination
+  and currency conversion still work. Still open, and not an ID matter: the
+  currency converter's amount inputs have no label at all.
 
 - **`code.css` loads only on project pages** (2026-10-02). The `code` layer —
   the project widgets' code-panel chrome — was imported by `global.css`, so all
