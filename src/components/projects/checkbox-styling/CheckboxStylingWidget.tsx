@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Checkboxes from './Checkboxes';
 import CodeBlocks from './CodeBlocks';
 import styles from './CheckboxStyling.module.css';
+import '../../../styles/code-layer.css';
 
 export default function CheckboxStylingWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

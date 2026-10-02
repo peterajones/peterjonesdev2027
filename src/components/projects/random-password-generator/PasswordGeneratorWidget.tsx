@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PasswordGenerator from './PasswordGenerator';
 import CodeBlocks from './CodeBlocks';
 import styles from './PasswordGenerator.module.css';
+import '../../../styles/code-layer.css';
 
 export default function PasswordGeneratorWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

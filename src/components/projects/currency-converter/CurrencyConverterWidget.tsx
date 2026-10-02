@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CurrencyConverter from './CurrencyConverter';
 import CodeBlocks from './CodeBlocks';
 import styles from './CurrencyConverter.module.css';
+import '../../../styles/code-layer.css';
 
 export default function CurrencyConverterWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

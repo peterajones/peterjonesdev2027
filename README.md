@@ -53,11 +53,13 @@ nvm use 22
 Plain CSS, no Sass. `src/styles/tokens.css` holds the `--color-*` custom
 properties (light values on `:root`, dark overrides under
 `:root[data-theme="dark"]`); `src/styles/global.css` declares
-`@layer reset, base, layout, code;`, imports `tokens.css`, then the four
-layer files in that order. Everything in those layers is genuinely
-site-wide (typography, resets, the page shell, the shared code-panel
-chrome for the project widgets) — a bare tag selector there really is
-meant to apply everywhere.
+`@layer reset, base, layout, code;`, imports `tokens.css`, then the first
+three layer files in that order. Everything in those three is genuinely
+site-wide (typography, resets, the page shell) — a bare tag selector there
+really is meant to apply everywhere. The fourth, `code` — the shared
+code-panel chrome for the project widgets — is only loaded where it's used:
+each project widget imports `src/styles/code-layer.css`, which wraps
+`code.css` in `layer(code)` so it keeps its place in the cascade.
 
 Component-level styling is scoped, not global:
 - `.astro` components use their own `<style>` block, which Astro
@@ -69,7 +71,8 @@ Component-level styling is scoped, not global:
   `PizzaPieWidget.tsx`/`PizzaSlices.tsx`), imported as `styles` and applied
   via `className={styles.foo}`. A handful of classes shared across every
   project widget (the code-panel toggle chrome) stay as plain global
-  strings from `code.css` rather than being duplicated per module.
+  strings from `code.css` (loaded by those widgets via `code-layer.css`)
+  rather than being duplicated per module.
 
 Because both `<style>` and CSS Modules are unlayered, they win over
 anything in the four layers regardless of specificity — that's what makes

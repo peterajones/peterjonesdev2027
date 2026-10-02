@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Data from './Data';
 import CodeBlocks from './CodeBlocks';
 import styles from './Pagination.module.css';
+import '../../../styles/code-layer.css';
 
 export default function PaginationWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

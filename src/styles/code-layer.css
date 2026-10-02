@@ -1,0 +1,5 @@
+/* The project widgets' code-panel chrome (code.css), for the pages that show
+   one. Imported by each project widget rather than by global.css, so the
+   other routes don't ship it. It keeps its place in the `code` layer, last
+   of the order global.css declares, so moving it changed no cascade. */
+@import './code.css' layer(code);

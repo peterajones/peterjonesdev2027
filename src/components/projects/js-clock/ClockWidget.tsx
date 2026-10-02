@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Clock from './Clock';
 import CodeBlocks from './CodeBlocks';
 import styles from './Clock.module.css';
+import '../../../styles/code-layer.css';
 
 export default function ClockWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PizzaSlices from './PizzaSlices';
 import CodeBlocks from './CodeBlocks';
 import styles from './PizzaPie.module.css';
+import '../../../styles/code-layer.css';
 
 export default function PizzaPieWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

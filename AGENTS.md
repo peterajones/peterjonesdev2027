@@ -48,8 +48,12 @@ the reasoning). The short version, and the rules that keep it intact:
   dark-only rule (a different image, say) writes
   `:global([data-theme="dark"]) .thing` — 13 exist, all listed in
   `docs/css-refactor-audit.md` §C.
-- **Global CSS is four layers** (`reset, base, layout, code`) imported by
-  `src/styles/global.css`. Only genuinely site-wide rules belong there. **Never
+- **Global CSS is four layers** (`reset, base, layout, code`), all declared in
+  `src/styles/global.css`. The first three are imported there and are the only
+  place for genuinely site-wide rules. `code` (the project widgets' code-panel
+  chrome) is imported by each project widget via `src/styles/code-layer.css`,
+  so other routes don't ship it; keep it inside `layer(code)` if you move it,
+  never as a plain import. **Never
   use `@layer` in a component** — component styles are unlayered on purpose, so
   they always win.
 - **Component styles live with the component:** a `<style>` block in `.astro`

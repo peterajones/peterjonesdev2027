@@ -2,6 +2,7 @@ import { useState } from 'react';
 import WeatherApp from './WeatherApp';
 import CodeBlocks from './CodeBlocks';
 import styles from './WeatherApp.module.css';
+import '../../../styles/code-layer.css';
 
 export default function WeatherAppWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);

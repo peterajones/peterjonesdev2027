@@ -12,11 +12,8 @@ final whole-branch review.
 ## Performance
 
 1. ~~**Load fonts per page.**~~ Done 2026-10-02 — see "Done since".
-2. **Stop shipping `code.css` everywhere.** The `code` layer (~3 KB minified) is
-   the project widgets' code-panel chrome, but it loads on all 12 non-project
-   routes too. It's the one remaining gap against "every page ships only the CSS
-   it uses". Fixing it means moving those rules to a component or a per-page
-   import.
+2. ~~**Stop shipping `code.css` everywhere.**~~ Done 2026-10-02 — see "Done
+   since".
 
 ## Theming
 
@@ -112,6 +109,24 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **`code.css` loads only on project pages** (2026-10-02). The `code` layer —
+  the project widgets' code-panel chrome — was imported by `global.css`, so all
+  20 routes shipped it. Now each of the eight `*Widget.tsx` files (and the
+  unused `PortPending.astro`, which also uses `code.inline`) imports
+  `src/styles/code-layer.css`, which is just
+  `@import './code.css' layer(code);`. `global.css` still declares `code` in
+  its `@layer` order; with no rules for it there, the build emits an explicit
+  `@layer code;` after the other three, and that keeps `code` last on project
+  pages even though its rules now arrive in a later stylesheet. Checked in the
+  browser: layer order `reset < base < layout < code` on every page.
+  Measured with `tests/visual/css-size.spec.ts`: the 12 non-project routes
+  each ship **3,065 bytes less CSS** (about 20%); the 8 project pages ship 13
+  bytes more (the `@layer code{}` wrapper). Pixel-identical (no baseline
+  moved), and — since the suite never opens the code panels — a computed-style
+  comparison against a `main` build over all 8 project pages, both themes, at
+  1280 and 390px, with the description open, the code panel open and a widget
+  button hovered: 248,848 element-states, **zero differences**.
 
 - **Header logo in proportion, and shrinks to fit** (2026-10-02). The logo was
   squeezed sideways at every width: its width was capped but the

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Counter from './Counter';
 import CodeBlocks from './CodeBlocks';
 import styles from './RollupCounter.module.css';
+import '../../../styles/code-layer.css';
 
 export default function RollupCounterWidget() {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
