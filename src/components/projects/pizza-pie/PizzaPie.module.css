@@ -20,9 +20,7 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-}
-:global([data-theme="dark"]) .ddl {
-	color: #f4f4f4;
+	color: var(--color-control-text);
 }
 .piechart {
 	position: relative;
@@ -137,12 +135,8 @@ button.btnStartOver {
 	border-color: var(--color-control-border);
 	font-size: 1.1rem;
 	transition: all 0.25s ease-in-out;
-}
-/* Dark-only escape: the light values are UA defaults. Must stay before the
-   :hover rule below, which has the same specificity and has to win. */
-:global([data-theme="dark"]) button.btnStartOver {
-	color: #f4f4f4;
-	background: #333333;
+	color: var(--color-button-rest-text);
+	background-color: var(--color-button-rest-bg);
 }
 button.btnStartOver:hover {
 	cursor: pointer;

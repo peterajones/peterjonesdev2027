@@ -46,8 +46,8 @@ the reasoning). The short version, and the rules that keep it intact:
 - **Dark mode is one attribute:** `data-theme` on `<html>`. Never reintroduce a
   `.dark` class or a per-rule dark selector. A component that genuinely needs a
   dark-only rule (a different image, say) writes
-  `:global([data-theme="dark"]) .thing` — 13 exist, all listed in
-  `docs/css-refactor-audit.md` §C.
+  `:global([data-theme="dark"]) .thing` — 11 remain, each with the reason it
+  can't be a token, in `docs/css-follow-ups.md` ("Dark-only rules trimmed").
 - **Global CSS is four layers** (`reset, base, layout, code`), all declared in
   `src/styles/global.css` (`npm run lint:layers` fails on any other `@layer`).
   The first three are imported there and are the only place for genuinely

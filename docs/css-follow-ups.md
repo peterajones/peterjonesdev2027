@@ -29,11 +29,7 @@ final whole-branch review.
    had to preserve exactly — `#ffa804` next to `#faa804`, several greys. Also
    rename `--color-text-inherit`, which is named for its mechanism
    (`currentColor` in light, a fixed value in dark) rather than its role.
-6. **Revisit the escapes.** 13 rules still need a `:global([data-theme="dark"])`
-   selector (audit §C). A few could become tokens if their light value can be
-   expressed — e.g. the contact email field, the `#ddl` select and the checkbox
-   input could take CSS system colours (`Field` / `FieldText`), which is a
-   behaviour change, not a pure refactor.
+6. ~~**Revisit the escapes.**~~ Done 2026-10-02 — see "Done since".
 
 ## Structure
 
@@ -97,6 +93,35 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Dark-only rules trimmed** (2026-10-02). There were 16 dark-only rules
+  (`[data-theme="dark"] …`), not the 13 counted in September: the nav work
+  added some. Five became tokens. Their light values had been left to the
+  browser, so the new tokens' light values are the system colours the
+  browser's own stylesheet uses, and light rendering is unchanged:
+  `--color-field-bg`/`--color-field-text` (`Field`/`FieldText`; the contact
+  email field), `--color-control-text` (`FieldText`; the checkbox-styling
+  inputs and the pizza-pie select), `--color-button-rest-bg`/`-text`
+  (`ButtonFace`/`ButtonText`; pizza-pie's Order Now button). The GitHub
+  link's hover rule dropped its dark scope, since it already used
+  `--color-link-hover` and that is the colour light mode inherits anyway.
+  (The item expected system colours to be a behaviour change; they aren't
+  while no `color-scheme` is set — see items 3–4.) Verified: computed colour,
+  background, border, accent and caret of all five in both themes, at rest
+  and hovered, identical before and after (28 elements); no baseline moved.
+
+  The 11 that remain, and why each stays dark-only:
+  - Not colours: `.logo-light`/`.logo-dark` and `.icon-sun`/`.icon-moon`
+    (display swaps, Navbar), `.github-logo` (a different image, code.css).
+  - Different design per theme, not a colour swap: the nav's `box-shadow`
+    (different offsets), the current-page glow (`font-weight` +
+    `text-shadow`), the icons' `transition` (0.25s vs 0.35s), and the Latest
+    Updates panel (border width and style, and its black background, E7).
+  - Light value unreachable from CSS: the weather search `::placeholder`
+    (the browser's own grey, which no keyword names and which differs
+    between browsers), and pagination's `.info span` (light inherits, and a
+    light rule there would also restyle the text Google Maps injects, which
+    the suite can't see).
 
 - **News thumbnails in the suite — and a squash bug they exposed**
   (2026-10-02). The harness aborted every `i.cbc.ca` request, so all 16 CBC

@@ -27,10 +27,8 @@
 	/* here doesn't disturb precedence for anything else. */
 	padding: 0 10px;
 	margin-bottom: 10px;
-}
-:global([data-theme="dark"]) .formContainer input.contactEmail {
-	background-color: #ffffff;
-	color: #333333;
+	background-color: var(--color-field-bg);
+	color: var(--color-field-text);
 }
 .formContainer textarea {
 	display: block;

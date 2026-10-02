@@ -9,8 +9,8 @@
 	margin: 0;
 }
 
-:global([data-theme="dark"]) .checkboxInput {
-	color: #f4f4f4;
+.checkboxInput {
+	color: var(--color-control-text);
 }
 
 .formsWrapper {
