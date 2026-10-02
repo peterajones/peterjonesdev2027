@@ -37,9 +37,8 @@ final whole-branch review.
 
 ## Structure
 
-7. **Merge the eight `CodeBlocks.tsx` copies** (~2,100 lines) into one component
-   fed each project's samples. They already share the same markup and the same
-   global class names.
+7. ~~**Merge the eight `CodeBlocks.tsx` copies.**~~ Done 2026-10-02 — see
+   "Done since".
 8. ~~**Shared `ProjectShell` component.**~~ Done 2026-10-02 — see "Done
    since".
 9. ~~**Tidy the IDs.**~~ Done 2026-10-02 — see "Done since".
@@ -105,6 +104,28 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **One `CodeBlocks` component** (2026-10-02). The eight per-project
+  `CodeBlocks.tsx` copies (2,100 lines) differed only in data: which files
+  each shows, in what order, under what header, in what language. Now
+  `src/components/projects/CodeBlocks.tsx` (47 lines) renders the panel from a
+  `files` prop, and each project has a `codeFiles.ts` with its sample strings
+  and file list (1,910 lines in all; nearly all of it is the samples
+  themselves). The strings were moved by script, not retyped, and checked
+  against `main`: all 23 byte-identical, and every project's file order,
+  labels and languages unchanged. Dropped one quirk: js-clock alone passed
+  `className=" html"` to its first highlighter, which rendered
+  `<pre class=" html">` and was read by nothing.
+
+  Server-rendered HTML of all eight pages is identical to `main` apart from
+  that class, the islands' JS bundle hashes, and, on `/projects/pagination`
+  only, the two halves of its one inline `<style>` block swapping places
+  (each half byte-identical; a layered block's position can't change the
+  cascade). Because the panels are rendered client-side and their bundle
+  changed, the deciding check was a computed-style comparison against a
+  `main` build: 8 pages, both themes, 1280 and 390px, at rest, description
+  open, code panel open and button hovered — 248,848 element-states, zero
+  differences. No baseline moved.
 
 - **`ProjectShell` component** (2026-10-02). The eight project pages each
   repeated the same block — `<div class="content">`, the "Back to Projects"

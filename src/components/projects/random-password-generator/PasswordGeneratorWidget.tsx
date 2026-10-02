@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PasswordGenerator from './PasswordGenerator';
-import CodeBlocks from './CodeBlocks';
+import CodeBlocks from '../CodeBlocks';
+import { codeFiles } from './codeFiles';
 import styles from './PasswordGenerator.module.css';
 import '../../../styles/code-layer.css';
 
@@ -100,7 +101,7 @@ export default function PasswordGeneratorWidget() {
             </button>
           </span>
         </div>
-        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
+        <CodeBlocks files={codeFiles} open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
     </div>
   );

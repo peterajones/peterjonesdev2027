@@ -1,10 +1,7 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import type { CodeFile } from '../CodeBlocks';
 
-interface Props {
-  open: boolean;
-  onToggle: () => void;
-}
+// The original HTML/CSS/JS iteration of the rollup-counter demo, shown in its
+// "Show me the code" panel.
 
 const htmlString = `<!DOCTYPE html>
 <html lang="en">
@@ -118,35 +115,8 @@ btnReset.addEventListener('click', () => {
   counter.innerHTML = \`<span>{count}</span>\`;
 });`;
 
-export default function CodeBlocks({ open, onToggle }: Props) {
-  return (
-    <section className={open ? 'code is-open' : 'code is-closed'}>
-      <p>
-        The code displayed below is from my original iteration in HTML, CSS and JS.
-      </p>
-      <div className="code-header">index.html</div>
-      <SyntaxHighlighter language="html" style={atomDark}>
-        {htmlString}
-      </SyntaxHighlighter>
-      <div className="code-header">style.css</div>
-      <SyntaxHighlighter language="css" style={atomDark}>
-        {cssString}
-      </SyntaxHighlighter>
-      <div className="code-header">script.js</div>
-      <SyntaxHighlighter language="javascript" style={atomDark}>
-        {jsString}
-      </SyntaxHighlighter>
-      <br />
-      <span className="btn-widget-code">
-        <button className="btn-toggle-code-bottom" onClick={onToggle}>
-          {open ? 'Hide the code' : 'Show me the code'}
-        </button>
-      </span>
-      <br />
-      <a href="/projects" className="backBtn btnLink">
-        Back to Projects
-      </a>
-      <section style={{ height: '60px' }} />
-    </section>
-  );
-}
+export const codeFiles: CodeFile[] = [
+  { name: 'index.html', language: 'html', code: htmlString },
+  { name: 'style.css', language: 'css', code: cssString },
+  { name: 'script.js', language: 'javascript', code: jsString },
+];

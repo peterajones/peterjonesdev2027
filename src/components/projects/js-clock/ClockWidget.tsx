@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Clock from './Clock';
-import CodeBlocks from './CodeBlocks';
+import CodeBlocks from '../CodeBlocks';
+import { codeFiles } from './codeFiles';
 import styles from './Clock.module.css';
 import '../../../styles/code-layer.css';
 
@@ -56,7 +57,7 @@ export default function ClockWidget() {
             </button>
           </span>
         </div>
-        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
+        <CodeBlocks files={codeFiles} open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
     </div>
   );

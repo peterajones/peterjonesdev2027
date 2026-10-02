@@ -21,9 +21,10 @@ nvm use 22
 - **React islands for interactivity.** Each project demo under `/projects/*`
   and the news reader mount a React component with `client:load` — isolated
   per page, not loaded site-wide. See `src/pages/projects/js-clock/index.astro`
-  for the reference pattern (widget component + `CodeBlocks.tsx` showing the
-  original vanilla HTML/CSS/JS + a `*Widget.tsx` wiring up the description/
-  code toggles) — all eight `/projects/*` pages now follow it. Each page
+  for the reference pattern (widget component + a `codeFiles.ts` holding the
+  original vanilla HTML/CSS/JS, rendered by the shared
+  `src/components/projects/CodeBlocks.tsx` + a `*Widget.tsx` wiring up the
+  description/code toggles) — all eight `/projects/*` pages now follow it. Each page
   wraps its widget in `src/components/ProjectShell.astro`, which supplies the
   shared back link, spacer and heading (`<ProjectShell heading="…">`).
 - **Google Maps, when a widget needs it**, loads via

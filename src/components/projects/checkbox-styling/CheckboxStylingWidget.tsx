@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Checkboxes from './Checkboxes';
-import CodeBlocks from './CodeBlocks';
+import CodeBlocks from '../CodeBlocks';
+import { codeFiles } from './codeFiles';
 import styles from './CheckboxStyling.module.css';
 import '../../../styles/code-layer.css';
 
@@ -50,7 +51,7 @@ export default function CheckboxStylingWidget() {
             </button>
           </span>
         </div>
-        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
+        <CodeBlocks files={codeFiles} open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
     </div>
   );

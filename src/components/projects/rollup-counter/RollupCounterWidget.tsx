@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Counter from './Counter';
-import CodeBlocks from './CodeBlocks';
+import CodeBlocks from '../CodeBlocks';
+import { codeFiles } from './codeFiles';
 import styles from './RollupCounter.module.css';
 import '../../../styles/code-layer.css';
 
@@ -55,7 +56,7 @@ export default function RollupCounterWidget() {
             </button>
           </span>
         </div>
-        <CodeBlocks open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
+        <CodeBlocks files={codeFiles} open={codeOpen} onToggle={() => setCodeOpen((v) => !v)} />
       </div>
     </div>
   );
