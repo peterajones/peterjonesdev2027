@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { fileURLToPath } from 'node:url';
 
 export type Theme = 'light' | 'dark';
 
@@ -7,6 +8,8 @@ export type Theme = 'light' | 'dark';
 const RECORDABLE = /^(?!http:\/\/localhost:\d+\/(?!api\/))/;
 
 const RECORD = process.env.VISUAL_RECORD_HAR === '1';
+
+const NEWS_THUMBNAIL = fileURLToPath(new URL('./fixtures/news-thumbnail.jpg', import.meta.url));
 
 export async function stabilize(page: Page, opts: { theme: Theme; harPath: string }) {
   await page.clock.setFixedTime(new Date('2026-09-18T12:00:00-04:00'));
@@ -32,17 +35,18 @@ export async function stabilize(page: Page, opts: { theme: Theme; harPath: strin
     notFound: 'abort',
   });
   // The CBC RSS feeds embed <img> thumbnails from i.cbc.ca inside item
-  // descriptions. In this environment every request to that host fails at
-  // the network level (net::ERR_HTTP2_PROTOCOL_ERROR) — consistently, and
-  // only for that host (CNBC/Euronews feed items carry no images at all).
-  // A live request fails fast, so recording captures it fine, but HAR
-  // replay of a "failed before any response" entry doesn't resolve the
-  // same way: the page-side request is left pending forever, so
-  // `networkidle` never fires. Short-circuit it ourselves so the outcome
-  // (image never loads) is identical but doesn't depend on replaying a
-  // failure through the HAR. Registered after routeFromHAR so it runs
-  // first (Playwright evaluates route handlers most-recently-added-first).
-  await page.route('https://i.cbc.ca/**', (route) => route.abort());
+  // descriptions (CNBC/Euronews items carry none). The recorded HARs hold no
+  // usable responses for that host (requests to it once failed here with
+  // net::ERR_HTTP2_PROTOCOL_ERROR), and HAR replay of a failed entry leaves
+  // the request pending so `networkidle` never fires. Answer every one with
+  // the same local fixture instead: a 620×349 image (the size every CBC
+  // thumbnail declares) with a grid and a circle, so the screenshots show
+  // the thumbnails laid out — and any squashing — rather than empty boxes.
+  // Registered after routeFromHAR so it runs first (Playwright evaluates
+  // route handlers most-recently-added-first).
+  await page.route('https://i.cbc.ca/**', (route) =>
+    route.fulfill({ path: NEWS_THUMBNAIL, contentType: 'image/jpeg' }),
+  );
   // Google Maps (pagination and weather-app projects) loads via its own
   // multi-chunk async bootstrap (a versioned main.js/common.js/map.js/...
   // sequence keyed off a `callback=` global). Under this suite's parallel
