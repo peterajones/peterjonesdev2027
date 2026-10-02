@@ -97,22 +97,31 @@ final whole-branch review.
     them as they were. The header was fixed afterwards (see below); the rest are
     still open, and fixing each means updating its baselines in the same commit.
 
-    Measured on 2026-09-21, production build, at the two widths every figure here
-    is quoted at. **`/contact` is the only route still scrolling sideways** —
-    20px at 320px, and clean at 390px. Everything else is now clean at both.
+    **No route scrolls sideways at 320px or 390px any more.** Fixed, worst
+    first: `/projects/random-password-generator` (29px at 390px, 67px at
+    320px), `/projects/pizza-pie` (5px / 40px), `/contact` (20px at 320px
+    only), and `/blog`, `/projects` and `/news` (3px each at 320px, one shared
+    cause). All six are guarded by `tests/overflow.spec.ts`; see "Done since"
+    for each cause.
 
-    Fixed in that pass, worst first: `/projects/random-password-generator`
-    (29px at 390px, 67px at 320px), `/projects/pizza-pie` (5px / 40px), and
-    `/blog`, `/projects` and `/news` (3px each at 320px, one shared cause).
-    All five are guarded by `tests/overflow.spec.ts`.
-
-    Two things that fall outside the 320–390px band and are left alone: at
-    280px `/projects` still overflows 15px, because `.card` in
-    `ProjectCard.astro` is a fixed 290px — no phone is that narrow (320px is
-    the floor in practice). And `/contact` needs its own look; it was the one
-    route in the group whose cause isn't the card grid.
+    Left alone because it falls outside the 320–390px band: at 280px
+    `/projects` still overflows 15px, because `.card` in `ProjectCard.astro`
+    is a fixed 290px — no phone is that narrow (320px is the floor in
+    practice).
 
 ## Done since
+
+- **Contact form fields shrink below a 380px viewport** (2026-10-02). The
+  name, email and message fields each had `min-width: 300px`, but the page
+  nests two `.content` wrappers, each with 20px side padding, so the form gets
+  the viewport minus 80px: 310px at 390px, only 240px at 320px. The fields
+  kept their 300px floor anyway and all three ended at x=340, 20px past a
+  320px viewport. Now `min(300px, 100%)` — the same pattern as the card grid
+  below — which only engages once the form is narrower than 300px. At 390px
+  and 1280px the fields are still exactly 300px, so **no baseline moved**.
+  The doubled `.content` padding is the reason the form is so narrow on
+  phones, but removing it would change the layout at every width, so it was
+  left alone.
 
 - **Pizza pie's rotated slices contained** (2026-09-21). Each slice is a 200px
   square rotated ~45°, so its bounding box is 283px and reached 41px past the
