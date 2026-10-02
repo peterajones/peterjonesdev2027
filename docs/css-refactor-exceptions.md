@@ -1,6 +1,6 @@
 # CSS Refactor — Exceptions Log
 
-**7 exceptions, all approved by Peter on 2026-09-19. Merged to `main` at `b295587`.**
+**7 exceptions from the refactor, all approved by Peter on 2026-09-19 and merged to `main` at `b295587`; later deliberate changes follow as E8 onwards.**
 
 This is now a record, not a gate: every intentional visual change the refactor made, so a later reader can tell a deliberate change from a regression. The interaction walkthrough below is still the checklist for any future CSS work, since the screenshot suite never captures those states.
 
@@ -93,3 +93,11 @@ Each entry is `E<n>` and records:
 - **What to look for:** in dark mode the modal panel is black against the grey page; light mode is unchanged (white). Verified in Chromium: dark modal `rgb(0, 0, 0)` with page `rgb(51, 51, 51)`; light modal `rgb(255, 255, 255)`.
 - **Commit:** see `git log --oneline -- src/components/Navbar.astro`
 - **Approval:** approved (Peter, 2026-09-19 — he requested it)
+
+### E8: Header logo — in proportion at every width, and shrinks to fit on phones
+
+- **Where:** every page, both themes, any width; the header is in every screenshot, so all 80 baselines were updated in the same commit. Clearest at 1280px (wider logo) and at 320–412px (logo sized to the room left by the links).
+- **What changed and why:** the logo PNG is 224×60, but the CSS capped only its width (158px, then 120px below 600px and 88px below 400px) while the `height="60"` attribute held it at 60px, so it was squeezed sideways at every width — aspect 2.63 on desktop and 1.47 at 320px against the image's 3.73. `.logo img` now sets `height: auto`, and its caps are `min(224px, 100%)` on desktop, `min(140px, 100%)` at 600px and below, and `min(120px, 100%)` at 400px and below (the phone sizes are Peter's). The percentage lets the logo narrow when the links need the room instead of pushing them off the right edge, which fixed caps did at 401–409px and below 347px. `.navContent` gains a 12px `column-gap`, so the logo never touches the links, and `height: 100%`, so the now-shorter row is centred in the 60px bar.
+- **What to look for:** desktop: the full 224×60 logo, no longer narrow. Phones: a smaller, correctly proportioned logo, vertically centred, with all four links and both icons on screen — measured at 140×38 (600px), 118×32 (412px), 120×32 (390px), 113×30 (360px) and 73×19 (320px). The bar stays 60px tall. Below the header nothing moves: in 78 of the 80 screenshots every changed pixel is within the top 60 rows, and in the other two (`/projects/pizza-pie`, desktop, both themes) exactly two pixels on the pie's edge change by at most 6/255 — anti-aliasing, the same two pixels on every run. `tests/overflow.spec.ts` now also asserts the nav fits and the logo keeps its ratio at 600/412/401/390/360/320px.
+- **Commit:** see `git log --oneline -- src/components/Navbar.astro`
+- **Approval:** approved (Peter, 2026-10-02 — he set the phone sizes and agreed the shrink-to-fit approach)

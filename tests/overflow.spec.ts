@@ -74,3 +74,41 @@ test.describe('no horizontal overflow', () => {
     }
   }
 });
+
+// The header is `position: fixed`, so anything it pushes past the right edge
+// is simply cut off: it never widens the document, and the scrollWidth check
+// above can't see it. Measure the nav's own items instead. The widths are the
+// ones the logo's shrink was tuned against: each breakpoint's edge (600, 400),
+// the in-between band just above 400 (401), common phones (412, 390, 360), and
+// the 320px floor.
+const NAV_WIDTHS = [600, 412, 401, 390, 360, 320];
+
+test.describe('navbar fits the viewport', () => {
+  for (const width of NAV_WIDTHS) {
+    test(`nav @ ${width}px`, async ({ page }, testInfo) => {
+      test.skip(testInfo.project.name !== 'mobile', 'run once, in the mobile project');
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto('/');
+      await page.waitForLoadState('domcontentloaded');
+
+      const { rightmost, logoLeft, logoRatio } = await page.evaluate(() => {
+        const items = [...document.querySelectorAll('nav a, nav button')]
+          .map((el) => el.getBoundingClientRect())
+          .filter((r) => r.width > 0);
+        const logo = [...document.querySelectorAll<HTMLImageElement>('.logo img')]
+          .find((img) => getComputedStyle(img).display !== 'none')!
+          .getBoundingClientRect();
+        return {
+          rightmost: Math.max(...items.map((r) => r.right)),
+          logoLeft: logo.left,
+          logoRatio: logo.width / logo.height,
+        };
+      });
+
+      expect(rightmost, 'a nav link or icon sits past the right edge').toBeLessThanOrEqual(width);
+      expect(logoLeft, 'the logo is clipped at the left edge').toBeGreaterThanOrEqual(0);
+      // 224×60 source image: the logo must scale, never squash.
+      expect(logoRatio).toBeCloseTo(224 / 60, 1);
+    });
+  }
+});

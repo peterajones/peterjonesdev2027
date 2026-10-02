@@ -66,22 +66,10 @@ final whole-branch review.
 
 ## Layout
 
-13. **The header logo is squashed, and the header is a fixed 60px.** The logo
-    PNG is 224×60, and both `<img>` tags in `Navbar.astro` carry
-    `width="224" height="60"`. The CSS caps the width (`max-width: 158px`,
-    then 120px below 600px and 88px below 400px) but never sets
-    `height: auto`, so the height stays at the attribute's 60px and the image
-    is squeezed sideways: measured on 2026-10-02 at 158×60 on desktop (aspect
-    2.63 against the image's 3.73) and 88×60 at 320px (1.47), where the face
-    and lettering are visibly narrow. Separately, `.nav` is `position: fixed`
-    with `height: 60px` at every width, which costs a phone 60px of screen at
-    all times; the content does fit (measured flush at 1280/390/320).
-
-    The fix for the logo is `height: auto` on `.logo img`, but that shrinks the
-    logo's height at every width, which changes the header on every page, so
-    it needs a decision on how big the logo should be on phones, every
-    baseline updated, and its own exception entry. Whether the bar should
-    then be shorter on phones is the same decision.
+13. ~~**The header logo is squashed, and the header is a fixed 60px.**~~
+    Done 2026-10-02 — see "Done since" and exception E8. The bar is still
+    60px tall at every width; with the logo now centred in it, that was left
+    as it is.
 
 14. **Consolidate the breakpoints.** 15 media queries across 13 files with no
     shared scale: 1200, 1024, 1000, 724, 667, 600, 400 all appear. Worse, some
@@ -124,6 +112,22 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Header logo in proportion, and shrinks to fit** (2026-10-02). The logo was
+  squeezed sideways at every width: its width was capped but the
+  `height="60"` attribute held it at 60px. Now `height: auto`, with caps of
+  `min(224px, 100%)` on desktop, `min(140px, 100%)` at 600px and below and
+  `min(120px, 100%)` at 400px and below. The percentage is what lets the logo
+  narrow when the links need the room; fixed caps pushed the icons off the
+  right edge at 401–409px and below 347px. Measured at 24 widths from 1440 to
+  280px in both themes: nothing off-screen, nothing clipped, ratio 3.73
+  throughout. A note for whoever touches this next: `min-width: 0` on `.logo`
+  is **not** needed and was removed — an image with a percentage `max-width`
+  already counts as shrinkable in flex layout, and a mutation run proved the
+  rule did nothing. The fixed header was also invisible to the page-overflow
+  check (it never widens the document), so `tests/overflow.spec.ts` gained a
+  nav-fit test, mutation-tested against both failure modes. Deliberate visual
+  change: exception E8, all baselines updated.
 
 - **Fonts load per page** (2026-10-02). `BaseLayout.astro` loaded six
   render-blocking Google Font stylesheets on every route. Now it loads only
@@ -189,7 +193,7 @@ final whole-branch review.
   derived from `Astro.url.pathname`, styled bold in light and with a glow in
   dark (colour only below 400px, where bold costs up to 20px on the longest
   label). Site-wide `:focus-visible` ring in `base.css`. The header's
-  logo distortion and fixed 60px height are item 13.
+  logo distortion was item 13, now done.
 
 - **Password Generator viewport overflow** (2026-09-21). The page scrolled 29px
   past a 390px viewport and 67px past 320px. Cause was a single rule: a

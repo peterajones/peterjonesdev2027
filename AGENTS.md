@@ -62,7 +62,7 @@ the reasoning). The short version, and the rules that keep it intact:
 ```
 npx astro check                                       # expect 0 errors/warnings/hints
 npx playwright test tests/theme.spec.ts tests/visual   # expect 84 passed, 2 skipped
-npx playwright test tests/overflow.spec.ts             # expect 12 passed, 12 skipped
+npx playwright test tests/overflow.spec.ts             # expect 18 passed, 18 skipped
 ```
 
 The visual suite screenshots every route in both themes at 390px and 1280px and
@@ -75,7 +75,9 @@ a page wider than the viewport just produces a wider screenshot that still
 matches its own baseline. `tests/overflow.spec.ts` is the gate for that,
 asserting `scrollWidth === clientWidth` at 390px and 320px. It covers the six
 routes that used to overflow (`docs/css-follow-ups.md` item 15); add a route
-whenever a fix touches its width.
+whenever a fix touches its width. The fixed header can't widen the document,
+so that check can't see it; the same file measures the nav's own links and
+icons, and the logo's aspect ratio, at six phone widths.
 
 The suite only captures each page at rest — no hover, no open panels or modals,
 no typed input. Those states need a computed-style check or a browser pass;
