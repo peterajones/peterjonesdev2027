@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './CurrencyConverter.module.css';
 
 interface Currency {
@@ -69,6 +69,7 @@ export default function CurrencyConverter() {
   const [baseCurrencyAmount, setBaseCurrencyAmount] = useState(0);
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({});
   const [addCurrencyOpen, setAddCurrencyOpen] = useState(false);
+  const addToggleRef = useRef<HTMLButtonElement>(null);
   const [dateText, setDateText] = useState('');
   const [inputValues, setInputValues] = useState<Record<string, string>>({});
 
@@ -305,6 +306,7 @@ export default function CurrencyConverter() {
           </button>
         </div>
         <button
+          ref={addToggleRef}
           className={`${styles.currencyAddBtn} ${addCurrencyOpen ? styles.open : ''}`}
           onClick={() => setAddCurrencyOpen((v) => !v)}
         >
@@ -320,20 +322,37 @@ export default function CurrencyConverter() {
           </svg>
           {addCurrencyOpen ? 'Back' : 'Add Currency'}
         </button>
-        <ul className={styles.currencyAddList}>
-          {currencyData.map((currency) => (
-            <li
-              key={currency.abbreviation}
-              data-currency={currency.abbreviation}
-              className={selectedCurrencies.includes(currency.abbreviation) ? styles.disabled : ''}
-              onClick={() => !selectedCurrencies.includes(currency.abbreviation) && handleAddCurrency(currency.abbreviation)}
-            >
-              <img src={currency.flagURL} alt="" className={styles.currencyFlag} width={48} height={32} />
-              <span>
-                {currency.abbreviation} - {currency.name}
-              </span>
-            </li>
-          ))}
+        {/* inert while closed: the list is only slid out of view, so its
+            buttons would otherwise still be reachable with Tab. */}
+        <ul className={styles.currencyAddList} inert={!addCurrencyOpen}>
+          {currencyData.map((currency) => {
+            const added = selectedCurrencies.includes(currency.abbreviation);
+            return (
+              <li
+                key={currency.abbreviation}
+                data-currency={currency.abbreviation}
+                className={added ? styles.disabled : ''}
+              >
+                <button
+                  type="button"
+                  className={styles.currencyAddOption}
+                  disabled={added}
+                  onClick={() => {
+                    handleAddCurrency(currency.abbreviation);
+                    // Adding closes the list and disables this button, which
+                    // would drop focus to the top of the page; send it back to
+                    // the toggle the user opened the list from.
+                    addToggleRef.current?.focus();
+                  }}
+                >
+                  <img src={currency.flagURL} alt="" className={styles.currencyFlag} width={48} height={32} />
+                  <span>
+                    {currency.abbreviation} - {currency.name}
+                  </span>
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -105,6 +105,33 @@ final whole-branch review.
 
 ## Done since
 
+- **Add Currency list works from the keyboard** (2026-10-02). Each item was a
+  click-only `<li>`. Each `<li>` now holds a `<button type="button">` that
+  takes over the item's flex layout and padding and inherits its cursor; the
+  UA border, background and margin are cleared and its colour inherited, so a
+  disabled one doesn't grey its text. Already-added currencies are `disabled`,
+  so Tab skips them. Three things came with it:
+  - The list is only slid out of view when closed, so its buttons were
+    reachable with Tab while invisible; the `<ul>` is now `inert` while
+    closed.
+  - Adding a currency closes the list (it always did) and disables the
+    focused button, which dropped focus to the top of the page. Focus now
+    returns to the "Add Currency" toggle, so Enter reopens the list.
+  - The toggle had `outline: none`, which overrode the site focus ring;
+    removed, so keyboard focus on it is visible. (`:focus-visible` doesn't
+    fire on mouse clicks, so nothing changes for mouse users.)
+
+  No pixel changed. Measured the open list — 33 items' boxes, colours,
+  opacity and cursor, plus the hover background, in both themes at 1280 and
+  390px — identical to before. Keyboard, checked twice round: Tab skips the
+  closed list; the toggle shows its ring; Enter opens it; Tab lands on the
+  first currency not yet added; Enter adds it and focus returns to the
+  toggle. Mouse: adding each of the 29 available currencies in turn behaves
+  identically to `main`. (Note for anyone testing this: Playwright scrolls a
+  clipped container to reach an element, which a visitor can't, so on
+  `main` it can "click" the closed, hidden list. Reopen the list before each
+  click, as a visitor must.)
+
 - **Currency converter accessibility** (2026-10-02). Three fixes, no pixel
   changed:
   - Each row's amount input had no label, so a screen reader announced every
@@ -124,8 +151,7 @@ final whole-branch review.
     read out beside every currency name. Now `alt=""`: the name is right next
     to each one.
 
-  Still open: the Add Currency list's items are clickable `<li>`s, so adding
-  a currency can't be done from the keyboard either.
+  The Add Currency list's click-only `<li>`s were fixed next (below).
 
 - **One `CodeBlocks` component** (2026-10-02). The eight per-project
   `CodeBlocks.tsx` copies (2,100 lines) differed only in data: which files
