@@ -45,9 +45,7 @@ final whole-branch review.
 
 ## Test harness
 
-10. **Verify the news thumbnails.** `i.cbc.ca` fails at the network level in the
-    suite, so the images are aborted and the feed-item image box renders
-    unloaded in every baseline. Its CSS is only verified where the box is sized.
+10. ~~**Verify the news thumbnails.**~~ Done 2026-10-02 — see "Done since".
 11. ~~**Revisit `workers: 2`.**~~ Done 2026-10-02 — see "Done since".
 12. ~~**Guard the layer order.**~~ Done 2026-10-02 — see "Done since".
 
@@ -99,6 +97,30 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **News thumbnails in the suite — and a squash bug they exposed**
+  (2026-10-02). The harness aborted every `i.cbc.ca` request, so all 16 CBC
+  feed screenshots showed empty image boxes. It now answers each one with
+  `tests/visual/fixtures/news-thumbnail.jpg`, a 620×349 image (the size
+  every CBC thumbnail declares) with a grid and a circle, so distortion is
+  obvious. `i.cbc.ca` itself answers fine today (a live request returns the
+  JPEG), so visitors do see these images. Only the 16 CBC screenshots changed
+  (the CNBC and Euronews feeds carry no images); those baselines were
+  updated.
+
+  The first real look showed every thumbnail squashed square on phones:
+  350×349 at 390px, ratio 1.00 against the image's 1.78. reset.css caps
+  images at `max-width: 100%`, but their `height="349"` attribute held the
+  height — the same bug the header logo had. Fixed at the root, as Peter
+  suggested: `img, picture { height: auto; }` in reset.css, so no image's
+  height attribute can squash it again. (A rule in the lowest layer still
+  beats a height attribute: presentational hints rank below all author
+  styles.) That would also have let every page banner follow its photo's
+  shape instead of the uniform 400px their `height="400"` gave them, so
+  `Banner.astro` now states `height: 400px`; banners are unchanged. Whether
+  banners should go fluid (280–500px, which their CSS already allows) is a
+  separate decision. Now 350×197 on phones, ratio 1.78; desktop unchanged at
+  620×349, and exactly the 8 phone-width CBC screenshots moved. Exception E9.
 
 - **Playwright back to half the cores** (2026-10-02). `workers: 2` was there
   for a 1px whole-page height race on `home [dark]` under parallel load.

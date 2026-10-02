@@ -32,8 +32,12 @@ const { src, alt = 'banner' } = Astro.props;
     overflow: hidden;
   }
 
+  /* Every banner is 400px tall, whatever the photo's shape: object-fit
+     crops it. Stated here because reset.css gives images height: auto,
+     which would otherwise let each banner follow its photo's proportions. */
   .banner img {
     width: 100%;
+    height: 400px;
     object-fit: cover;
     object-position: center center;
     max-height: 500px;

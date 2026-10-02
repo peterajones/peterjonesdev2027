@@ -101,3 +101,12 @@ Each entry is `E<n>` and records:
 - **What to look for:** desktop: the full 224×60 logo, no longer narrow. Phones: a smaller, correctly proportioned logo, vertically centred, with all four links and both icons on screen — measured at 140×38 (600px), 118×32 (412px), 120×32 (390px), 113×30 (360px) and 73×19 (320px). The bar stays 60px tall. Below the header nothing moves: in 78 of the 80 screenshots every changed pixel is within the top 60 rows, and in the other two (`/projects/pizza-pie`, desktop, both themes) exactly two pixels on the pie's edge change by at most 6/255 — anti-aliasing, the same two pixels on every run. `tests/overflow.spec.ts` now also asserts the nav fits and the logo keeps its ratio at 600/412/401/390/360/320px.
 - **Commit:** see `git log --oneline -- src/components/Navbar.astro`
 - **Approval:** approved (Peter, 2026-10-02 — he set the phone sizes and agreed the shrink-to-fit approach)
+
+### E9: News thumbnails no longer squashed on phones
+
+- **Where:** any CBC feed (`/news/cbc-world-news`, `/news/cbc-top-stories`, `/news/cbc-toronto-news`, `/news/cbc-technology-news`), either theme, below about 660px wide (where the 620px thumbnail starts to narrow). The 8 phone-width CBC baselines were updated in the same commit.
+- **What changed and why:** each feed item's thumbnail arrives as `<img width="620" height="349">`. reset.css caps images at `max-width: 100%`, so on a phone the width narrowed to the column, but nothing set `height: auto`, so the 349px height held and the picture was squashed: 350×349 at 390px, aspect 1.00 against the image's 1.78. `img, picture { height: auto; }` in `reset.css` fixes it for every image (Peter's call: fix it at the root). `Banner.astro` now sets `height: 400px` explicitly, since the banners' uniform 400px came only from their `height="400"` attribute and they would otherwise have followed each photo's shape. This only came to light once the suite rendered the thumbnails at all (follow-ups item 10).
+- **What to look for:** on a phone, thumbnails keep their shape (350×197 at 390px) and each feed item is correspondingly shorter. Desktop is unchanged (620×349): every desktop screenshot passed untouched.
+- **Commit:** see `git log --oneline -- src/components/NewsFeed.module.css`
+- **Approval:** approved (Peter, 2026-10-02)
+
