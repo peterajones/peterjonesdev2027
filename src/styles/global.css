@@ -1,9 +1,10 @@
 /* This statement establishes layer order (and with it, cascade order) by
-   first appearance — the minifier drops the statement itself from the
-   built output, but the order it declared survives via the @import
-   layer(...) below. Never use @layer in component styles (Astro <style>
-   blocks or CSS Modules): a layered rule there would join this ordering
-   and could lose to an unlayered component rule it used to beat.
+   first appearance. The minifier folds it into the layer blocks the
+   @import layer(...) lines below produce, in this order. Never use @layer
+   in component styles (Astro <style> blocks or CSS Modules): a layered rule
+   there would join this ordering and could lose to an unlayered component
+   rule it used to beat. `npm run lint:layers` enforces that, and that only
+   the four layers declared here are ever named.
    `code` is declared here but filled by code-layer.css, which only the
    project widgets import. With no rules for it in this file, the build keeps
    an explicit `@layer code;` after the other three, and that is what keeps

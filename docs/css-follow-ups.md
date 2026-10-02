@@ -51,10 +51,7 @@ final whole-branch review.
 11. **Revisit `workers: 2`** in `playwright.config.ts`. It's there for a real
     1px whole-page height race that only appeared under parallel load. Worth
     retesting if the suite gets slow.
-12. **Guard the layer order.** Cascade order currently relies on `@layer`'s first
-    appearance, because the minifier drops the statement. `global.css` carries a
-    comment warning never to use `@layer` in a component; a lint rule would make
-    that mechanical.
+12. ~~**Guard the layer order.**~~ Done 2026-10-02 — see "Done since".
 
 ## Layout
 
@@ -104,6 +101,21 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Layer order guarded** (2026-10-02). `npm run lint:layers`
+  (`scripts/check-layers.mjs`, no dependencies) scans every `.css` and
+  `.astro` file under `src/` and fails if `@layer` or `layer(` appears
+  anywhere but `src/styles/global.css` and `src/styles/code-layer.css`, if
+  either names a layer other than `reset`, `base`, `layout` or `code`, or if
+  `global.css` stops declaring exactly that order. A plain script rather than
+  a Playwright spec, because every Playwright run starts with a full build.
+  Mutation-tested: an `@layer` block in a CSS Module, an `@layer` in an Astro
+  `<style>`, a misspelt `layer(Code)`, a reordered declaration and a layered
+  `@import` in a component are each caught, with the right file and line.
+  Added to the before-and-after checks in `AGENTS.md`. (The item's premise
+  was also out of date: the minifier doesn't drop the order statement, it
+  folds it into the layer blocks and keeps `@layer code;` explicit; the
+  `global.css` comment now says so.)
 
 - **Add Currency list works from the keyboard** (2026-10-02). Each item was a
   click-only `<li>`. Each `<li>` now holds a `<button type="button">` that

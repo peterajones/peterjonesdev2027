@@ -49,8 +49,9 @@ the reasoning). The short version, and the rules that keep it intact:
   `:global([data-theme="dark"]) .thing` — 13 exist, all listed in
   `docs/css-refactor-audit.md` §C.
 - **Global CSS is four layers** (`reset, base, layout, code`), all declared in
-  `src/styles/global.css`. The first three are imported there and are the only
-  place for genuinely site-wide rules. `code` (the project widgets' code-panel
+  `src/styles/global.css` (`npm run lint:layers` fails on any other `@layer`).
+  The first three are imported there and are the only place for genuinely
+  site-wide rules. `code` (the project widgets' code-panel
   chrome) is imported by each project widget via `src/styles/code-layer.css`,
   so other routes don't ship it; keep it inside `layer(code)` if you move it,
   never as a plain import. **Never
@@ -65,6 +66,7 @@ the reasoning). The short version, and the rules that keep it intact:
 
 ```
 npx astro check                                       # expect 0 errors/warnings/hints
+npm run lint:layers                                   # expect "Layer order check passed"
 npx playwright test tests/theme.spec.ts tests/visual   # expect 84 passed, 2 skipped
 npx playwright test tests/overflow.spec.ts             # expect 18 passed, 18 skipped
 ```
