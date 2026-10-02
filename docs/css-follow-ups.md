@@ -48,9 +48,7 @@ final whole-branch review.
 10. **Verify the news thumbnails.** `i.cbc.ca` fails at the network level in the
     suite, so the images are aborted and the feed-item image box renders
     unloaded in every baseline. Its CSS is only verified where the box is sized.
-11. **Revisit `workers: 2`** in `playwright.config.ts`. It's there for a real
-    1px whole-page height race that only appeared under parallel load. Worth
-    retesting if the suite gets slow.
+11. ~~**Revisit `workers: 2`.**~~ Done 2026-10-02 — see "Done since".
 12. ~~**Guard the layer order.**~~ Done 2026-10-02 — see "Done since".
 
 ## Layout
@@ -101,6 +99,15 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Playwright back to half the cores** (2026-10-02). `workers: 2` was there
+  for a 1px whole-page height race on `home [dark]` under parallel load.
+  Retested now that the CSS rebuild has changed that page: 20 consecutive
+  visual runs at 6 workers (the default on this 12-core machine; 1,600
+  zero-tolerance comparisons) were all clean, against 5 clean runs at 2. A
+  run takes ~19s instead of ~46s. The config now says `workers: '50%'` — the
+  default, stated — with the history and the fallback in its comment: if the
+  race returns, set it back to 2 rather than raising `expect.timeout`.
 
 - **Layer order guarded** (2026-10-02). `npm run lint:layers`
   (`scripts/check-layers.mjs`, no dependencies) scans every `.css` and

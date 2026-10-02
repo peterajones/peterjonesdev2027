@@ -7,15 +7,16 @@ export default defineConfig({
   snapshotPathTemplate: '{testDir}/visual/__screenshots__/{projectName}/{arg}{ext}',
   fullyParallel: true,
   retries: 0,
-  // Default worker count (half the CPU cores = 6 on this machine) was
-  // observed to occasionally produce a genuine 1px total-page-height
-  // difference on the longest page (home, dark, desktop) between otherwise
-  // identical runs — reproduced 0/5 times at workers:1, so it's rendering
-  // contention under parallel load, not app or test nondeterminism. Capped
-  // instead of raising expect.timeout, since that would only paper over
-  // the same race with more retries rather than reducing the contention
-  // causing it.
-  workers: 2,
+  // Half the CPU cores (Playwright's default, stated so it's visible): 6 on
+  // the 12-core dev machine. This was capped at 2 from September 2026 after
+  // the default occasionally produced a genuine 1px total-page-height
+  // difference on the longest page (home, dark, desktop) under parallel
+  // load. Retested 2026-10-02, after the CSS rebuild had changed that page:
+  // 20 consecutive visual runs at 6 workers (1,600 zero-tolerance
+  // comparisons) were all clean, at ~19s a run against ~46s at 2. If that
+  // 1px race comes back, set this to 2 again rather than raising
+  // expect.timeout, which would only hide it.
+  workers: '50%',
   reporter: [['list'], ['html', { open: 'never' }]],
   expect: {
     toHaveScreenshot: { maxDiffPixels: 0, animations: 'disabled', caret: 'hide', scale: 'css' },
