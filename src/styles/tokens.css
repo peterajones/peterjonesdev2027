@@ -7,8 +7,9 @@
 	/* Text and page */
 	--color-text: #000000;
 	--color-text-muted: #585858;
-	/* currentColor = inherit in light mode; a fixed colour in dark mode. */
-	--color-text-inherit: currentColor;
+	/* Text that takes its surroundings' colour in light mode (currentColor)
+	   and is pinned to the light text colour in dark. */
+	--color-text-ambient: currentColor;
 	--color-bg: #ffffff;
 
 	/* Links and accents */
@@ -22,9 +23,7 @@
 	--color-nav-border: rebeccapurple;
 
 	/* Cards and code pages */
-	--color-card-title: #000000;
 	--color-card-bg: transparent;
-	--color-list-text: #000;
 	--color-code-header-bg: #fff;
 	--color-stage-bg: transparent;
 	--color-stage-border: #464646;
@@ -38,9 +37,8 @@
 
 	/* Pagination project */
 	--color-contact-icon: darkgreen;
-	--color-contact-icon-alt: darkgreen;
 	--color-page-num-bg: #f4f4f4;
-	--color-page-num-hover-bg: #faa804;
+	--color-page-num-hover-bg: #ffa804;
 	--color-page-num-hover-text: #fff;
 	--color-page-num-text: darkgreen;
 	--color-page-num-active-hover-bg: #ffa804;
@@ -73,7 +71,7 @@
 	/* Text and page */
 	--color-text: #f4f4f4;
 	--color-text-muted: #f4f4f4;
-	--color-text-inherit: #f4f4f4;
+	--color-text-ambient: #f4f4f4;
 	--color-bg: #333333;
 
 	/* Links and accents */
@@ -87,9 +85,7 @@
 	--color-nav-border: rgba(255, 235, 59, 0.35);
 
 	/* Cards and code pages */
-	--color-card-title: #fafafa;
-	--color-card-bg: #4a4a4a;
-	--color-list-text: #fff;
+	--color-card-bg: #464646;
 	--color-code-header-bg: #464646;
 	--color-stage-bg: #464646;
 	--color-stage-border: #000000;
@@ -103,7 +99,6 @@
 
 	/* Pagination project */
 	--color-contact-icon: #ffa804;
-	--color-contact-icon-alt: #faa804;
 	--color-page-num-bg: #ffa804;
 	--color-page-num-hover-bg: #f4f4f4;
 	--color-page-num-hover-text: #333333;

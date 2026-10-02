@@ -110,3 +110,11 @@ Each entry is `E<n>` and records:
 - **Commit:** see `git log --oneline -- src/components/NewsFeed.module.css`
 - **Approval:** approved (Peter, 2026-10-02)
 
+### E10: Near-duplicate colours merged
+
+- **Where:** dark theme: `/projects` and `/blog` (project card background and titles), `/projects/pagination` (the phone and website icons on each user card); light theme: `/projects/pagination` page numbers on hover; dark theme, any project page's code panel description list (only with the description open). Any width.
+- **What changed and why:** four colours that differed from a neighbour by under 8/255 per channel were merged into it (follow-ups item 5): `#4a4a4a` → `#464646` (card background, dark), `#fafafa` → `#f4f4f4` (card titles, dark), `#fff` → `#f4f4f4` (description list text, dark), `#faa804` → `#ffa804` (page-number hover, light; contact icons, dark). The 6 dark baselines for `/projects`, `/blog` and `/projects/pagination` were updated in the same commit.
+- **What to look for:** nothing, to the eye. Measured: every changed pixel in those 6 screenshots is one of the four merges or its anti-aliased edge, at most 7/255 per channel. Computed values: cards `rgb(70, 70, 70)`, titles `rgb(244, 244, 244)`, contact icons `rgb(255, 168, 4)` in dark.
+- **Commit:** see `git log --oneline -- src/styles/tokens.css`
+- **Approval:** approved (Peter, 2026-10-02 — he chose all four merges)
+

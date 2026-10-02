@@ -4,9 +4,9 @@
 	padding: 10px 0 10px 0;
 }
 .github-link span {
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
-/* In dark mode the span's colour is pinned (--color-text-inherit is a fixed
+/* In dark mode the span's colour is pinned (--color-text-ambient is a fixed
    value there, not currentColor), so it would not follow the link's hover
    colour. Stating the hover colour for both themes restores parity (E5);
    in light it is the colour the span already inherited. */
@@ -39,7 +39,7 @@ code.inline {
 	color: var(--color-text);
 }
 .code-description-open li {
-  color: var(--color-list-text);
+  color: var(--color-text);
 }
 .stage {
 	width: 50vw;
@@ -61,7 +61,7 @@ section.code pre {
 	position: relative;
 	text-align: right;
 	background-color: var(--color-code-header-bg);
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 	border-top: 1px solid #000000;
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;

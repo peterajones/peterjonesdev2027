@@ -96,12 +96,12 @@ li.pCard {
 	padding: 4px 0;
 }
 .phoneIcon {
-	color: var(--color-contact-icon-alt);
+	color: var(--color-contact-icon);
 	width: 18px;
 }
 .phoneNumber {
 	padding-left: 12px;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 .website {
 	display: flex;
@@ -110,7 +110,7 @@ li.pCard {
 	padding: 4px 0;
 }
 .websiteIcon {
-	color: var(--color-contact-icon-alt);
+	color: var(--color-contact-icon);
 	width: 18px;
 }
 .websiteUrl {
@@ -120,7 +120,7 @@ li.pCard {
 	color: var(--color-text);
 }
 .websiteUrl a:hover {
-	color: var(--color-contact-icon-alt);
+	color: var(--color-contact-icon);
 }
 :global([data-theme="dark"]) .info span {
 	color: #fff;

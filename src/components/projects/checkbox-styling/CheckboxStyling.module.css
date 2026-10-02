@@ -38,7 +38,7 @@
 	justify-content: center;
 	margin-left: calc(50% - 70px);
 	text-align: left;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 
 .checkboxes .checkboxLabel {
@@ -66,7 +66,7 @@
 	justify-content: center;
 	margin-left: calc(50% - 70px);
 	text-align: left;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 
 .switches label {

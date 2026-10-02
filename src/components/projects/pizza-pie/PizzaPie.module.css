@@ -123,7 +123,7 @@
 	font-family: Arial, sans-serif;
 	font-size: 1.15rem;
 	padding-bottom: 40px;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 button.btnStartOver {
 	position: relative;

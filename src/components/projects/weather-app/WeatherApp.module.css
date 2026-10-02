@@ -47,7 +47,7 @@ span.weatherConditions {
 .currentWeatherWrapper {
 	position: relative;
 	bottom: 26px;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 .row1,
 .row2 {

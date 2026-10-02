@@ -8,7 +8,7 @@
 	display: inline-block;
 	overflow: hidden;
 	font-size: 60px;
-	color: var(--color-text-inherit);
+	color: var(--color-text-ambient);
 }
 .countEnter {
 	transform: translateY(100%);
