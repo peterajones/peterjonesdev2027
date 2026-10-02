@@ -39,11 +39,8 @@ const {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" />
+    {/* A font used by one widget is loaded by that widget's page, not here. */}
+    <slot name="head" />
   </head>
   <body>
     <Navbar />

@@ -11,12 +11,7 @@ final whole-branch review.
 
 ## Performance
 
-1. **Load fonts per page.** `BaseLayout.astro` loads six render-blocking Google
-   Font stylesheets on all 20 routes. Four are used by exactly one project
-   widget each (Roboto Mono, Montserrat, Muli, Open Sans) and **Source Sans Pro
-   is used nowhere** outside CodeBlocks sample text. Moving each to the page
-   that needs it — and dropping the unused one — is pixel-neutral everywhere
-   else. The refactor preserved the existing behaviour deliberately (audit P3).
+1. ~~**Load fonts per page.**~~ Done 2026-10-02 — see "Done since".
 2. **Stop shipping `code.css` everywhere.** The `code` layer (~3 KB minified) is
    the project widgets' code-panel chrome, but it loads on all 12 non-project
    routes too. It's the one remaining gap against "every page ships only the CSS
@@ -69,6 +64,25 @@ final whole-branch review.
     comment warning never to use `@layer` in a component; a lint rule would make
     that mechanical.
 
+## Layout
+
+13. **The header logo is squashed, and the header is a fixed 60px.** The logo
+    PNG is 224×60, and both `<img>` tags in `Navbar.astro` carry
+    `width="224" height="60"`. The CSS caps the width (`max-width: 158px`,
+    then 120px below 600px and 88px below 400px) but never sets
+    `height: auto`, so the height stays at the attribute's 60px and the image
+    is squeezed sideways: measured on 2026-10-02 at 158×60 on desktop (aspect
+    2.63 against the image's 3.73) and 88×60 at 320px (1.47), where the face
+    and lettering are visibly narrow. Separately, `.nav` is `position: fixed`
+    with `height: 60px` at every width, which costs a phone 60px of screen at
+    all times; the content does fit (measured flush at 1280/390/320).
+
+    The fix for the logo is `height: auto` on `.logo img`, but that shrinks the
+    logo's height at every width, which changes the header on every page, so
+    it needs a decision on how big the logo should be on phones, every
+    baseline updated, and its own exception entry. Whether the bar should
+    then be shorter on phones is the same decision.
+
 14. **Consolidate the breakpoints.** 15 media queries across 13 files with no
     shared scale: 1200, 1024, 1000, 724, 667, 600, 400 all appear. Worse, some
     use `min-device-width`/`max-device-width` with `orientation` (the old
@@ -110,6 +124,19 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Fonts load per page** (2026-10-02). `BaseLayout.astro` loaded six
+  render-blocking Google Font stylesheets on every route. Now it loads only
+  Roboto, which `base.css` uses site-wide, and exposes a `head` slot; the four
+  widget fonts each moved to the one page that uses them (Roboto Mono →
+  `/projects/js-clock`, Montserrat → `/projects/currency-converter`, Muli →
+  `/projects/random-password-generator`, Open Sans →
+  `/projects/rollup-counter`). Source Sans Pro was dropped: it appears only
+  inside sample code shown in the checkbox-styling code panel, never as a
+  style. Every other route now makes one font request instead of six.
+  Verified in a browser that each widget page still loads its font
+  (`document.fonts`) and that `/` and `/projects` request only Roboto; **no
+  baseline moved**.
 
 - **Contact form fields shrink below a 380px viewport** (2026-10-02). The
   name, email and message fields each had `min-width: 300px`, but the page
@@ -161,8 +188,8 @@ final whole-branch review.
 - **Current-page indicator and focus styles** (2026-09-20). `aria-current="page"`
   derived from `Astro.url.pathname`, styled bold in light and with a glow in
   dark (colour only below 400px, where bold costs up to 20px on the longest
-  label). Site-wide `:focus-visible` ring in `base.css`. Still open in the
-  header: the fixed 60px height on phones.
+  label). Site-wide `:focus-visible` ring in `base.css`. The header's
+  logo distortion and fixed 60px height are item 13.
 
 - **Password Generator viewport overflow** (2026-09-21). The page scrolled 29px
   past a 390px viewport and 67px past 320px. Cause was a single rule: a
