@@ -40,13 +40,18 @@ the reasoning). The short version, and the rules that keep it intact:
 
 - **Plain CSS only. No Sass** — the `sass` dependency is gone, and there are no
   `.scss` files. Native nesting is fine.
-- **Colours are tokens.** `src/styles/tokens.css` defines `--color-*` on `:root`
-  with dark overrides under `:root[data-theme="dark"]`. Write
-  `color: var(--color-text)`, never a hex literal for anything theme-varying.
-- **Dark mode is one attribute:** `data-theme` on `<html>`. Never reintroduce a
+- **Colours are tokens.** `src/styles/tokens.css` defines each `--color-*` once,
+  as `light-dark(light, dark)`, resolved by `color-scheme` (light on `:root`,
+  dark under `:root[data-theme="dark"]`). Write `color: var(--color-text)`,
+  never a hex literal for anything theme-varying. An element that sets its
+  own `color-scheme` (only the weather search input) gets that branch of every
+  token it uses.
+- **Dark mode is one attribute:** `data-theme` on `<html>`, set before first
+  paint from the stored choice, else the OS setting; the toggle stores a choice
+  only when it differs from the OS. Never reintroduce a
   `.dark` class or a per-rule dark selector. A component that genuinely needs a
   dark-only rule (a different image, say) writes
-  `:global([data-theme="dark"]) .thing` — 11 remain, each with the reason it
+  `:global([data-theme="dark"]) .thing` — 10 remain, each with the reason it
   can't be a token, in `docs/css-follow-ups.md` ("Dark-only rules trimmed").
 - **Global CSS is four layers** (`reset, base, layout, code`), all declared in
   `src/styles/global.css` (`npm run lint:layers` fails on any other `@layer`).
@@ -67,7 +72,7 @@ the reasoning). The short version, and the rules that keep it intact:
 ```
 npx astro check                                       # expect 0 errors/warnings/hints
 npm run lint:layers                                   # expect "Layer order check passed"
-npx playwright test tests/theme.spec.ts tests/visual   # expect 84 passed, 2 skipped
+npx playwright test tests/theme.spec.ts tests/visual   # expect 88 passed, 2 skipped
 npx playwright test tests/overflow.spec.ts             # expect 18 passed, 18 skipped
 ```
 

@@ -134,3 +134,11 @@ Each entry is `E<n>` and records:
 - **Commit:** see `git log --oneline -- src/styles/tokens.css`
 - **Approval:** approved (Peter, 2026-10-02 — adopt `color-scheme` and fix the email field and weather search)
 
+### E13: First visits follow the OS light/dark setting
+
+- **Where:** any page, first visit (or with site data cleared), with the OS set to dark. Not in the screenshots: the suite sets each theme explicitly.
+- **What changed and why:** a first visit used to be light whatever the OS said. It now follows `prefers-color-scheme`, decided before first paint, without writing anything to storage, and follows live OS changes until the visitor picks a theme (follow-ups item 4). The toggle is still the one sun/moon button: it stores a choice only when that choice differs from the OS, and clears it when the visitor picks what the OS already uses, so the site goes back to following the OS. With storage blocked, the site follows the OS instead of always being light.
+- **What to look for:** with the OS in dark mode and no site data, the site opens dark with no flash of light. Toggle to light and reload: light (stored). Toggle back to dark: storage cleared, and switching the OS to light now turns the site light.
+- **Commit:** see `git log --oneline -- src/layouts/BaseLayout.astro`
+- **Approval:** approved (Peter, 2026-10-02 — follow the OS, two-state self-clearing toggle)
+

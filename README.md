@@ -54,8 +54,9 @@ nvm use 22
 ## Styling architecture
 
 Plain CSS, no Sass. `src/styles/tokens.css` holds the `--color-*` custom
-properties (light values on `:root`, dark overrides under
-`:root[data-theme="dark"]`); `src/styles/global.css` declares
+properties, each `light-dark(light, dark)` and resolved by `color-scheme`
+(`light` on `:root`, `dark` under `:root[data-theme="dark"]`, which also
+gives native controls and scrollbars their dark style); `src/styles/global.css` declares
 `@layer reset, base, layout, code;`, imports `tokens.css`, then the first
 three layer files in that order. Everything in those three is genuinely
 site-wide (typography, resets, the page shell) — a bare tag selector there
@@ -84,7 +85,11 @@ Sass partials could.
 
 Theme is `data-theme="light"|"dark"` on `<html>`, set by an inline script
 in `BaseLayout`'s `<head>` before first paint (no flash of the wrong
-theme) and flipped by `Navbar.astro`'s toggle script, both writing
+theme): a stored choice if there is one, otherwise the OS's
+`prefers-color-scheme`. `Navbar.astro`'s toggle flips it and stores the
+choice, unless the new theme matches the OS, in which case it clears the
+stored choice so the site follows the OS again; with no stored choice the
+site also follows OS changes live. Both write
 `document.documentElement.dataset.theme`.
 
 **Visual regression suite:** `npm run test:visual` screenshots every route

@@ -18,12 +18,21 @@ const {
 <html lang="en">
   <head>
     <script is:inline>
-      try {
-        const t = localStorage.getItem('theme');
-        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
-      } catch {
-        /* storage blocked — light */
-      }
+      // Theme before first paint: a stored choice wins, otherwise the OS
+      // setting. Nothing is stored here; only the toggle stores a choice,
+      // and it clears it again when the choice matches the OS (Navbar.astro).
+      (() => {
+        let t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {
+          /* storage blocked — follow the OS */
+        }
+        if (t !== 'dark' && t !== 'light') {
+          t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : null;
+        }
+        if (t) document.documentElement.dataset.theme = t;
+      })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -119,16 +119,35 @@ const updates = await Promise.all(
 <script>
   const THEME_KEY = 'theme';
   const root = document.documentElement;
+  const osDark = matchMedia('(prefers-color-scheme: dark)');
+
+  function storedTheme() {
+    try {
+      const t = localStorage.getItem(THEME_KEY);
+      return t === 'dark' || t === 'light' ? t : null;
+    } catch {
+      return null;
+    }
+  }
 
   function toggleTheme() {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
+    // Choosing what the OS already uses leaves nothing to remember, so clear
+    // the choice and follow the OS again.
+    const os = osDark.matches ? 'dark' : 'light';
     try {
-      localStorage.setItem(THEME_KEY, next);
+      if (next === os) localStorage.removeItem(THEME_KEY);
+      else localStorage.setItem(THEME_KEY, next);
     } catch {
       /* storage blocked — theme lasts for this page only */
     }
   }
+
+  // With no stored choice, follow the OS when it changes.
+  osDark.addEventListener('change', (e) => {
+    if (!storedTheme()) root.dataset.theme = e.matches ? 'dark' : 'light';
+  });
 
   function toggleUpdatesModal() {
     const bg = document.getElementById('updates-bg');

@@ -17,14 +17,8 @@ final whole-branch review.
 
 ## Theming
 
-3. **`color-scheme` and `light-dark()`.** The modern way to express the same
-   thing the tokens do. Deferred because setting `color-scheme` changes how
-   native controls and scrollbars render, which would have broken pixel
-   identity. Pair it with item 4.
-4. **Honour the OS preference.** Today a first visit is always light, and
-   nothing is written to storage until the visitor toggles (that groundwork was
-   done deliberately). Defaulting to `prefers-color-scheme`, optionally with a
-   light/dark/system control, is the remaining step.
+3. ~~**`color-scheme` and `light-dark()`.**~~ Done 2026-10-02 — see "Done since".
+4. ~~**Honour the OS preference.**~~ Done 2026-10-02 — see "Done since".
 5. ~~**Consolidate colours.**~~ Done 2026-10-02 — see "Done since".
 6. ~~**Revisit the escapes.**~~ Done 2026-10-02 — see "Done since".
 
@@ -83,6 +77,33 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **The theme follows the OS; tokens use `color-scheme` and `light-dark()`**
+  (2026-10-02). Three commits, decisions by Peter:
+  - `color-scheme: light` on `:root`, `dark` under `[data-theme="dark"]`, so
+    native controls and scrollbars are dark in dark mode (E12). Measured
+    first: light mode didn't move at all; dark changed only unstyled native
+    controls on 5 pages. Two fixes came with it. The contact email field
+    dropped its forced white, so the form is consistent. The weather search
+    input keeps `color-scheme: light`, as part of the widget's fixed light
+    design, and its dark-only white placeholder rule is gone: the field had
+    always been white, so in dark mode the hint was invisible (1:1); it is
+    now the browser's grey in both themes (4.6:1).
+  - `tokens.css` is one block of 39 `light-dark(light, dark)` declarations
+    instead of two blocks. Proved identical: every token resolved to the same
+    colour, as `color` and as `background-color`, in both themes, before and
+    after (156 comparisons, zero differences), and the exact visual suite
+    passed.
+  - A first visit follows `prefers-color-scheme`, decided before first paint
+    and without writing storage; with no stored choice the site follows live
+    OS changes. The toggle stays two-state but stores a choice only when it
+    differs from the OS, clearing it otherwise so the site follows the OS
+    again. Blocked storage now follows the OS instead of falling back to
+    light. `tests/theme.spec.ts` grew from 4 tests to 8 (OS light and dark
+    first visits, stored choice beats the OS, self-clearing in both
+    directions, live OS changes, blocked storage); mutation-tested by making
+    the toggle always store (both self-clearing tests fail) and by removing
+    the live listener (its test fails). E13.
 
 - **Breakpoints on one scale** (2026-10-02). 18 width queries used 11
   different widths, five of them `device-width` + `orientation`. Now every
@@ -159,7 +180,8 @@ final whole-branch review.
     Updates panel (border width and style, and its black background, E7).
   - Light value unreachable from CSS: the weather search `::placeholder`
     (the browser's own grey, which no keyword names and which differs
-    between browsers), and pagination's `.info span` (light inherits, and a
+    between browsers; later deleted, see items 3–4, so 10 remain), and
+    pagination's `.info span` (light inherits, and a
     light rule there would also restyle the text Google Maps injects, which
     the suite can't see).
 
