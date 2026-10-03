@@ -89,8 +89,8 @@ The visual suite is blind to horizontal overflow: it screenshots `fullPage`, so
 a page wider than the viewport just produces a wider screenshot that still
 matches its own baseline. `tests/overflow.spec.ts` is the gate for that,
 asserting `scrollWidth === clientWidth` at 390px and 320px. It covers the six
-routes that used to overflow (`docs/css-follow-ups.md` item 15); add a route
-whenever a fix touches its width. The fixed header can't widen the document,
+routes that used to overflow; add a route whenever a fix touches its width.
+320px is the narrowest width supported: no phone in use is narrower. The fixed header can't widen the document,
 so that check can't see it; the same file measures the nav's own links and
 icons, and the logo's aspect ratio, at six phone widths.
 

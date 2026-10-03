@@ -48,25 +48,6 @@ final whole-branch review.
 16. ~~**Replace the clipboard button's painted overhang.**~~ Done 2026-10-02 —
     see "Done since".
 
-## Known, out of scope
-
-15. **Remaining mobile layout issues.** Peter flagged these before the refactor
-    started and they were deliberately excluded, so the 390px baselines captured
-    them as they were. The header was fixed afterwards (see below); the rest are
-    still open, and fixing each means updating its baselines in the same commit.
-
-    **No route scrolls sideways at 320px or 390px any more.** Fixed, worst
-    first: `/projects/random-password-generator` (29px at 390px, 67px at
-    320px), `/projects/pizza-pie` (5px / 40px), `/contact` (20px at 320px
-    only), and `/blog`, `/projects` and `/news` (3px each at 320px, one shared
-    cause). All six are guarded by `tests/overflow.spec.ts`; see "Done since"
-    for each cause.
-
-    Left alone because it falls outside the 320–390px band: at 280px
-    `/projects` still overflows 15px, because `.card` in `ProjectCard.astro`
-    is a fixed 290px — no phone is that narrow (320px is the floor in
-    practice).
-
 ## Done since
 
 - **Copy button laid out, not painted** (2026-10-02). The Password
