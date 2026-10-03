@@ -27,8 +27,6 @@
 	/* here doesn't disturb precedence for anything else. */
 	padding: 0 10px;
 	margin-bottom: 10px;
-	background-color: var(--color-field-bg);
-	color: var(--color-field-text);
 }
 .formContainer textarea {
 	display: block;

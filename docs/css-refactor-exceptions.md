@@ -126,3 +126,11 @@ Each entry is `E<n>` and records:
 - **Commit:** see `git log --oneline -- src/components/Navbar.astro`
 - **Approval:** approved (Peter, 2026-10-02 — the scale, keeping 320, and 600 for the weather widget)
 
+### E12: Native controls and scrollbars follow the theme (`color-scheme`)
+
+- **Where:** dark theme, any width: `/contact` (the form), `/projects/checkbox-styling`, `/projects/random-password-generator` (slider and checkboxes), `/projects/rollup-counter` (buttons), plus the page scrollbars everywhere. Light theme unchanged. The 8 dark baselines for those four pages were updated in the same commit.
+- **What changed and why:** `tokens.css` sets `color-scheme: light` on `:root` and `color-scheme: dark` under `[data-theme="dark"]` (follow-ups item 3), so the browser draws controls the site doesn't style itself, and scrollbars, in its dark style in dark mode. Two follow-on fixes: the contact email field no longer forces a white background (its `--color-field-bg`/`-text` tokens are gone), so all three fields and the button match; and the weather search input keeps `color-scheme: light`, since it's part of the widget's fixed light design with dark text, which would otherwise have sat on a dark field. Its dark-only white placeholder rule is deleted: the field was always white, so in dark mode the "Enter a City ..." hint had been invisible (white on white, 1:1). It now uses the browser's grey in both themes (4.6:1).
+- **What to look for:** dark mode: the contact fields are dark grey with white text (11.2:1); checkboxes, the slider and the counter buttons take the browser's dark style; scrollbars are dark. The weather search field is white with dark text, as before, and its placeholder now shows. Light mode is unchanged.
+- **Commit:** see `git log --oneline -- src/styles/tokens.css`
+- **Approval:** approved (Peter, 2026-10-02 — adopt `color-scheme` and fix the email field and weather search)
+

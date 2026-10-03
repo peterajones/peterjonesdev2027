@@ -83,9 +83,9 @@ input.weatherSearchInput {
 	font-style: italic;
 	color: #282828;
 	padding-left: 4px;
-}
-:global([data-theme="dark"]) .weatherSearchInput::placeholder {
-	color: #ffffff;
+	/* Part of the widget's fixed light design (dark text, always a white
+	   field), so it keeps light native rendering in dark mode too. */
+	color-scheme: light;
 }
 input[type='submit'].weatherGoBtn {
 	position: relative;

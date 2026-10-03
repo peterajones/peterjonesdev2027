@@ -4,6 +4,10 @@
    docs/css-refactor-audit.md §D); tokens merge only values that were
    already identical. */
 :root {
+	/* Native controls, scrollbars and system colours (Field, ButtonFace…)
+	   follow the theme. */
+	color-scheme: light;
+
 	/* Text and page */
 	--color-text: #000000;
 	--color-text-muted: #585858;
@@ -51,8 +55,6 @@
 	/* Form controls the light theme leaves to the browser: these are the
 	   system colours its own stylesheet uses, so light rendering is
 	   unchanged, while dark gets explicit values. */
-	--color-field-bg: Field;
-	--color-field-text: FieldText;
 	--color-control-text: FieldText;
 	--color-button-rest-bg: ButtonFace;
 	--color-button-rest-text: ButtonText;
@@ -68,6 +70,8 @@
 }
 
 :root[data-theme="dark"] {
+	color-scheme: dark;
+
 	/* Text and page */
 	--color-text: #f4f4f4;
 	--color-text-muted: #f4f4f4;
@@ -110,8 +114,6 @@
 	--color-control-border: #aaaaaa;
 	--color-button-bg: #f4f4f4;
 	--color-button-text: #333333;
-	--color-field-bg: #ffffff;
-	--color-field-text: #333333;
 	--color-control-text: #f4f4f4;
 	--color-button-rest-bg: #333333;
 	--color-button-rest-text: #f4f4f4;
