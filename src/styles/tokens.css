@@ -1,129 +1,79 @@
 /* Semantic design tokens. The only place dark mode is defined.
-   Light values on :root, dark overrides under :root[data-theme="dark"].
-   Values are copied verbatim from the rules they replaced (see
-   docs/css-refactor-audit.md §D); tokens merge only values that were
-   already identical. */
+   Each token is light-dark(light value, dark value), resolved by the
+   color-scheme that data-theme sets below. Values were copied verbatim
+   from the rules they replaced (see docs/css-refactor-audit.md §D); tokens
+   merge only values that were already identical, plus the near-duplicates
+   merged on purpose (exception E10).
+   Caution: light-dark() follows each element's own color-scheme, so an
+   element that sets color-scheme itself (the weather search input) gets
+   that branch of every token it uses. */
 :root {
-	/* Native controls, scrollbars and system colours (Field, ButtonFace…)
-	   follow the theme. */
+	/* color-scheme picks the light-dark() branch below, and makes native
+	   controls, scrollbars and system colours (Field, ButtonFace…) follow the
+	   theme. data-theme on <html> is the only switch. */
 	color-scheme: light;
 
 	/* Text and page */
-	--color-text: #000000;
-	--color-text-muted: #585858;
+	--color-text: light-dark(#000000, #f4f4f4);
+	--color-text-muted: light-dark(#585858, #f4f4f4);
 	/* Text that takes its surroundings' colour in light mode (currentColor)
 	   and is pinned to the light text colour in dark. */
-	--color-text-ambient: currentColor;
-	--color-bg: #ffffff;
+	--color-text-ambient: light-dark(currentColor, #f4f4f4);
+	--color-bg: light-dark(#ffffff, #333333);
 
 	/* Links and accents */
-	--color-accent: rebeccapurple;
-	--color-link-hover: #ffa804;
-	--color-news-title: #047fa5;
-	--color-icon-hover: #ff0000;
+	--color-accent: light-dark(rebeccapurple, #ffa804);
+	--color-link-hover: light-dark(#ffa804, #e43af4);
+	--color-news-title: light-dark(#047fa5, #ffa804);
+	--color-icon-hover: light-dark(#ff0000, #ff7272);
 
 	/* Navbar */
-	--color-nav-bg: rgba(255, 255, 255, 0.95);
-	--color-nav-border: rebeccapurple;
+	--color-nav-bg: light-dark(rgba(255, 255, 255, 0.95), rgba(51, 51, 51, 0.95));
+	--color-nav-border: light-dark(rebeccapurple, rgba(255, 235, 59, 0.35));
 
 	/* Cards and code pages */
-	--color-card-bg: transparent;
-	--color-code-header-bg: #fff;
-	--color-stage-bg: transparent;
-	--color-stage-border: #464646;
-	--color-widget-btn-bg: #464646;
-	--color-widget-btn-border: #464646;
-	--color-widget-btn-hover-bg: transparent;
+	--color-card-bg: light-dark(transparent, #464646);
+	--color-code-header-bg: light-dark(#fff, #464646);
+	--color-stage-bg: light-dark(transparent, #464646);
+	--color-stage-border: light-dark(#464646, #000000);
+	--color-widget-btn-bg: light-dark(#464646, transparent);
+	--color-widget-btn-border: light-dark(#464646, #f4f4f4);
+	--color-widget-btn-hover-bg: light-dark(transparent, #464646);
 
 	/* Latest updates modal */
-	--color-modal-title-bg: rgb(144, 75, 213);
-	--color-update-divider: rgba(63, 63, 63, 0.4);
+	--color-modal-title-bg: light-dark(rgb(144, 75, 213), rgba(201, 44, 44, 1));
+	--color-update-divider: light-dark(rgba(63, 63, 63, 0.4), rgba(244, 244, 244, 0.4));
 
 	/* Pagination project */
-	--color-contact-icon: darkgreen;
-	--color-page-num-bg: #f4f4f4;
-	--color-page-num-hover-bg: #ffa804;
-	--color-page-num-hover-text: #fff;
-	--color-page-num-text: darkgreen;
-	--color-page-num-active-hover-bg: #ffa804;
+	--color-contact-icon: light-dark(darkgreen, #ffa804);
+	--color-page-num-bg: light-dark(#f4f4f4, #ffa804);
+	--color-page-num-hover-bg: light-dark(#ffa804, #f4f4f4);
+	--color-page-num-hover-text: light-dark(#fff, #333333);
+	--color-page-num-text: light-dark(darkgreen, #333333);
+	--color-page-num-active-hover-bg: light-dark(#ffa804, #f4f4f4);
 
 	/* Widgets */
-	--color-surface: #f6f6f6;
-	--color-control-border: #333333;
-	--color-button-bg: #333333;
-	--color-button-text: #f4f4f4;
+	--color-surface: light-dark(#f6f6f6, #464646);
+	--color-control-border: light-dark(#333333, #aaaaaa);
+	--color-button-bg: light-dark(#333333, #f4f4f4);
+	--color-button-text: light-dark(#f4f4f4, #333333);
 	/* Form controls the light theme leaves to the browser: these are the
 	   system colours its own stylesheet uses, so light rendering is
 	   unchanged, while dark gets explicit values. */
-	--color-control-text: FieldText;
-	--color-button-rest-bg: ButtonFace;
-	--color-button-rest-text: ButtonText;
-	--color-slice: silver;
-	--color-switch-border: rgba(97, 96, 96, 0.6);
+	--color-control-text: light-dark(FieldText, #f4f4f4);
+	--color-button-rest-bg: light-dark(ButtonFace, #333333);
+	--color-button-rest-text: light-dark(ButtonText, #f4f4f4);
+	--color-slice: light-dark(silver, dimgrey);
+	--color-switch-border: light-dark(rgba(97, 96, 96, 0.6), #f4f4f4);
 
 	/* Weather app */
-	--color-weather-bg: rgba(19, 146, 180, 0.25);
-	--color-weather-text: rgba(56, 56, 57, 0.85);
-	--color-weather-conditions: #484848;
-	--color-weather-credit: #484848;
-	--color-weather-credit-hover: #ffa804;
+	--color-weather-bg: light-dark(rgba(19, 146, 180, 0.25), rgba(0, 201, 255, 0.75));
+	--color-weather-text: light-dark(rgba(56, 56, 57, 0.85), #f4f4f4);
+	--color-weather-conditions: light-dark(#484848, #f4f4f4);
+	--color-weather-credit: light-dark(#484848, #282828);
+	--color-weather-credit-hover: light-dark(#ffa804, #4c0295);
 }
 
 :root[data-theme="dark"] {
 	color-scheme: dark;
-
-	/* Text and page */
-	--color-text: #f4f4f4;
-	--color-text-muted: #f4f4f4;
-	--color-text-ambient: #f4f4f4;
-	--color-bg: #333333;
-
-	/* Links and accents */
-	--color-accent: #ffa804;
-	--color-link-hover: #e43af4;
-	--color-news-title: #ffa804;
-	--color-icon-hover: #ff7272;
-
-	/* Navbar */
-	--color-nav-bg: rgba(51, 51, 51, 0.95);
-	--color-nav-border: rgba(255, 235, 59, 0.35);
-
-	/* Cards and code pages */
-	--color-card-bg: #464646;
-	--color-code-header-bg: #464646;
-	--color-stage-bg: #464646;
-	--color-stage-border: #000000;
-	--color-widget-btn-bg: transparent;
-	--color-widget-btn-border: #f4f4f4;
-	--color-widget-btn-hover-bg: #464646;
-
-	/* Latest updates modal */
-	--color-modal-title-bg: rgba(201, 44, 44, 1);
-	--color-update-divider: rgba(244, 244, 244, 0.4);
-
-	/* Pagination project */
-	--color-contact-icon: #ffa804;
-	--color-page-num-bg: #ffa804;
-	--color-page-num-hover-bg: #f4f4f4;
-	--color-page-num-hover-text: #333333;
-	--color-page-num-text: #333333;
-	--color-page-num-active-hover-bg: #f4f4f4;
-
-	/* Widgets */
-	--color-surface: #464646;
-	--color-control-border: #aaaaaa;
-	--color-button-bg: #f4f4f4;
-	--color-button-text: #333333;
-	--color-control-text: #f4f4f4;
-	--color-button-rest-bg: #333333;
-	--color-button-rest-text: #f4f4f4;
-	--color-slice: dimgrey;
-	--color-switch-border: #f4f4f4;
-
-	/* Weather app */
-	--color-weather-bg: rgba(0, 201, 255, 0.75);
-	--color-weather-text: #f4f4f4;
-	--color-weather-conditions: #f4f4f4;
-	--color-weather-credit: #282828;
-	--color-weather-credit-hover: #4c0295;
 }
