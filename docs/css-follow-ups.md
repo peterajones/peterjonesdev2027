@@ -45,17 +45,8 @@ final whole-branch review.
 
 14. ~~**Consolidate the breakpoints.**~~ Done 2026-10-02 — see "Done since".
 
-16. **Replace the clipboard button's painted overhang.** The Password Generator's
-    copy button sits inside the password field but is drawn outside it, via
-    `position: relative; left: 50px`. That works at every width down to 280px
-    because the field shrinks with the panel, but the clearance at 320px is 1px,
-    so it is one layout tweak away from pushing the page sideways again. The
-    structural fix is to make the button a sibling of the field in a flex row and
-    push it right with `margin-left: auto`, deleting the magic number. Measured
-    cost: the dark field narrows by 4px on desktop (270px → 266px) and more on
-    phones, so it needs desktop baselines and its own before/after. Deferred as
-    out of proportion to the bug it would prevent — the overflow itself is fixed
-    (see below).
+16. ~~**Replace the clipboard button's painted overhang.**~~ Done 2026-10-02 —
+    see "Done since".
 
 ## Known, out of scope
 
@@ -77,6 +68,23 @@ final whole-branch review.
     practice).
 
 ## Done since
+
+- **Copy button laid out, not painted** (2026-10-02). The Password
+  Generator's copy button sat inside the dark field and was drawn 50px to
+  the right of its own layout box (`position: relative; left: 50px`). The
+  result row is now a flex row of two siblings, the dark field
+  (`.pwgResult`, `flex: 1 1 auto`, max 270px) and the button
+  (`margin-left: auto`), and the magic number is gone. Measured with a
+  generated password at 1280/390/320/280px. On desktop the field and button
+  occupy exactly the pixels they did: the button used to cover the field's
+  last 4px, so the visible field already ended where the new one does. That
+  "4px narrower" cost recorded here earlier never reached the screen. What
+  changes: the button is inside the panel at every width (before, 2px out at
+  390px and 40px out at 320px, with 1px to spare before the viewport edge),
+  and the password now ends 10px from the field's edge instead of 50px short
+  of it, where the button's invisible layout box used to be. Only the 2
+  phone-width password-generator baselines moved, in the button's 46×50
+  area. Exception E14.
 
 - **The theme follows the OS; tokens use `color-scheme` and `light-dark()`**
   (2026-10-02). Three commits, decisions by Peter:

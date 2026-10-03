@@ -115,9 +115,7 @@ export default function PasswordGenerator() {
         <div className={styles.pwgContainer}>
           <h2 className={styles.pwg}>Password Generator</h2>
           <div className={styles.pwgResultContainer}>
-            <span className={styles.pwg}>
-              {password}
-            </span>
+            <span className={styles.pwgResult}>{password}</span>
             <button
               className={styles.clipboard}
               onClick={handleCopy}

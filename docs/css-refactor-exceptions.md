@@ -142,3 +142,11 @@ Each entry is `E<n>` and records:
 - **Commit:** see `git log --oneline -- src/layouts/BaseLayout.astro`
 - **Approval:** approved (Peter, 2026-10-02 — follow the OS, two-state self-clearing toggle)
 
+### E14: Password Generator copy button stays inside the panel
+
+- **Where:** `/projects/random-password-generator`, either theme. Desktop: generate a password to see the text change. Phones: the copy button's position, clearest at 320px. The 2 phone-width baselines were updated in the same commit.
+- **What changed and why:** the copy button was drawn 50px outside its layout box (`position: relative; left: 50px`), so on narrow screens it stuck out of the purple panel (40px at 320px). The field and button are now siblings in a flex row with the button pushed right by `margin-left: auto` (follow-ups item 16). On desktop the field and button cover the same pixels as before.
+- **What to look for:** the button is always flush with the panel's inner edge, never past it (at 390px it moves 2px left). A generated password now sits 10px from the button rather than 50px short of it.
+- **Commit:** see `git log --oneline -- src/components/projects/random-password-generator/PasswordGenerator.module.css`
+- **Approval:** approved (Peter, 2026-10-02)
+
