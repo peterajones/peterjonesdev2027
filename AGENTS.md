@@ -72,7 +72,7 @@ the reasoning). The short version, and the rules that keep it intact:
 ```
 npx astro check                                       # expect 0 errors/warnings/hints
 npm run lint:layers                                   # expect "Layer order check passed"
-npx playwright test tests/theme.spec.ts tests/visual   # expect 88 passed, 2 skipped
+npx playwright test tests/theme.spec.ts tests/visual   # expect 152 passed, 2 skipped
 npx playwright test tests/overflow.spec.ts             # expect 18 passed, 18 skipped
 ```
 

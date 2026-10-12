@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Banner from '../../components/Banner.astro';
-import { feeds } from '../../config/news';
+import { categories, feeds } from '../../config/news';
+
+const groups = categories
+  .map((category) => ({ category, feeds: feeds.filter((f) => f.category === category) }))
+  .filter((g) => g.feeds.length > 0);
 ---
 
 <BaseLayout title="Peter Jones | News Feeds">
@@ -9,25 +13,34 @@ import { feeds } from '../../config/news';
   <div class="content" style="min-height: 2000px">
     <div class="fade-in visible">
       <h1 class="news page">RSS News Feeds</h1>
-      <ul class="items-container">
-        {
-          feeds.map((feed) => (
-            <li class="news item">
-              <a href={`/news/${feed.slug}`}>
-                <div class="item-content">
-                  <img src={feed.image} width="100" height="100" alt="" />
-                  <div class="item-title">{feed.title}</div>
-                </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        groups.map((group) => (
+          <section>
+            <h2 class="category">{group.category}</h2>
+            <ul class="items-container">
+              {group.feeds.map((feed) => (
+                <li class="news item">
+                  <a href={`/news/${feed.slug}`}>
+                    <div class="item-content">
+                      <img src={feed.image} width="100" height="100" alt="" />
+                      <div class="item-title">{feed.title}</div>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
 
 <style>
+  h2.category {
+    text-align: center;
+    margin: 30px 0 10px;
+  }
   li.news.item {
     position: relative;
     display: flex;

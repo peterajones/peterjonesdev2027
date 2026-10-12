@@ -14,6 +14,7 @@ for (const theme of themes) {
       await expect(page).toHaveScreenshot(`${route.name}-${theme}.png`, {
         fullPage: true,
         mask: (route.mask ?? []).map((sel) => page.locator(sel)),
+        timeout: route.screenshotTimeout,
       });
     });
   }

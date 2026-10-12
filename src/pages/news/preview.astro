@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsFeed from '../../components/NewsFeed';
+
+// Dev-only page for evaluating a feed before adding it to config/news.ts:
+// /news/preview?url=<feed URL> renders it with the real NewsFeed component,
+// exactly as a /news/[slug] page would. Without ?url it lists candidates.
+// 404s outside `astro dev`, along with its proxy (api/rss/preview.ts).
+export const prerender = false;
+
+if (!import.meta.env.DEV) {
+  return new Response(null, { status: 404 });
+}
+
+// Candidates checked on 2026-10-12. Edit freely; this list never ships.
+const candidates: { group: string; name: string; url: string; image?: string }[] = [
+  { group: 'Canadian', name: 'National Post', url: 'https://nationalpost.com/feed/' },
+  { group: 'Toronto', name: 'Toronto Sun', url: 'https://torontosun.com/feed' },
+  { group: 'Canadian', name: 'Financial Post', url: 'https://financialpost.com/feed/' },
+  { group: 'Canadian', name: 'The Hub', url: 'https://thehub.ca/feed/' },
+  { group: 'Canadian', name: 'Western Standard', url: 'https://www.westernstandard.news/feed', image: '/images/news/western_standard.png' },
+  { group: 'Canadian', name: 'The Line', url: 'https://www.readtheline.ca/feed', image: '/images/news/the_line.png' },
+  { group: 'Toronto', name: 'CityNews Toronto', url: 'https://toronto.citynews.ca/feed/' },
+  { group: 'Canadian', name: 'Juno News', url: 'https://www.junonews.com/feed', image: '/images/news/juno_news.png' },
+  { group: 'Canadian', name: 'Canadian Affairs', url: 'https://www.canadianaffairs.news/feed/', image: '/images/news/canadian_affairs.png' },
+  { group: 'Canadian', name: 'The Bureau', url: 'https://www.thebureau.news/feed', image: '/images/news/the_bureau.png' },
+  { group: 'Canadian', name: "Blacklock's Reporter", url: 'https://www.blacklocks.ca/feed/' },
+  { group: 'Canadian', name: 'C2C Journal', url: 'https://c2cjournal.ca/feed/' },
+  { group: 'Canadian', name: 'The Logic', url: 'https://thelogic.co/feed/' },
+  { group: 'Canadian', name: 'The Counter Signal', url: 'https://www.thecountersignal.com/feed/', image: '/images/news/counter_signal.png' },
+  { group: 'Canadian', name: 'Rebel News', url: 'https://www.rebelnews.com/news.rss', image: '/images/news/rebel_news.png' },
+  { group: 'Canadian', name: 'Paul Wells', url: 'https://paulwells.substack.com/feed' },
+  { group: 'Canadian', name: 'The Audit', url: 'https://www.theaudit.ca/feed', image: '/images/news/the_audit.png' },
+  { group: 'Canadian', name: 'Ottawa Citizen', url: 'https://ottawacitizen.com/feed' },
+  { group: 'Canadian', name: 'Calgary Herald', url: 'https://calgaryherald.com/feed' },
+  { group: 'Canadian', name: 'Edmonton Journal', url: 'https://edmontonjournal.com/feed' },
+  { group: 'Canadian', name: 'The Globe and Mail (Canada)', url: 'https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/canada/', image: '/images/news/globe_and_mail.png' },
+  { group: 'Canadian', name: 'Fraser Institute', url: 'https://www.fraserinstitute.org/rss.xml' },
+  { group: 'Canadian', name: 'SecondStreet.org', url: 'https://www.secondstreet.org/feed/' },
+  { group: 'Canadian', name: 'Macdonald-Laurier Institute', url: 'https://macdonaldlaurier.ca/feed/' },
+  { group: 'Toronto', name: 'TorontoToday', url: 'https://www.torontotoday.ca/rss', image: '/images/news/toronto_today.png' },
+  { group: 'Toronto', name: 'Daily Hive Toronto', url: 'https://dailyhive.com/feed/toronto' },
+  { group: 'International', name: 'Wall Street Journal World', url: 'https://feeds.content.dowjones.io/public/rss/RSSWorldNews', image: '/images/news/wall_street_journal.png' },
+  { group: 'International', name: 'NY Post', url: 'https://nypost.com/news/feed/', image: '/images/news/new_york_post.png' },
+  { group: 'International', name: 'Fox News World', url: 'https://moxie.foxnews.com/google-publisher/world.xml', image: '/images/news/fox_news_intl.png' },
+  { group: 'International', name: 'Washington Examiner', url: 'https://www.washingtonexaminer.com/feed/', image: '/images/news/washington_examiner.png' },
+  { group: 'International', name: 'The Free Press', url: 'https://www.thefp.com/feed', image: '/images/news/the_free_press.png' },
+  { group: 'International', name: 'UnHerd', url: 'https://unherd.com/feed/', image: '/images/news/unherd.png' },
+  { group: 'International', name: 'The Economist', url: 'https://www.economist.com/international/rss.xml' },
+  { group: 'Tech', name: 'Hacker News', url: 'https://hnrss.org/frontpage' },
+  { group: 'Tech', name: 'IEEE Spectrum', url: 'https://spectrum.ieee.org/feeds/feed.rss' },
+  { group: 'Tech', name: 'MIT Technology Review', url: 'https://www.technologyreview.com/feed/', image: '/images/news/mit_technology_review.png' },
+  { group: 'Tech', name: 'The Register', url: 'https://www.theregister.com/headlines.rss', image: '/images/news/the_register.png' },
+  { group: 'Tech', name: "Tom's Hardware", url: 'https://www.tomshardware.com/feeds/all', image: '/images/news/toms_hardware.png' },
+  { group: 'Tech', name: 'BleepingComputer', url: 'https://www.bleepingcomputer.com/feed/' },
+  { group: 'Tech', name: 'BetaKit', url: 'https://betakit.com/feed/' },
+  { group: 'Tech', name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+  { group: 'Tech', name: 'Wired', url: 'https://www.wired.com/feed/rss', image: '/images/news/wired.png' },
+  { group: 'Tech', name: 'Engadget', url: 'https://www.engadget.com/rss.xml', image: '/images/news/engadget.png' },
+  { group: 'Tech', name: '9to5Mac', url: 'https://9to5mac.com/feed/', image: '/images/news/925_mac.png' },
+];
+
+const feedUrl = Astro.url.searchParams.get('url') ?? '';
+const candidate = candidates.find((c) => c.url === feedUrl);
+const title =
+  candidate?.name ??
+  (URL.canParse(feedUrl) ? new URL(feedUrl).hostname : 'Feed preview');
+const groups = [...new Set(candidates.map((c) => c.group))];
+const previewHref = (url: string) => `/news/preview?url=${encodeURIComponent(url)}`;
+---
+
+<BaseLayout title={`Peter Jones | ${feedUrl ? title : 'Feed preview'}`}>
+  <div class="preview content">
+    <form method="get" action="/news/preview">
+      <label for="feed-url">Feed URL</label>
+      <input id="feed-url" name="url" type="url" required value={feedUrl} placeholder="https://example.com/feed" />
+      <button type="submit">Preview</button>
+      {feedUrl && <a href="/news/preview">All candidates</a>}
+    </form>
+
+    {!feedUrl && groups.map((group) => (
+      <section>
+        <h2>{group}</h2>
+        <ul>
+          {candidates.filter((c) => c.group === group).map((c) => (
+            <li><a href={previewHref(c.url)}>{c.name}</a></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  {feedUrl && (
+    <NewsFeed
+      client:load
+      slug="preview"
+      pageTitle={title}
+      image={candidate?.image ?? '/favicon.png'}
+      src={`/api/rss/preview?url=${encodeURIComponent(feedUrl)}`}
+    />
+  )}
+</BaseLayout>
+
+<style>
+  /* .content's 90vh min-height would push the feed below the fold. */
+  .preview {
+    min-height: 0;
+  }
+  .preview form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .preview input {
+    flex: 1 1 20rem;
+    min-width: 0;
+  }
+</style>

@@ -6,6 +6,7 @@ export interface VisualRoute {
   name: string;
   path: string;
   mask?: string[];
+  screenshotTimeout?: number;
 }
 
 const blogDir = fileURLToPath(new URL('../../src/content/blog/', import.meta.url));
@@ -31,6 +32,14 @@ const masks: Record<string, string[]> = {
   'project-pagination': ['[data-testid="map"]'],
 };
 
+// Pages too long to screenshot inside toHaveScreenshot's default 5s.
+// 9to5Mac's feed carries 100 items, each with a full-size image in its
+// description: ~65,000px tall at 390px, twice any other feed. Raised per
+// route rather than through expect.timeout (see playwright.config.ts).
+const screenshotTimeouts: Record<string, number> = {
+  'news-9to5mac': 30_000,
+};
+
 export const routes: VisualRoute[] = [
   { name: 'home', path: '/' },
   { name: 'blog', path: '/blog' },
@@ -40,4 +49,4 @@ export const routes: VisualRoute[] = [
   { name: 'news', path: '/news' },
   ...feeds.map((f) => ({ name: `news-${f.slug}`, path: `/news/${f.slug}` })),
   { name: 'contact', path: '/contact' },
-].map((r) => ({ ...r, mask: masks[r.name] }));
+].map((r) => ({ ...r, mask: masks[r.name], screenshotTimeout: screenshotTimeouts[r.name] }));

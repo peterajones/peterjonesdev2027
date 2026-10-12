@@ -34,17 +34,22 @@ export async function stabilize(page: Page, opts: { theme: Theme; harPath: strin
     updateContent: 'embed',
     notFound: 'abort',
   });
-  // The CBC RSS feeds embed <img> thumbnails from i.cbc.ca inside item
-  // descriptions (CNBC/Euronews items carry none). The recorded HARs hold no
-  // usable responses for that host (requests to it once failed here with
-  // net::ERR_HTTP2_PROTOCOL_ERROR), and HAR replay of a failed entry leaves
-  // the request pending so `networkidle` never fires. Answer every one with
-  // the same local fixture instead: a 620×349 image (the size every CBC
-  // thumbnail declares) with a grid and a circle, so the screenshots show
-  // the thumbnails laid out — and any squashing — rather than empty boxes.
-  // Registered after routeFromHAR so it runs first (Playwright evaluates
-  // route handlers most-recently-added-first).
-  await page.route('https://i.cbc.ca/**', (route) =>
+  // Feed images are animated GIFs now and then (Juno News has carried a
+  // 57-frame one), and `toHaveScreenshot` disables CSS animations but not
+  // GIF playback, so the page never yields two identical screenshots.
+  // Answer every external GIF with a still local fixture instead: a 620×349
+  // image (the size the old CBC thumbnails declared) with a grid and a
+  // circle, so the screenshots still show the image laid out — and any
+  // squashing. Registered after routeFromHAR so it runs first (Playwright
+  // evaluates route handlers most-recently-added-first).
+  await page.route(/^(?!http:\/\/localhost:\d+\/)[^?#]*\.gif(?:[?#]|$)/i, (route) =>
+    route.fulfill({ path: NEWS_THUMBNAIL, contentType: 'image/jpeg' }),
+  );
+  // Engadget answers headless Chromium's image requests with a 403, which
+  // ORB then blocks, so the HAR records them as failed (status -1) and
+  // replay leaves them hanging: `networkidle` never arrives. Real Chrome
+  // loads them, so answer with the same still fixture.
+  await page.route(/^https:\/\/www\.engadget\.com\/img\//, (route) =>
     route.fulfill({ path: NEWS_THUMBNAIL, contentType: 'image/jpeg' }),
   );
   // Google Maps (pagination and weather-app projects) loads via its own
