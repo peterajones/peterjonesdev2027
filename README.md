@@ -50,6 +50,14 @@ nvm use 22
   changelog text as the file body. Uses Astro 7.3's current loader API
   (`glob()` from `astro/loaders`, `z` from `astro/zod` — not `astro:content`,
   deprecated there and removed in Astro 8).
+- **Home-screen app.** `public/manifest.webmanifest`, three opaque icons
+  (`apple-touch-icon.png` 180, `icon-192.png`, `icon-512.png`: the
+  `favicon.png` portrait centred on rebeccapurple, generated once with
+  Pillow) and the apple-*/theme-color tags in `BaseLayout.astro` make
+  Safari's "Add to Home Screen" open full screen as "Peter Jones". Browsers
+  fetch the manifest and icons without cookies, so they must stay public if
+  a login is ever added. `tests/home-screen.spec.ts` checks every page's
+  tags, the manifest's Content-Type, and the icons' size and opacity.
 
 ## Styling architecture
 

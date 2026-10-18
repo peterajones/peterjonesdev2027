@@ -37,6 +37,17 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    {/* Home-screen app (iPhone "Add to Home Screen", Android install). The
+        manifest and icons are generated once from favicon.png; see README. */}
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Peter Jones" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    {/* --color-bg. Follows the OS setting, not the site's theme toggle. */}
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#333333" media="(prefers-color-scheme: dark)" />
     <meta name="description" content={description} />
     <meta
       name="keywords"
