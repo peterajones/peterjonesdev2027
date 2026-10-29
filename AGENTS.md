@@ -8,6 +8,8 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+Keep `TODO.md` current: remove an item when it is finished, and add any unfinished work you discover.
+
 ### Known quirk: stale Vite dependency cache after repeated restarts
 
 Editing `astro.config.mjs` (or otherwise forcing several `astro dev stop` /
