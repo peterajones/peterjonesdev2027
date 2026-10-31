@@ -10,4 +10,3 @@ _Single source of truth for unfinished work in this project. Tick an item when i
 - [ ] Run a keyboard/accessibility audit in late Nov / early Dec 2026, starting with the pagination page-number `<li>`s (from: Claude memory accessibility-audit-planned.md)
 
 ## Undecided
-- [ ] Decide whether to remove the doubled `.content` padding that narrows the contact form on phones (from: docs/css-follow-ups.md)
