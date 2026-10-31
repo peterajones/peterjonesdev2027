@@ -10,5 +10,4 @@ _Single source of truth for unfinished work in this project. Remove an item when
 - [ ] Run a keyboard/accessibility audit in late Nov / early Dec 2026, starting with the pagination page-number `<li>`s (from: Claude memory accessibility-audit-planned.md)
 
 ## Undecided
-- [ ] Decide whether page banners should go fluid (280–500px, as their CSS allows) instead of a fixed 400px (from: docs/css-follow-ups.md)
 - [ ] Decide whether to remove the doubled `.content` padding that narrows the contact form on phones (from: docs/css-follow-ups.md)
