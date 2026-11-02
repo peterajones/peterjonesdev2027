@@ -3,7 +3,7 @@
 _Single source of truth for unfinished work in this project. Tick an item when it is done; the review harness records it and removes the line._
 
 ## Next
-- [ ] Set up a custom domain and TLS for the Coolify deployment (from: README.md)
+- [ ] Cut peterjones.dev over from Netlify to the Coolify deployment: add the domain in Coolify, repoint DNS, add it to the Maps key's referrers (from: README.md)
 
 ## Later
 - [ ] Link the blog to the real domain and bring it out of dormancy (from: README.md)
