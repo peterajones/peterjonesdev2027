@@ -31,7 +31,7 @@ This is a dev-server-only artifact, unrelated to application code. Don't
 chase it in the app — either:
 - `astro dev stop && rm -rf node_modules/.vite .astro && astro dev --background --force`, or
 - test against the real production build instead (what actually matters for
-  a deploy question anyway): `npm run build && node --env-file=.env ./dist/server/entry.mjs`,
+  a deploy question anyway): `npm run build && node --env-file=.env server.mjs`,
   which has no Vite dev-time module graph at all.
 
 ## Styling

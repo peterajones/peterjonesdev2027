@@ -17,5 +17,6 @@ ENV HOST=0.0.0.0
 ENV PORT=4321
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/server.mjs ./server.mjs
 EXPOSE 4321
-CMD ["node", "./dist/server/entry.mjs"]
+CMD ["node", "server.mjs"]

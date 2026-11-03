@@ -114,7 +114,7 @@ VISUAL_RECORD_HAR=1 npx playwright test tests/visual --update-snapshots
 ```
 
 Prerequisites: a local `.env` (the suite's Playwright `webServer` runs the
-production build with `node --env-file=.env ./dist/server/entry.mjs`), and
+production build with `node --env-file=.env server.mjs`), and
 live network access with real API keys, since this run records the
 network traffic (SMTP, Google Maps, OpenWeatherMap, ExchangeRatesAPI) into
 the HAR files that later runs replay from.
@@ -158,6 +158,13 @@ The `Dockerfile` builds and runs the Node-adapter standalone server on port
 4321. Point a Coolify app at this repo with the Dockerfile build pack, set
 the env vars above, and it's a normal container deploy — no
 framework-specific hosting integration needed.
+
+**Security headers:** `server.mjs` is the production entry point. It wraps
+Astro's server and adds the CSP, HSTS and `nosniff` to every response, because
+prerendered pages and public files skip Astro's middleware. A widget that
+starts using a new external service needs that host added to the CSP there;
+`tests/security-headers.spec.ts` catches anything blocked on page load, but not
+requests a widget makes only when used.
 
 **Live test deployment:** deployed to a self-hosted Coolify instance (public
 GitHub repo, no deploy key needed). Currently reachable only at its

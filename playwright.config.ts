@@ -40,7 +40,7 @@ export default defineConfig({
     { name: 'mobile', use: { viewport: { width: 390, height: 844 } }, testIgnore: ['**/theme.spec.ts'] },
   ],
   webServer: {
-    command: 'npm run build && node --env-file=.env ./dist/server/entry.mjs',
+    command: 'npm run build && node --env-file=.env server.mjs',
     url: `http://localhost:${PORT}`,
     env: { PORT: String(PORT), HOST: 'localhost' },
     timeout: 180_000,
