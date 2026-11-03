@@ -41,8 +41,8 @@ nvm use 22
     `src/config/news.ts`), replacing 6 duplicated Next.js API routes.
 - **Content Collections** (`src/content.config.ts`) for content that's
   genuinely a list of documents rather than app config — currently `blog`
-  (`/blog`, `/blog/[...slug]`, one seed post so far — dormant until real
-  posts are written) and `updates` (the navbar's "Latest Updates" modal,
+  (`/blog`, `/blog/[...slug]`, one seed post so far, with real posts still
+  to be written) and `updates` (the navbar's "Latest Updates" modal,
   27 entries migrated off a flat `src/config/updates.ts` array). Each entry
   is a Markdown file under `src/content/<collection>/`; `updates` entries
   use their filename as the unique id (not the date — several entries
@@ -154,8 +154,8 @@ doesn't affect the deployed app.
 
 ## Deployment (Coolify)
 
-The `Dockerfile` builds and runs the Node-adapter standalone server on port
-4321. Point a Coolify app at this repo with the Dockerfile build pack, set
+The `Dockerfile` builds the site and runs `server.mjs`, which wraps the
+Node-adapter standalone server, on port 4321. Point a Coolify app at this repo with the Dockerfile build pack, set
 the env vars above, and it's a normal container deploy — no
 framework-specific hosting integration needed.
 
@@ -177,7 +177,10 @@ deployment notes.
 
 To attach a real domain: Coolify → app → **Domains**, add it, point an
 A/AAAA record at the server's IP, and Coolify's built-in proxy
-auto-provisions a Let's Encrypt cert once DNS resolves.
+auto-provisions a Let's Encrypt cert once DNS resolves. For `peterjones.dev`,
+the records at the registrar (Hover) aren't live until the domain's nameservers
+move there from Netlify's DNS, so the cutover includes that step; the checklist
+is in the local deployment notes.
 
 **Push-to-deploy is configured**: a manual GitHub webhook (Coolify app →
 **Git** → **Webhooks**, the "Manual Git webhooks" → GitHub section — not
@@ -246,5 +249,6 @@ Coolify deployment: done as a test deploy, Dockerfile and Google Places API
 issues both found and fixed (see Deployment section above), push-to-deploy
 configured. Not yet done: custom domain + TLS.
 
-Blog: scaffolded on Content Collections (see Architecture above), one seed
-post, not linked to a real domain yet — dormant until then.
+Blog: scaffolded on Content Collections (see Architecture above) and linked in
+the navbar, with one seed post. It goes public with the domain cutover; real
+posts come later.

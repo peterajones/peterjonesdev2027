@@ -10,6 +10,8 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 Keep `TODO.md` current: tick an item (`- [x]`) when it is finished — don't delete it; the review harness records it and removes the line — and add any unfinished work you discover.
 
+A new external service (API, script, font) needs its host added to the CSP in `server.mjs`. `tests/security-headers.spec.ts` catches anything blocked on page load, but not a request a widget makes only when used, so try the widget in a browser against the production build.
+
 ### Known quirk: stale Vite dependency cache after repeated restarts
 
 Editing `astro.config.mjs` (or otherwise forcing several `astro dev stop` /
